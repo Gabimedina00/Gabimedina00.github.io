@@ -124,10 +124,10 @@ input[readonly]{color:var(--muted)}
     <p class="muted">Solo quien tenga esta clave puede cambiar la página. Sin ella, este panel no puede guardar nada.</p>
     <ol>
       <li>Entrá a <a id="tokLink" href="https://github.com/settings/personal-access-tokens/new?name=iBros%20web&description=Panel%20de%20la%20pagina%20iBros&expires_in=none&contents=write" target="_blank" rel="noopener">crear clave en GitHub</a> (con tu cuenta de GitHub).</li>
-      <li>Nombre: <b>iBros web</b>. Vencimiento: <b>No expiration</b>.</li>
+      <li>Nombre: <b>iBros web</b>. En <b>Resource owner</b> elegí <b class="ownerName">Gabimedina00</b>. Vencimiento: <b>No expiration</b>.</li>
       <li>En <b>Repository access</b> elegí <b>Only select repositories</b> y marcá los dos: <code class="repoName">Gabimedina00.github.io</code> y <code>ibros-registro</code>.</li>
       <li>En <b>Permissions</b>, buscá <b>Contents</b> y poné <b>Read and write</b>.</li>
-      <li>Tocá <b>Generate token</b>, copiá la clave y pegala acá abajo.</li>
+      <li>Tocá <b>Generate token</b>, copiá la clave y pegala acá abajo. Si GitHub dice que la clave espera aprobación, aprobala vos en la organización: <b>Settings</b> → <b>Personal access tokens</b> → <b>Pending requests</b>.</li>
     </ol>
     <label>Clave de GitHub<input id="tok" type="password" autocomplete="off" placeholder="github_pat_..."></label>
     <button class="btn" id="saveTok" type="button">Conectar</button>
@@ -311,7 +311,10 @@ input[readonly]{color:var(--muted)}
 <script>
 (function(){
   var HOST=location.hostname,OWNER=/\.github\.io$/.test(HOST)?HOST.split(".")[0]:"Gabimedina00",REPO=OWNER+".github.io";
-  document.querySelectorAll(".repoName").forEach(function(e){e.textContent=REPO});
+  var NOMBRE={ibrostechnology:"iBrosTechnology",gabimedina00:"Gabimedina00"}[OWNER.toLowerCase()]||OWNER;
+  document.querySelectorAll(".repoName").forEach(function(e){e.textContent=NOMBRE+".github.io"});
+  document.querySelectorAll(".ownerName").forEach(function(e){e.textContent=NOMBRE});
+  document.getElementById("tokLink").href+="&target_name="+encodeURIComponent(NOMBRE);
   var API="https://api.github.com/repos/"+OWNER+"/"+REPO,RAW="https://raw.githubusercontent.com/"+OWNER+"/"+REPO+"/HEAD/";
   var CATS={pantalla:"Módulo",bateria:"Batería",pin:"Pin de carga",mojado:"Mojados",software:"Software",camara:"Cámara y audio",tapa:"Tapa trasera",pc:"Computadoras",otro:"Otro"};
   var $=function(id){return document.getElementById(id)};

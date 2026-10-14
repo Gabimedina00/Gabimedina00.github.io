@@ -290,6 +290,15 @@ input[readonly]{color:var(--muted)}
         <div class="btns"><button class="btn" type="submit" id="sSave">Guardar</button><button class="btn ghost" type="button" id="sCancel">Cancelar</button><button class="btn danger" type="button" id="sDel">Borrar servicio</button></div>
         <div id="svcMsg"></div>
       </form>
+      <form class="card" id="redForm">
+        <h2>Redes sociales</h2>
+        <p class="muted">Aparecen como íconos al pie de la página. Pegá el enlace de tu perfil; si dejás uno vacío, ese ícono no se muestra.</p>
+        <label>Facebook<input id="rFacebook" inputmode="url" autocomplete="off" placeholder="https://www.facebook.com/..."></label>
+        <label>Instagram<input id="rInstagram" inputmode="url" autocomplete="off" placeholder="https://www.instagram.com/... o @usuario"></label>
+        <label>YouTube<input id="rYoutube" inputmode="url" autocomplete="off" placeholder="https://www.youtube.com/@..."></label>
+        <div class="btns"><button class="btn" type="submit" id="rSave">Guardar redes</button></div>
+        <div id="redMsg"></div>
+      </form>
     </div>
 
     <!-- AJUSTES -->
@@ -368,7 +377,7 @@ input[readonly]{color:var(--muted)}
     $("setup").hidden=locked||!!token;
     $("app").hidden=locked||!token;
     if(locked){setTimeout(function(){$("pinIn").querySelector("input").focus()},50);return}
-    if(token){loadJobs();loadSvcs();pinState();regInit()}
+    if(token){loadJobs();loadSvcs();loadRedes();pinState();regInit()}
   }
   document.querySelector(".tabs").onclick=function(e){
     var b=e.target.closest("button");if(!b)return;
@@ -489,6 +498,29 @@ input[readonly]{color:var(--muted)}
       for(var p of (gone&&gone.fotos)||[]){try{await delFile(p)}catch(err){}}
       renderJobs();
     }catch(err){b.textContent="Error";b.title=err.message;setTimeout(loadJobs,2500)}
+  };
+
+  // ---- Redes sociales (redes.json, pie de la página) ----
+  var REDES={facebook:"Facebook",instagram:"Instagram",youtube:"YouTube"};
+  function redIn(k){return $("r"+REDES[k].charAt(0)+REDES[k].slice(1).toLowerCase())}
+  async function loadRedes(){
+    try{var r=await readJson("redes.json",{});Object.keys(REDES).forEach(function(k){redIn(k).value=r.data[k]||""})}
+    catch(err){msg("redMsg","err",err.message)}
+  }
+  function normRed(k,v){
+    v=v.trim();if(!v)return"";
+    if(k==="instagram"&&(/^@[\w.]+$/.test(v)||/^[\w.]+$/.test(v)&&!/\.com$/i.test(v)))return"https://www.instagram.com/"+v.replace(/^@/,"")+"/";
+    if(!/^https?:\/\//i.test(v))v="https://"+v;
+    try{var u=new URL(v.replace(/^http:/i,"https:"));return u.protocol==="https:"&&u.hostname.indexOf(".")>0?u.href:null}catch(e){return null}
+  }
+  $("redForm").onsubmit=async function(e){
+    e.preventDefault();var d={},bad="";
+    Object.keys(REDES).forEach(function(k){var v=normRed(k,redIn(k).value);if(v===null)bad=bad||REDES[k];else{d[k]=v;redIn(k).value=v}});
+    if(bad){msg("redMsg","err","El enlace de "+bad+" no es válido.");return}
+    $("rSave").disabled=true;msg("redMsg","info","Guardando…");
+    try{await update("redes.json",{},function(){return d},"Actualizar redes sociales");msg("redMsg","ok","Guardado. Se ve en la página en 1 o 2 minutos.")}
+    catch(err){msg("redMsg","err",err.message)}
+    $("rSave").disabled=false;
   };
 
   // ---- Servicios ----

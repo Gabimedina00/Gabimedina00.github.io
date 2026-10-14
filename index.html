@@ -38,7 +38,7 @@
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{scroll-behavior:smooth;scroll-padding-top:80px}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;overflow-x:hidden}
 .wrap{max-width:1140px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.06;letter-spacing:-.025em}
 h2{font-size:clamp(1.9rem,4.4vw,3.1rem);font-weight:800}
@@ -85,11 +85,13 @@ button{font:inherit;color:inherit}
 .bar{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--band) 84%,transparent);backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);color:var(--band-ink);border-bottom:1px solid transparent;transition:border-color .3s;padding-top:env(safe-area-inset-top,0px)}
 .bar.scrolled{border-bottom-color:var(--band-line)}
 .bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
-.bar nav{display:flex;align-items:center;gap:24px;font-size:.92rem}
+.bar nav{display:flex;align-items:center;gap:22px;font-size:.92rem}
 .bar nav a{text-decoration:none;color:var(--band-muted);transition:color .2s}
 .bar nav a:hover,.bar nav a.on{color:var(--band-ink)}
 .bar nav a.pc{color:var(--band-ink);display:inline-flex;align-items:center;gap:6px}
 .bar nav a.pc::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.bar nav a.cta{display:inline-flex;align-items:center;padding:7px 16px;border-radius:99px;background:var(--accent);color:var(--accent-ink);font-weight:600;transition:filter .2s}
+.bar nav a.cta:hover{color:var(--accent-ink);filter:brightness(1.08)}
 .status{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;color:var(--band-muted);white-space:nowrap}
 .dot{width:9px;height:9px;border-radius:50%;background:#77716b;position:relative}
 .dot.on{background:var(--wa)}
@@ -391,7 +393,7 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
   .svcs{grid-template-columns:repeat(2,minmax(0,1fr))}
   .facts .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}
   .bar nav a{display:none}
-  .bar nav a.pc{display:inline-flex}
+  .bar nav a.pc,.bar nav a.cta{display:inline-flex}
   .lb-in{grid-template-columns:1fr}
   .lb-pics img{max-height:56vh}
   .hero h1{min-height:0}
@@ -411,7 +413,7 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
   dialog.sheet[open]{animation-name:sheetUp}
   .sh-body{padding-bottom:calc(28px + env(safe-area-inset-bottom,0px))}
   .hero .lead{min-height:0}
-  .bar nav a.pc{display:none}
+  .bar nav a.pc,.bar nav a.cta{display:none}
 }
 @keyframes sheetUp{from{translate:0 60px;opacity:0}to{translate:0 0;opacity:1}}
 @media (prefers-reduced-motion:reduce){
@@ -430,7 +432,9 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
     <a href="#celulares">Celulares</a>
     <a href="#computadoras" class="pc">Computadoras</a>
     <a href="#trabajos">Trabajos</a>
-    <a href="#local">Local</a>
+    <a href="#local">Ubicación</a>
+    <a href="#preguntas">Preguntas</a>
+    <a href="#presupuesto" class="cta">Consultar</a>
     <span class="status" aria-live="polite"><i class="dot" id="dot"></i><span id="openTxt">Lun a Sáb</span></span>
   </nav>
 </div></header>

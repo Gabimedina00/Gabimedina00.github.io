@@ -5,37 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0b0b0b">
-<title>iBros · Subir trabajos</title>
+<title>iBros · Panel</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
 <style>
-:root{--bg:#0b0b0b;--card:#171615;--ink:#f5f3f0;--muted:#a8a29c;--line:#2a2826;--accent:#ff7a2e;--accent-ink:#1a0c02;--ok:#2fc56b;--err:#ff6b6b;--star:#f5a524;color-scheme:dark}
+:root{--bg:#0b0b0b;--card:#171615;--card2:#201e1c;--ink:#f5f3f0;--muted:#a8a29c;--line:#2c2a27;--accent:#ff7a2e;--accent-ink:#1a0c02;--ok:#2fc56b;--err:#ff6b6b;--star:#f5a524;color-scheme:dark}
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans","Segoe UI",system-ui,sans-serif;font-size:16px;line-height:1.5;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-.wrap{max-width:640px;margin:0 auto;padding:20px max(16px,env(safe-area-inset-right,0px)) 60px max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:18px}
+.wrap{max-width:680px;margin:0 auto;padding:18px max(16px,env(safe-area-inset-right,0px)) 80px max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:16px}
 h1,h2{font-family:Montserrat,system-ui,sans-serif;margin:0;letter-spacing:-.02em}
-h1{font-size:1.5rem;font-weight:800}
+h1{font-size:1.4rem;font-weight:800}
 h2{font-size:1.1rem;font-weight:800}
 p{margin:0}
 .muted{color:var(--muted);font-size:.92rem}
 header{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.logo{font-family:Montserrat,system-ui,sans-serif;font-weight:800;font-size:1.3rem;letter-spacing:-.03em}
+.logo i{font-style:normal;position:relative}
+.logo i::before{content:"";position:absolute;left:50%;top:.02em;width:.26em;height:.26em;margin-left:-.13em;border-radius:50%;background:var(--accent)}
+.logo small{display:block;font-size:.7rem;font-weight:600;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
 header a{color:var(--muted);font-size:.9rem}
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:14px}
 label{font-size:.85rem;font-weight:600;display:flex;flex-direction:column;gap:6px}
 input,select,textarea{font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;width:100%}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent)}
-textarea{min-height:80px;resize:vertical}
+textarea{min-height:84px;resize:vertical}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:14px 22px;font:inherit;font-weight:600;cursor:pointer;background:var(--accent);color:var(--accent-ink);text-decoration:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:13px 22px;font:inherit;font-weight:600;cursor:pointer;background:var(--accent);color:var(--accent-ink);text-decoration:none}
 .btn[disabled]{opacity:.5;cursor:wait}
 .btn.ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
 .btn.small{padding:8px 14px;font-size:.85rem}
-.pick{border:1.5px dashed var(--line);border-radius:14px;padding:22px;text-align:center;cursor:pointer;color:var(--muted)}
+.btn.danger{background:transparent;border:1.5px solid color-mix(in srgb,var(--err) 50%,transparent);color:var(--err)}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.tabs{display:flex;gap:6px;padding:5px;border-radius:999px;background:var(--card);border:1px solid var(--line);position:sticky;top:calc(8px + env(safe-area-inset-top,0px));z-index:5}
+.tabs button{flex:1;border:0;background:none;color:var(--muted);font:inherit;font-weight:600;padding:10px;border-radius:999px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+.pick{border:1.5px dashed var(--line);border-radius:14px;padding:20px;text-align:center;cursor:pointer;color:var(--muted)}
 .pick b{color:var(--ink);display:block;font-size:1rem}
 .thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.thumbs img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px}
+.thumbs div{position:relative}
+.thumbs img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;display:block}
+.thumbs button{position:absolute;right:4px;top:4px;width:26px;height:26px;border-radius:50%;border:0;background:rgba(0,0,0,.75);color:#fff;cursor:pointer;line-height:1}
 .stars{display:flex;gap:4px}
 .stars button{border:0;background:none;font-size:2rem;line-height:1;color:var(--line);cursor:pointer;padding:0 2px}
 .stars button.on{color:var(--star)}
@@ -46,11 +58,17 @@ textarea{min-height:80px;resize:vertical}
 ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:.92rem;color:var(--muted)}
 ol b{color:var(--ink)}
 code{background:var(--bg);padding:1px 6px;border-radius:6px;font-size:.85em}
-.item{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.item{display:grid;grid-template-columns:60px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
 .item:last-child{border-bottom:0}
-.item img{width:64px;height:64px;object-fit:cover;border-radius:10px;background:var(--bg)}
+.item img,.item .ph{width:60px;height:60px;object-fit:cover;border-radius:10px;background:var(--bg)}
 .item b{display:block;font-size:.95rem}
 .item span{color:var(--muted);font-size:.82rem}
+.item .btns{gap:6px;flex-wrap:nowrap}
+.svcitem{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;text-align:left;border:1px solid var(--line);background:var(--card2);color:var(--ink);border-radius:14px;padding:12px 14px;cursor:pointer;font:inherit}
+.svcitem small{color:var(--muted);display:block;font-size:.8rem}
+.svcitem .t{font-size:.75rem;color:var(--accent);white-space:nowrap}
+.pin{display:flex;gap:10px;justify-content:center}
+.pin input{width:56px;height:64px;text-align:center;font-size:1.6rem;font-family:Montserrat,sans-serif;font-weight:800;padding:0}
 a{color:var(--accent)}
 :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 @media (max-width:480px){.row{grid-template-columns:1fr}}
@@ -59,19 +77,27 @@ a{color:var(--accent)}
 <body>
 <div class="wrap">
   <header>
-    <div><h1>Subir trabajos</h1><p class="muted">iBros Technology</p></div>
-    <a href="./#trabajos">Ver la página</a>
+    <div class="logo"><i>ı</i>Bros <small>Panel del administrador</small></div>
+    <a href="./" target="_blank" rel="noopener">Ver la página</a>
   </header>
+
+  <!-- Bloqueo con PIN -->
+  <div class="card" id="lock" hidden>
+    <h2>Ingresá tu PIN</h2>
+    <p class="muted">Este panel está bloqueado en este dispositivo.</p>
+    <div class="pin" id="pinIn"><input inputmode="numeric" maxlength="1" aria-label="Dígito 1"><input inputmode="numeric" maxlength="1" aria-label="Dígito 2"><input inputmode="numeric" maxlength="1" aria-label="Dígito 3"><input inputmode="numeric" maxlength="1" aria-label="Dígito 4"></div>
+    <div id="lockMsg"></div>
+  </div>
 
   <!-- Conexión -->
   <div class="card" id="setup" hidden>
-    <h2>Conectar este celular (una sola vez)</h2>
-    <p class="muted">Para publicar desde acá necesitás una clave de GitHub que solo pueda tocar esta página.</p>
+    <h2>Conectar este dispositivo (una sola vez)</h2>
+    <p class="muted">Solo quien tenga esta clave puede cambiar la página. Sin ella, este panel no puede guardar nada.</p>
     <ol>
-      <li>Entrá a <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">crear clave en GitHub</a>.</li>
-      <li>Nombre: <b>iBros web</b>. Vencimiento: <b>No expiration</b> (o 1 año).</li>
+      <li>Entrá a <a id="tokLink" href="https://github.com/settings/personal-access-tokens/new?name=iBros%20web&description=Panel%20de%20la%20pagina%20iBros&expires_in=none&contents=write" target="_blank" rel="noopener">crear clave en GitHub</a> (con tu cuenta Gabimedina00).</li>
+      <li>Nombre: <b>iBros web</b>. Vencimiento: <b>No expiration</b>.</li>
       <li>En <b>Repository access</b> elegí <b>Only select repositories</b> y marcá <code>Gabimedina00.github.io</code>.</li>
-      <li>En <b>Permissions → Repository permissions</b>, poné <b>Contents</b> en <b>Read and write</b>.</li>
+      <li>En <b>Permissions</b>, buscá <b>Contents</b> y poné <b>Read and write</b>.</li>
       <li>Tocá <b>Generate token</b>, copiá la clave y pegala acá abajo.</li>
     </ol>
     <label>Clave de GitHub<input id="tok" type="password" autocomplete="off" placeholder="github_pat_..."></label>
@@ -79,175 +105,308 @@ a{color:var(--accent)}
     <div id="setupMsg"></div>
   </div>
 
-  <!-- Nuevo trabajo -->
-  <form class="card" id="form" hidden>
-    <h2>Nuevo trabajo</h2>
-    <label class="pick" for="fotos"><b>Agregar fotos</b>Hasta 4. Podés sacarlas en el momento.</label>
-    <input id="fotos" type="file" accept="image/*" multiple hidden>
-    <div class="thumbs" id="thumbs"></div>
-    <div class="row">
-      <label>Equipo<input id="equipo" required placeholder="Ej: iPhone 12"></label>
-      <label>Tipo de trabajo
-        <select id="categoria">
-          <option value="pantalla">Módulo / pantalla</option><option value="bateria">Batería</option><option value="pin">Pin de carga</option><option value="mojado">Mojados</option><option value="software">Software / desbloqueo</option><option value="camara">Cámara, parlante, micrófono</option><option value="tapa">Tapa trasera</option><option value="pc">Computadoras</option><option value="otro">Otro</option>
-        </select>
-      </label>
+  <div id="app" hidden>
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" aria-selected="true" data-tab="trabajos">Trabajos</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="servicios">Servicios</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="ajustes">Ajustes</button>
     </div>
-    <label>Qué se hizo<textarea id="trabajo" placeholder="Ej: Cambio de módulo original. Se le cayó y no daba imagen."></textarea></label>
-    <h2 style="font-size:1rem;margin-top:4px">Reseña del cliente (opcional)</h2>
-    <div class="stars" id="stars"></div>
-    <div class="row">
-      <label>Nombre del cliente<input id="cliente" placeholder="Ej: Lucía M."></label>
-      <label>Fecha<input id="fecha" type="date"></label>
-    </div>
-    <label>Lo que dijo el cliente<textarea id="resena" placeholder="Copiá acá lo que te escribió por WhatsApp"></textarea></label>
-    <button class="btn" id="pub" type="submit">Publicar trabajo</button>
-    <div id="pubMsg"></div>
-  </form>
 
-  <!-- Publicados -->
-  <div class="card" id="listCard" hidden>
-    <h2>Publicados</h2>
-    <div id="list"><p class="muted">Cargando…</p></div>
+    <!-- TRABAJOS -->
+    <div data-pane="trabajos" style="display:flex;flex-direction:column;gap:16px;margin-top:16px">
+      <button class="btn" id="newJob" type="button">+ Nuevo trabajo</button>
+      <form class="card" id="form" hidden>
+        <h2 id="formTitle">Nuevo trabajo</h2>
+        <label class="pick" for="fotos"><b>Agregar fotos</b>Hasta 4. Podés sacarlas en el momento.</label>
+        <input id="fotos" type="file" accept="image/*" multiple hidden>
+        <div class="thumbs" id="thumbs"></div>
+        <div class="row">
+          <label>Equipo<input id="equipo" placeholder="Ej: iPhone 12"></label>
+          <label>Tipo de trabajo
+            <select id="categoria">
+              <option value="pantalla">Módulo / pantalla</option><option value="bateria">Batería</option><option value="pin">Pin de carga</option><option value="mojado">Mojados</option><option value="software">Software / desbloqueo</option><option value="camara">Cámara, parlante, micrófono</option><option value="tapa">Tapa trasera</option><option value="pc">Computadoras</option><option value="otro">Otro</option>
+            </select>
+          </label>
+        </div>
+        <label>Qué se hizo<textarea id="trabajo" placeholder="Ej: Cambio de módulo. Se le cayó y no daba imagen."></textarea></label>
+        <h2 style="font-size:1rem;margin-top:4px">Reseña del cliente (opcional)</h2>
+        <div class="stars" id="stars"></div>
+        <div class="row">
+          <label>Nombre del cliente<input id="cliente" placeholder="Ej: Lucía M."></label>
+          <label>Fecha<input id="fecha" type="date"></label>
+        </div>
+        <label>Lo que dijo el cliente<textarea id="resena" placeholder="Copiá acá lo que te escribió por WhatsApp"></textarea></label>
+        <div class="btns"><button class="btn" id="pub" type="submit">Publicar</button><button class="btn ghost" id="cancel" type="button">Cancelar</button></div>
+        <div id="pubMsg"></div>
+      </form>
+      <div class="card">
+        <h2>Publicados</h2>
+        <div id="list"><p class="muted">Cargando…</p></div>
+      </div>
+    </div>
+
+    <!-- SERVICIOS -->
+    <div data-pane="servicios" hidden style="flex-direction:column;gap:16px;margin-top:16px">
+      <div class="card" id="svcList">
+        <h2>Servicios de la página</h2>
+        <p class="muted">Tocá uno para cambiar su descripción, el tiempo o los pasos del procedimiento.</p>
+        <div class="row" style="grid-template-columns:1fr auto;align-items:end">
+          <label>Mostrar<select id="grupo"><option value="celulares">Celulares</option><option value="computadoras">Computadoras</option></select></label>
+          <button class="btn ghost" id="addSvc" type="button">+ Agregar</button>
+        </div>
+        <div id="svcItems" style="display:flex;flex-direction:column;gap:8px"><p class="muted">Cargando…</p></div>
+      </div>
+      <form class="card" id="svcForm" hidden>
+        <h2 id="svcFormTitle">Editar servicio</h2>
+        <label>Nombre<input id="sNombre"></label>
+        <div class="row">
+          <label>Tiempo<input id="sTiempo" placeholder="Ej: En el día, 2 a 3 días"></label>
+          <label>Foto (opcional)<select id="sFoto"><option value="">Sin foto (muestra el ícono)</option><option value="img/hero.webp">Pin de carga</option><option value="img/iphone-foto.webp">iPhone</option><option value="img/bateria-foto.webp">Batería</option><option value="img/tapas-foto.webp">Tapas</option><option value="img/pc-foto.webp">Notebook</option></select></label>
+        </div>
+        <label>Frase corta (aparece en el botón)<input id="sCorto"></label>
+        <label>En qué consiste<textarea id="sDetalle"></textarea></label>
+        <label>Procedimiento (un paso por renglón)<textarea id="sPasos" style="min-height:150px"></textarea></label>
+        <label>Aviso destacado (opcional)<textarea id="sNota" style="min-height:60px"></textarea></label>
+        <div class="btns"><button class="btn" type="submit" id="sSave">Guardar</button><button class="btn ghost" type="button" id="sCancel">Cancelar</button><button class="btn danger" type="button" id="sDel">Borrar servicio</button></div>
+        <div id="svcMsg"></div>
+      </form>
+    </div>
+
+    <!-- AJUSTES -->
+    <div data-pane="ajustes" hidden style="flex-direction:column;gap:16px;margin-top:16px">
+      <div class="card">
+        <h2>PIN de este dispositivo</h2>
+        <p class="muted" id="pinState"></p>
+        <label>Nuevo PIN de 4 números<input id="newPin" inputmode="numeric" maxlength="4" placeholder="••••"></label>
+        <div class="btns"><button class="btn" id="setPin" type="button">Guardar PIN</button><button class="btn ghost" id="clearPin" type="button">Quitar PIN</button></div>
+        <div id="pinMsg"></div>
+      </div>
+      <div class="card">
+        <h2>Conexión</h2>
+        <p class="muted">Desconectá si vas a dejar de usar este dispositivo. Para volver a entrar vas a necesitar la clave de GitHub.</p>
+        <button class="btn danger" id="logout" type="button">Desconectar este dispositivo</button>
+      </div>
+    </div>
   </div>
-
-  <div id="foot" hidden><button class="btn ghost small" id="logout" type="button">Desconectar este celular</button></div>
 </div>
 
 <script>
 (function(){
-  var OWNER="Gabimedina00", REPO="Gabimedina00.github.io", DATA="trabajos.json";
-  var API="https://api.github.com/repos/"+OWNER+"/"+REPO;
+  var OWNER="Gabimedina00",REPO="Gabimedina00.github.io";
+  var API="https://api.github.com/repos/"+OWNER+"/"+REPO,RAW="https://raw.githubusercontent.com/"+OWNER+"/"+REPO+"/HEAD/";
   var CATS={pantalla:"Módulo",bateria:"Batería",pin:"Pin de carga",mojado:"Mojados",software:"Software",camara:"Cámara y audio",tapa:"Tapa trasera",pc:"Computadoras",otro:"Otro"};
   var $=function(id){return document.getElementById(id)};
-  var token=""; try{token=localStorage.getItem("ibros_token")||""}catch(e){}
-
+  function ls(k,v){try{if(v===undefined)return localStorage.getItem(k)||"";if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){return""}}
+  var token=ls("ibros_token");
   function msg(el,kind,text){$(el).innerHTML=text?'<div class="msg '+kind+'">'+text+'</div>':""}
   function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
   function b64(str){var b=new TextEncoder().encode(str),s="";for(var i=0;i<b.length;i+=32768)s+=String.fromCharCode.apply(null,b.subarray(i,i+32768));return btoa(s)}
   function unb64(s){var bin=atob(s.replace(/\s/g,""));return new TextDecoder().decode(Uint8Array.from(bin,function(c){return c.charCodeAt(0)}))}
+  function hoy(){return new Date(Date.now()-3*3600e3).toISOString().slice(0,10)}
+  async function sha(s){var h=await crypto.subtle.digest("SHA-256",new TextEncoder().encode("ibros:"+s));return Array.from(new Uint8Array(h)).map(function(b){return b.toString(16).padStart(2,"0")}).join("")}
 
+  // GitHub
   async function gh(url,method,body){
     var r=await fetch(url,{method:method||"GET",cache:"no-store",headers:{Authorization:"Bearer "+token,Accept:"application/vnd.github+json"},body:body?JSON.stringify(body):undefined});
     if(r.status===404&&!method)return null;
     if(!r.ok){
       var t="Error "+r.status;
-      if(r.status===401)t="La clave no es válida o venció. Desconectá y cargá una nueva.";
+      if(r.status===401)t="La clave no es válida o venció. Desconectá en Ajustes y cargá una nueva.";
       else if(r.status===403||r.status===404)t="La clave no tiene permiso para escribir en "+REPO+". Revisá que Contents esté en Read and write.";
       else if(r.status===409||r.status===422)t="Otro cambio se guardó al mismo tiempo. Probá de nuevo.";
       var e=new Error(t);e.status=r.status;throw e;
     }
     return r.status===204?null:r.json();
   }
-  async function readData(){
-    var f=await gh(API+"/contents/"+DATA);
-    if(!f)return{list:[],sha:null};
-    var list=[];try{list=JSON.parse(unb64(f.content))}catch(e){}
-    return{list:Array.isArray(list)?list:[],sha:f.sha};
+  async function readJson(path,def){
+    var f=await gh(API+"/contents/"+path);if(!f)return{data:def,sha:null};
+    var d=def;try{d=JSON.parse(unb64(f.content))}catch(e){}
+    return{data:d,sha:f.sha};
   }
-  async function writeData(list,sha,message){
-    var body={message:message,content:b64(JSON.stringify(list,null,2)+"\n")};if(sha)body.sha=sha;
-    return gh(API+"/contents/"+DATA,"PUT",body);
+  async function writeJson(path,data,sha,message){
+    var body={message:message,content:b64(JSON.stringify(data,null,2)+"\n")};if(sha)body.sha=sha;
+    return gh(API+"/contents/"+path,"PUT",body);
   }
+  async function update(path,def,fn,message){
+    for(var t=0;t<2;t++){
+      try{var r=await readJson(path,def);var d=fn(r.data);await writeJson(path,d,r.sha,message);return d}
+      catch(e){if(t||e.status!==409)throw e}
+    }
+  }
+  async function delFile(p){var f=await gh(API+"/contents/"+p);if(f)await gh(API+"/contents/"+p,"DELETE",{message:"Borrar foto",sha:f.sha})}
 
-  // Inicio
+  // Pantallas
   function show(){
-    var on=!!token;
-    $("setup").hidden=on;$("form").hidden=!on;$("listCard").hidden=!on;$("foot").hidden=!on;
-    if(on)loadList();
+    var locked=ls("ibros_pin")&&sessionStorage.getItem("ibros_ok")!=="1";
+    $("lock").hidden=!locked;
+    $("setup").hidden=locked||!!token;
+    $("app").hidden=locked||!token;
+    if(locked){setTimeout(function(){$("pinIn").querySelector("input").focus()},50);return}
+    if(token){loadJobs();loadSvcs();pinState()}
   }
+  document.querySelector(".tabs").onclick=function(e){
+    var b=e.target.closest("button");if(!b)return;
+    document.querySelectorAll(".tabs button").forEach(function(x){x.setAttribute("aria-selected",x===b)});
+    document.querySelectorAll("[data-pane]").forEach(function(p){var on=p.dataset.pane===b.dataset.tab;p.hidden=!on;if(on)p.style.display="flex"});
+  };
+
+  // PIN
+  var pins=$("pinIn").querySelectorAll("input");
+  pins.forEach(function(inp,i){
+    inp.addEventListener("input",async function(){
+      inp.value=inp.value.replace(/\D/g,"").slice(-1);
+      if(inp.value&&i<3)pins[i+1].focus();
+      var v=Array.from(pins).map(function(x){return x.value}).join("");
+      if(v.length===4){
+        if(await sha(v)===ls("ibros_pin")){try{sessionStorage.setItem("ibros_ok","1")}catch(e){}msg("lockMsg","","");show()}
+        else{msg("lockMsg","err","PIN incorrecto.");pins.forEach(function(x){x.value=""});pins[0].focus()}
+      }
+    });
+    inp.addEventListener("keydown",function(e){if(e.key==="Backspace"&&!inp.value&&i>0)pins[i-1].focus()});
+  });
+  function pinState(){$("pinState").textContent=ls("ibros_pin")?"Este dispositivo pide PIN cada vez que abrís el panel.":"Sin PIN. Cualquiera que use este dispositivo puede abrir el panel."}
+  $("setPin").onclick=async function(){var v=$("newPin").value.trim();if(!/^\d{4}$/.test(v)){msg("pinMsg","err","El PIN tiene que tener 4 números.");return}
+    ls("ibros_pin",await sha(v));try{sessionStorage.setItem("ibros_ok","1")}catch(e){}$("newPin").value="";msg("pinMsg","ok","PIN guardado.");pinState()};
+  $("clearPin").onclick=function(){ls("ibros_pin",null);msg("pinMsg","ok","PIN quitado.");pinState()};
+
+  // Conexión
   $("saveTok").onclick=async function(){
     var t=$("tok").value.trim();if(!t){msg("setupMsg","err","Pegá la clave primero.");return}
-    token=t;msg("setupMsg","info","Probando la clave…");
+    msg("setupMsg","info","Probando la clave…");
     try{
       var r=await fetch(API,{headers:{Authorization:"Bearer "+t,Accept:"application/vnd.github+json"}});
       if(!r.ok)throw new Error(r.status===401?"La clave no es válida.":"La clave no puede ver "+REPO+". Revisá el paso 3.");
       var repo=await r.json();
       if(repo.permissions&&!repo.permissions.push)throw new Error("La clave no tiene permiso de escritura. Revisá el paso 4.");
-      try{localStorage.setItem("ibros_token",t)}catch(e){}
-      msg("setupMsg","","");show();
-    }catch(e){token="";msg("setupMsg","err",e.message)}
+      token=t;ls("ibros_token",t);msg("setupMsg","","");show();
+    }catch(e){msg("setupMsg","err",e.message)}
   };
-  $("logout").onclick=function(){try{localStorage.removeItem("ibros_token")}catch(e){}token="";show()};
+  $("logout").onclick=function(){ls("ibros_token",null);token="";show()};
 
-  // Fotos
-  var files=[];
-  $("fotos").onchange=function(){
-    files=Array.prototype.slice.call(this.files,0,4);
-    $("thumbs").innerHTML=files.map(function(f){return'<img src="'+URL.createObjectURL(f)+'" alt="">'}).join("");
-  };
+  // ---- Trabajos ----
+  var jobs=[],editing=null,newFiles=[],keepFotos=[],dropFotos=[],rv=5;
+  var sb=$("stars");
+  for(var i=1;i<=5;i++)sb.insertAdjacentHTML("beforeend",'<button type="button" data-v="'+i+'" aria-label="'+i+' estrellas">★</button>');
+  function paint(){sb.querySelectorAll("button").forEach(function(b){b.classList.toggle("on",+b.dataset.v<=rv)})}
+  sb.onclick=function(e){var b=e.target.closest("button");if(b){rv=+b.dataset.v;paint()}};
+  function thumbs(){
+    $("thumbs").innerHTML=keepFotos.map(function(p,i){return'<div><img src="'+RAW+esc(p)+'" alt=""><button type="button" data-k="'+i+'" aria-label="Quitar foto">×</button></div>'}).join("")+
+      newFiles.map(function(f,i){return'<div><img src="'+URL.createObjectURL(f)+'" alt=""><button type="button" data-n="'+i+'" aria-label="Quitar foto">×</button></div>'}).join("");
+  }
+  $("thumbs").onclick=function(e){var b=e.target.closest("button");if(!b)return;
+    if(b.dataset.k!==undefined){dropFotos.push(keepFotos[b.dataset.k]);keepFotos.splice(b.dataset.k,1)}else newFiles.splice(b.dataset.n,1);thumbs()};
+  $("fotos").onchange=function(){newFiles=newFiles.concat(Array.prototype.slice.call(this.files)).slice(0,4-keepFotos.length);this.value="";thumbs()};
+  function openForm(j){
+    editing=j||null;$("form").hidden=false;$("newJob").hidden=true;msg("pubMsg","","");
+    $("formTitle").textContent=j?"Editar trabajo":"Nuevo trabajo";$("pub").textContent=j?"Guardar cambios":"Publicar";
+    $("equipo").value=j?j.equipo:"";$("categoria").value=j?j.categoria:"pantalla";$("trabajo").value=j?j.trabajo||"":"";
+    $("cliente").value=j?j.cliente||"":"";$("resena").value=j?j.resena||"":"";$("fecha").value=j?j.fecha:hoy();
+    rv=j&&j.estrellas?j.estrellas:5;paint();
+    keepFotos=j?(j.fotos||[]).slice():[];dropFotos=[];newFiles=[];thumbs();
+    $("form").scrollIntoView({behavior:"smooth",block:"start"});
+  }
+  function closeForm(){$("form").hidden=true;$("newJob").hidden=false;editing=null}
+  $("newJob").onclick=function(){openForm()};
+  $("cancel").onclick=closeForm;
   async function compress(file){
     var url=URL.createObjectURL(file),img=new Image();img.src=url;await img.decode();
-    var s=Math.min(1,1400/Math.max(img.naturalWidth,img.naturalHeight));
-    var c=document.createElement("canvas");c.width=Math.round(img.naturalWidth*s);c.height=Math.round(img.naturalHeight*s);
+    var s=Math.min(1,1400/Math.max(img.naturalWidth,img.naturalHeight)),c=document.createElement("canvas");
+    c.width=Math.round(img.naturalWidth*s);c.height=Math.round(img.naturalHeight*s);
     c.getContext("2d").drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(url);
     return c.toDataURL("image/jpeg",.82).split(",")[1];
   }
-
-  // Estrellas
-  var rv=5,sb=$("stars");
-  for(var i=1;i<=5;i++)sb.insertAdjacentHTML("beforeend",'<button type="button" data-v="'+i+'" aria-label="'+i+' estrellas">★</button>');
-  function paint(){sb.querySelectorAll("button").forEach(function(b){b.classList.toggle("on",+b.dataset.v<=rv)})}
-  sb.onclick=function(e){var b=e.target.closest("button");if(b){rv=+b.dataset.v;paint()}};paint();
-
-  // Fecha de hoy (hora de Corrientes)
-  $("fecha").value=new Date(Date.now()-3*3600e3).toISOString().slice(0,10);
-
-  // Publicar
   $("form").onsubmit=async function(e){
     e.preventDefault();
-    if(!files.length){msg("pubMsg","err","Agregá al menos una foto.");return}
+    if(!keepFotos.length&&!newFiles.length){msg("pubMsg","err","Agregá al menos una foto.");return}
     if(!$("equipo").value.trim()){msg("pubMsg","err","Escribí el equipo.");return}
     var btn=$("pub");btn.disabled=true;
-    var id=Date.now().toString(36),fotos=[];
+    var id=editing?editing.id:Date.now().toString(36),fotos=keepFotos.slice(),stamp=Date.now().toString(36);
     try{
-      for(var i=0;i<files.length;i++){
-        msg("pubMsg","info","Subiendo foto "+(i+1)+" de "+files.length+"…");
-        var path="trabajos/"+id+"-"+(i+1)+".jpg";
-        await gh(API+"/contents/"+path,"PUT",{message:"Foto de trabajo "+id,content:await compress(files[i])});
+      for(var i=0;i<newFiles.length;i++){
+        msg("pubMsg","info","Subiendo foto "+(i+1)+" de "+newFiles.length+"…");
+        var path="trabajos/"+id+"-"+stamp+"-"+(i+1)+".jpg";
+        await gh(API+"/contents/"+path,"PUT",{message:"Foto de trabajo "+id,content:await compress(newFiles[i])});
         fotos.push(path);
       }
-      msg("pubMsg","info","Guardando el trabajo…");
+      msg("pubMsg","info","Guardando…");
       var resena=$("resena").value.trim();
-      var item={id:id,fecha:$("fecha").value,equipo:$("equipo").value.trim(),categoria:$("categoria").value,trabajo:$("trabajo").value.trim(),fotos:fotos};
+      var item={id:id,fecha:$("fecha").value||hoy(),equipo:$("equipo").value.trim(),categoria:$("categoria").value,trabajo:$("trabajo").value.trim(),fotos:fotos};
       if(resena){item.resena=resena;item.estrellas=rv;item.cliente=$("cliente").value.trim()}
-      for(var tries=0;tries<2;tries++){
-        try{var d=await readData();d.list.unshift(item);await writeData(d.list,d.sha,"Nuevo trabajo: "+item.equipo);break}
-        catch(err){if(tries||err.status!==409)throw err}
-      }
-      msg("pubMsg","ok","Listo. Aparece en la página en 1 o 2 minutos.");
-      $("form").reset();files=[];$("thumbs").innerHTML="";rv=5;paint();
-      $("fecha").value=new Date(Date.now()-3*3600e3).toISOString().slice(0,10);
-      loadList();
+      jobs=await update("trabajos.json",[],function(list){
+        list=Array.isArray(list)?list:[];var ix=list.findIndex(function(x){return x.id===id});
+        if(ix>=0)list[ix]=item;else list.unshift(item);return list;
+      },(editing?"Editar trabajo: ":"Nuevo trabajo: ")+item.equipo);
+      for(var p of dropFotos){try{await delFile(p)}catch(err){}}
+      msg("pubMsg","ok",(editing?"Cambios guardados.":"Trabajo publicado.")+" Se ve en la página en 1 o 2 minutos.");
+      setTimeout(closeForm,1600);renderJobs();
     }catch(err){msg("pubMsg","err",err.message)}
     btn.disabled=false;
   };
-
-  // Lista y borrado
-  var current=[];
-  async function loadList(){
-    try{
-      var d=await readData();current=d.list;
-      $("list").innerHTML=current.length?current.map(function(j){
-        var src=j.fotos&&j.fotos[0]?"https://raw.githubusercontent.com/"+OWNER+"/"+REPO+"/HEAD/"+j.fotos[0]:"";
-        return'<div class="item"><img src="'+esc(src)+'" alt=""><div><b>'+esc(j.equipo)+'</b><span>'+esc(CATS[j.categoria]||"")+' · '+esc(j.fecha)+(j.estrellas?' · '+"★".repeat(j.estrellas):"")+'</span></div><button class="btn ghost small" type="button" data-id="'+esc(j.id)+'">Borrar</button></div>';
-      }).join(""):'<p class="muted">Todavía no publicaste trabajos. El primero aparece arriba de todo en la página.</p>';
-    }catch(err){$("list").innerHTML='<div class="msg err">'+esc(err.message)+'</div>'}
+  async function loadJobs(){
+    try{var r=await readJson("trabajos.json",[]);jobs=Array.isArray(r.data)?r.data:[];renderJobs()}
+    catch(err){$("list").innerHTML='<div class="msg err">'+esc(err.message)+'</div>'}
+  }
+  function renderJobs(){
+    $("list").innerHTML=jobs.length?jobs.map(function(j){
+      var src=j.fotos&&j.fotos[0]?RAW+j.fotos[0]:"";
+      return'<div class="item">'+(src?'<img src="'+esc(src)+'" alt="">':'<span class="ph"></span>')+'<div><b>'+esc(j.equipo)+'</b><span>'+esc(CATS[j.categoria]||"")+' · '+esc(j.fecha)+(j.estrellas?' · '+"★".repeat(j.estrellas):"")+'</span></div><div class="btns"><button class="btn ghost small" type="button" data-edit="'+esc(j.id)+'">Editar</button><button class="btn danger small" type="button" data-del="'+esc(j.id)+'">Borrar</button></div></div>';
+    }).join(""):'<p class="muted">Todavía no publicaste trabajos. Tocá "Nuevo trabajo" para cargar el primero.</p>';
   }
   $("list").onclick=async function(e){
-    var b=e.target.closest("button[data-id]");if(!b)return;
+    var ed=e.target.closest("[data-edit]");if(ed){openForm(jobs.find(function(x){return x.id===ed.dataset.edit}));return}
+    var b=e.target.closest("[data-del]");if(!b)return;
     if(b.dataset.sure!=="1"){b.dataset.sure="1";b.textContent="¿Seguro?";setTimeout(function(){b.dataset.sure="";b.textContent="Borrar"},4000);return}
     b.disabled=true;b.textContent="Borrando…";
     try{
-      var d=await readData(),j=d.list.find(function(x){return x.id===b.dataset.id});
-      d.list=d.list.filter(function(x){return x.id!==b.dataset.id});
-      await writeData(d.list,d.sha,"Borrar trabajo: "+(j?j.equipo:b.dataset.id));
-      for(var p of (j&&j.fotos)||[]){
-        var f=await gh(API+"/contents/"+p);
-        if(f)await gh(API+"/contents/"+p,"DELETE",{message:"Borrar foto",sha:f.sha});
-      }
-    }catch(err){alert(err.message)}
-    loadList();
+      var gone=null;
+      jobs=await update("trabajos.json",[],function(list){gone=list.find(function(x){return x.id===b.dataset.del});return list.filter(function(x){return x.id!==b.dataset.del})},"Borrar trabajo");
+      for(var p of (gone&&gone.fotos)||[]){try{await delFile(p)}catch(err){}}
+      renderJobs();
+    }catch(err){b.textContent="Error";b.title=err.message;setTimeout(loadJobs,2500)}
+  };
+
+  // ---- Servicios ----
+  var svc={celulares:[],computadoras:[]},sEdit=null;
+  async function loadSvcs(){
+    try{var r=await readJson("servicios.json",{celulares:[],computadoras:[]});svc=r.data;renderSvcs()}
+    catch(err){$("svcItems").innerHTML='<div class="msg err">'+esc(err.message)+'</div>'}
+  }
+  function renderSvcs(){
+    var g=$("grupo").value,list=svc[g]||[];
+    $("svcItems").innerHTML=list.map(function(s){return'<button type="button" class="svcitem" data-id="'+esc(s.id)+'"><span><b>'+esc(s.nombre)+'</b><small>'+esc(s.corto)+'</small></span><span class="t">'+esc(s.tiempo)+'</span></button>'}).join("")||'<p class="muted">No hay servicios en este grupo.</p>';
+  }
+  $("grupo").onchange=renderSvcs;
+  function openSvc(s,isNew){
+    sEdit={g:$("grupo").value,id:s.id,isNew:!!isNew};
+    $("svcForm").hidden=false;$("svcFormTitle").textContent=isNew?"Nuevo servicio":"Editar servicio";$("sDel").hidden=!!isNew;msg("svcMsg","","");
+    $("sNombre").value=s.nombre||"";$("sTiempo").value=s.tiempo||"";$("sFoto").value=s.foto||"";$("sCorto").value=s.corto||"";
+    $("sDetalle").value=s.detalle||"";$("sPasos").value=(s.pasos||[]).join("\n");$("sNota").value=s.nota||"";
+    $("svcForm").scrollIntoView({behavior:"smooth",block:"start"});
+  }
+  $("svcItems").onclick=function(e){var b=e.target.closest(".svcitem");if(!b)return;openSvc((svc[$("grupo").value]||[]).find(function(x){return x.id===b.dataset.id}))};
+  $("addSvc").onclick=function(){var g=$("grupo").value;openSvc({id:(g==="computadoras"?"pc-":"")+"s"+Date.now().toString(36)},true)};
+  $("sCancel").onclick=function(){$("svcForm").hidden=true;sEdit=null};
+  $("svcForm").onsubmit=async function(e){
+    e.preventDefault();if(!sEdit)return;
+    if(!$("sNombre").value.trim()){msg("svcMsg","err","Escribí el nombre.");return}
+    var item={id:sEdit.id,nombre:$("sNombre").value.trim(),corto:$("sCorto").value.trim(),tiempo:$("sTiempo").value.trim()||"Consultá",foto:$("sFoto").value,
+      detalle:$("sDetalle").value.trim(),pasos:$("sPasos").value.split("\n").map(function(x){return x.trim()}).filter(Boolean),nota:$("sNota").value.trim()};
+    $("sSave").disabled=true;msg("svcMsg","info","Guardando…");
+    try{
+      svc=await update("servicios.json",{celulares:[],computadoras:[]},function(d){
+        d[sEdit.g]=d[sEdit.g]||[];var ix=d[sEdit.g].findIndex(function(x){return x.id===item.id});
+        if(ix>=0)d[sEdit.g][ix]=item;else d[sEdit.g].push(item);return d;
+      },"Editar servicio: "+item.nombre);
+      msg("svcMsg","ok","Guardado. Se ve en la página en 1 o 2 minutos.");renderSvcs();
+      setTimeout(function(){$("svcForm").hidden=true},1600);
+    }catch(err){msg("svcMsg","err",err.message)}
+    $("sSave").disabled=false;
+  };
+  $("sDel").onclick=async function(){
+    var b=$("sDel");if(b.dataset.sure!=="1"){b.dataset.sure="1";b.textContent="¿Seguro? Tocá otra vez";setTimeout(function(){b.dataset.sure="";b.textContent="Borrar servicio"},4000);return}
+    try{svc=await update("servicios.json",{celulares:[],computadoras:[]},function(d){d[sEdit.g]=(d[sEdit.g]||[]).filter(function(x){return x.id!==sEdit.id});return d},"Borrar servicio");
+      $("svcForm").hidden=true;renderSvcs()}catch(err){msg("svcMsg","err",err.message)}
+    b.dataset.sure="";b.textContent="Borrar servicio";
   };
 
   show();

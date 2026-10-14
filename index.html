@@ -8,50 +8,55 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_AR">
 <meta property="og:title" content="iBros Technology · Servicio técnico en Corrientes">
-<meta property="og:description" content="Celulares y computadoras. Reparaciones en el día con 2 meses de garantía. 3 de Abril 917 · WhatsApp 3794 541449.">
+<meta property="og:description" content="Celulares y computadoras. Reparaciones con 2 meses de garantía. 3 de Abril 917 · WhatsApp 3794 541449.">
 <meta property="og:image" content="https://gabimedina00.github.io/img/og.jpg">
 <meta property="og:url" content="https://gabimedina00.github.io/">
 <meta name="twitter:card" content="summary_large_image">
 <title>iBros Technology</title>
-<meta name="description" content="iBros Technology: servicio técnico de celulares y computadoras en Corrientes. Módulos, baterías, pin de carga, mojados y más. Reparaciones en el día con 2 meses de garantía.">
+<meta name="description" content="iBros Technology: servicio técnico de celulares y computadoras en Corrientes. Módulos, baterías, pin de carga, mojados, formateo y más, con 2 meses de garantía.">
 <meta name="theme-color" content="#0b0b0b">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
 <style>
-/* Layout: bandas negras de marca (inicio, trabajos, pie) alternadas con secciones claras; tarjetas con foco que sigue al puntero, cinta de servicios en movimiento, carrusel de trabajos con reseñas y WhatsApp siempre a mano */
+/* Layout: bandas negras de marca alternadas con secciones crema; servicios como botones que abren su ficha con el procedimiento, sección propia para computadoras, carrusel de trabajos con reseñas y WhatsApp siempre a mano */
 :root{
-  --bg:#f6f3ef; --surface:#ffffff; --ink:#141414; --muted:#5f5a55; --line:#e4ded7;
-  --accent:#ee6a1c; --accent-ink:#ffffff; --sand:#efe2d3;
-  --band:#0b0b0b; --band-2:#171615; --band-ink:#f5f3f0; --band-muted:#a8a29c; --band-line:#2a2826;
+  --bg:#ebe7e0; --surface:#f5f2ec; --surface-2:#e2ddd4; --ink:#161412; --muted:#5f5850; --line:#d5cec3;
+  --accent:#ee6a1c; --accent-text:#b9500f; --accent-ink:#ffffff; --sand:#e6dccf;
+  --band:#0b0b0b; --band-2:#171615; --band-3:#211f1d; --band-ink:#f5f3f0; --band-muted:#a8a29c; --band-line:#2c2a27;
   --wa:#1fa855; --star:#f5a524;
   --display:"Montserrat", "Segoe UI", system-ui, sans-serif;
   --body:"DM Sans", "Segoe UI", system-ui, sans-serif;
   --ease:cubic-bezier(.2,.7,.2,1);
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#111110; --surface:#1a1918; --ink:#f1eeea; --muted:#aaa39c; --line:#2d2b29;
-  --accent:#ff7a2e; --accent-ink:#1a0c02; --sand:#2a231c; --band:#060606; --band-2:#141312; --band-line:#242220; color-scheme:dark}}
+  --bg:#121110; --surface:#1b1a18; --surface-2:#242220; --ink:#f1eeea; --muted:#aaa39c; --line:#302d2a;
+  --accent:#ff7a2e; --accent-text:#ff8f4d; --accent-ink:#1a0c02; --sand:#2a231c;
+  --band:#070707; --band-2:#151413; --band-3:#1f1d1b; --band-line:#272523; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#111110; --surface:#1a1918; --ink:#f1eeea; --muted:#aaa39c; --line:#2d2b29;
-  --accent:#ff7a2e; --accent-ink:#1a0c02; --sand:#2a231c; --band:#060606; --band-2:#141312; --band-line:#242220; color-scheme:dark}
+  --bg:#121110; --surface:#1b1a18; --surface-2:#242220; --ink:#f1eeea; --muted:#aaa39c; --line:#302d2a;
+  --accent:#ff7a2e; --accent-text:#ff8f4d; --accent-ink:#1a0c02; --sand:#2a231c;
+  --band:#070707; --band-2:#151413; --band-3:#1f1d1b; --band-line:#272523; color-scheme:dark}
 
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;overflow-x:hidden}
-.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1140px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.06;letter-spacing:-.025em}
-h2{font-size:clamp(1.9rem,4.4vw,3rem);font-weight:800}
+h2{font-size:clamp(1.9rem,4.4vw,3.1rem);font-weight:800}
 h3{font-size:1.08rem;font-weight:700;letter-spacing:-.01em}
 p{margin:0}
 a{color:inherit}
 img{display:block}
 button{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-.eyebrow{font-family:var(--display);font-weight:600;font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--muted)}
-.eyebrow.or{color:var(--accent)}
-.or{color:var(--accent)}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+.eyebrow.or{color:var(--accent-text)}
+.band .eyebrow.or{color:var(--accent)}
+
+/* Barra de progreso */
+.progress{position:fixed;left:0;right:0;top:0;height:3px;z-index:40;transform-origin:0 50%;transform:scaleX(0);background:var(--accent)}
 
 /* Logo */
 .logo{display:inline-flex;flex-direction:column;text-decoration:none;color:inherit;line-height:1}
@@ -61,23 +66,33 @@ button{font:inherit;color:inherit}
 .logo .t{font-family:var(--display);font-weight:500;font-size:.48rem;letter-spacing:.44em;margin-top:4px}
 
 /* Botones */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 24px;border-radius:999px;font-weight:600;text-decoration:none;font-size:1rem;border:0;cursor:pointer;font-family:var(--body);transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s,border-color .25s}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 24px;border-radius:999px;font-weight:600;text-decoration:none;font-size:1rem;border:0;cursor:pointer;font-family:var(--body);transition:translate .25s var(--ease),box-shadow .25s var(--ease),background .25s,border-color .25s,color .25s}
 .btn svg{width:20px;height:20px;flex:none}
 .btn-or{background:var(--accent);color:var(--accent-ink);box-shadow:0 8px 24px color-mix(in srgb,var(--accent) 35%,transparent)}
-.btn-or:hover{transform:translateY(-2px);box-shadow:0 12px 30px color-mix(in srgb,var(--accent) 45%,transparent)}
+.btn-or:hover{translate:0 -2px;box-shadow:0 12px 30px color-mix(in srgb,var(--accent) 50%,transparent)}
 .btn-ghost{border:1.5px solid var(--band-line);color:var(--band-ink)}
 .btn-ghost:hover{border-color:var(--band-ink)}
 .btn-line{border:1.5px solid var(--line);color:var(--ink);background:var(--surface)}
 .btn-line:hover{border-color:var(--ink)}
-.btn-sm{padding:9px 16px;font-size:.9rem}
+
+/* Foco de luz que sigue al puntero */
+.spot{position:relative;isolation:isolate}
+.spot::before{content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;pointer-events:none;opacity:0;transition:opacity .3s;
+  background:radial-gradient(340px circle at var(--x,50%) var(--y,50%),color-mix(in srgb,var(--accent) 24%,transparent),transparent 65%)}
+.spot::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;pointer-events:none;opacity:0;transition:opacity .3s;
+  background:radial-gradient(220px circle at var(--x,50%) var(--y,50%),var(--accent),transparent 70%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+.spot:hover::before,.spot:hover::after,.spot.touch::before,.spot.touch::after{opacity:1}
 
 /* Barra superior */
-.bar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--band) 82%,transparent);backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);color:var(--band-ink);border-bottom:1px solid transparent;transition:border-color .3s;padding-top:env(safe-area-inset-top,0px)}
+.bar{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--band) 84%,transparent);backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);color:var(--band-ink);border-bottom:1px solid transparent;transition:border-color .3s;padding-top:env(safe-area-inset-top,0px)}
 .bar.scrolled{border-bottom-color:var(--band-line)}
 .bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
-.bar nav{display:flex;align-items:center;gap:26px;font-size:.92rem}
+.bar nav{display:flex;align-items:center;gap:24px;font-size:.92rem}
 .bar nav a{text-decoration:none;color:var(--band-muted);transition:color .2s}
-.bar nav a:hover{color:var(--band-ink)}
+.bar nav a:hover,.bar nav a.on{color:var(--band-ink)}
+.bar nav a.pc{color:var(--band-ink);display:inline-flex;align-items:center;gap:6px}
+.bar nav a.pc::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent)}
 .status{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;color:var(--band-muted);white-space:nowrap}
 .dot{width:9px;height:9px;border-radius:50%;background:#77716b;position:relative}
 .dot.on{background:var(--wa)}
@@ -88,25 +103,34 @@ button{font:inherit;color:inherit}
 .band{background:var(--band);color:var(--band-ink)}
 .band .eyebrow{color:var(--band-muted)}
 .hero{position:relative;overflow:hidden}
-.hero::before{content:"";position:absolute;width:720px;height:720px;right:-200px;top:-240px;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--accent) 28%,transparent),transparent);pointer-events:none}
-.hero .wrap{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;padding-block:40px 72px}
-.hero h1{font-size:clamp(3rem,8.4vw,6.4rem);font-weight:900;letter-spacing:-.045em;margin-top:18px;line-height:.98}
+.hero::before{content:"";position:absolute;width:760px;height:760px;right:-220px;top:-260px;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--accent) 30%,transparent),transparent);pointer-events:none;transition:transform 1.2s var(--ease)}
+.hero[data-mode="pc"]::before{transform:translate(-140px,120px)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;padding-block:32px 72px}
+.switch{display:inline-flex;position:relative;padding:4px;border-radius:999px;background:var(--band-2);border:1px solid var(--band-line)}
+.switch button{position:relative;z-index:1;border:0;background:none;cursor:pointer;padding:9px 18px;border-radius:999px;font-weight:600;font-size:.9rem;color:var(--band-muted);display:inline-flex;align-items:center;gap:8px;transition:color .3s}
+.switch button svg{width:18px;height:18px}
+.switch button[aria-pressed="true"]{color:var(--accent-ink)}
+.switch .knob{position:absolute;top:4px;bottom:4px;left:4px;border-radius:999px;background:var(--accent);transition:left .45s var(--ease),width .45s var(--ease)}
+.hero h1{font-size:clamp(3rem,8.2vw,6.3rem);font-weight:900;letter-spacing:-.045em;margin-top:26px;line-height:.98;min-height:2em}
 .hero h1 .ln{display:block}
 .hero h1 .ln:last-child{color:var(--accent)}
-.hero .lead{margin-top:26px;font-size:1.14rem;color:var(--band-muted);max-width:44ch}
+.hero .lead{margin-top:24px;font-size:1.14rem;color:var(--band-muted);max-width:44ch;min-height:5.4em}
 .hero .lead b{color:var(--band-ink);font-weight:600}
-.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.swap{transition:opacity .35s var(--ease),translate .35s var(--ease)}
+.swap.out{opacity:0;translate:0 10px}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
 .visual{position:relative;perspective:1000px}
-.visual figure{margin:0;border-radius:24px;overflow:hidden;aspect-ratio:1/1;max-width:100%;background:var(--sand);transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .5s var(--ease);box-shadow:0 40px 80px rgba(0,0,0,.45)}
-.visual figure img{width:100%;height:100%;object-fit:cover;object-position:60% 50%}
-.pill{position:absolute;display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:16px;background:color-mix(in srgb,var(--band-2) 86%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--band-line);color:var(--band-ink);font-size:.88rem;box-shadow:0 16px 40px rgba(0,0,0,.35);animation:float 6s ease-in-out infinite}
+.visual .frame{position:relative;border-radius:26px;overflow:hidden;aspect-ratio:1/1;max-width:100%;background:var(--sand);transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .5s var(--ease);box-shadow:0 40px 80px rgba(0,0,0,.45)}
+.visual .frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .7s var(--ease),scale 1.2s var(--ease)}
+.visual .frame img.off{opacity:0;scale:1.06}
+.pill{position:absolute;display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:16px;background:color-mix(in srgb,var(--band-2) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--band-line);color:var(--band-ink);font-size:.88rem;box-shadow:0 16px 40px rgba(0,0,0,.35);animation:float 6s ease-in-out infinite}
 .pill b{display:block;font-family:var(--display);font-size:1rem}
 .pill small{color:var(--band-muted)}
 .pill .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--accent);color:var(--accent-ink);flex:none}
 .pill .ic svg{width:18px;height:18px}
-.pill.p1{left:-28px;top:12%}
-.pill.p2{right:-20px;bottom:10%;animation-delay:-3s}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.pill.p1{left:-28px;top:10%}
+.pill.p2{right:-20px;bottom:9%;animation-delay:-3s}
+@keyframes float{0%,100%{translate:0 0}50%{translate:0 -10px}}
 
 .facts{border-top:1px solid var(--band-line)}
 .facts .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;padding-block:28px}
@@ -114,17 +138,14 @@ button{font:inherit;color:inherit}
 .fact b{font-family:var(--display);font-weight:800;font-size:clamp(1.5rem,3vw,2.1rem);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
 .fact span{color:var(--band-muted);font-size:.9rem}
 
-/* Carga inicial */
 @media (prefers-reduced-motion:no-preference){
   .ld{animation:rise .9s var(--ease) both;animation-delay:var(--d,0s)}
-  .visual .ld{animation-name:zoom}
 }
-@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
-@keyframes zoom{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+@keyframes rise{from{opacity:0;translate:0 26px}to{opacity:1;translate:0 0}}
 
 /* Cinta */
 .ticker{background:var(--accent);color:var(--accent-ink);overflow:hidden;white-space:nowrap;padding-block:14px;font-family:var(--display);font-weight:700;font-size:1.05rem;letter-spacing:-.01em}
-.ticker .track{display:inline-flex;gap:0;animation:slide 38s linear infinite}
+.ticker .track{display:inline-flex;animation:slide 40s linear infinite}
 .ticker span{display:inline-flex;align-items:center;gap:22px;padding-right:22px}
 .ticker span::after{content:"";width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.6}
 .ticker:hover .track{animation-play-state:paused}
@@ -133,32 +154,65 @@ button{font:inherit;color:inherit}
 /* Aparición al hacer scroll */
 @supports (animation-timeline:view()){
   @media (prefers-reduced-motion:no-preference){
-    .reveal{animation:reveal linear both;animation-timeline:view();animation-range:entry 0% entry 45%}
+    .reveal{animation:reveal linear both;animation-timeline:view();animation-range:entry 0% entry 40%}
   }
 }
-@keyframes reveal{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+@keyframes reveal{from{opacity:0;translate:0 34px}to{opacity:1;translate:0 0}}
 
 section{padding-block:88px}
-.head{display:flex;flex-direction:column;gap:12px;margin-bottom:36px;max-width:62ch}
+.head{display:flex;flex-direction:column;gap:12px;max-width:62ch}
 .head p{color:var(--muted);font-size:1.05rem}
 .band .head p{color:var(--band-muted)}
-.head-row{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:28px}
-.head-row .head{margin-bottom:0}
+.head-row{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:32px}
+
+/* Pestañas */
+.tabs{display:inline-flex;position:relative;padding:5px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line)}
+.tabs button{position:relative;z-index:1;border:0;background:none;cursor:pointer;padding:10px 20px;border-radius:999px;font-weight:600;font-size:.95rem;color:var(--muted);display:inline-flex;align-items:center;gap:8px;transition:color .3s}
+.tabs button small{font-size:.75rem;padding:1px 8px;border-radius:99px;background:color-mix(in srgb,var(--ink) 8%,transparent)}
+.tabs button[aria-selected="true"]{color:var(--band-ink)}
+.tabs button[aria-selected="true"] small{background:color-mix(in srgb,var(--band-ink) 18%,transparent)}
+.tabs .knob{position:absolute;top:5px;bottom:5px;left:5px;border-radius:999px;background:var(--ink);transition:left .45s var(--ease),width .45s var(--ease)}
 
 /* Servicios */
 .svcs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.svc{position:relative;overflow:hidden;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:8px;transition:transform .35s var(--ease),border-color .35s,box-shadow .35s}
-.svc::before{content:"";position:absolute;inset:0;background:radial-gradient(260px circle at var(--x,50%) var(--y,0%),color-mix(in srgb,var(--accent) 14%,transparent),transparent 70%);opacity:0;transition:opacity .35s;pointer-events:none}
-.svc:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--accent) 45%,var(--line));box-shadow:0 18px 40px rgba(20,14,8,.08)}
-.svc:hover::before{opacity:1}
-.svc .ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent);transition:transform .35s var(--ease),background .35s,color .35s}
+.svc{text-align:left;cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:8px;transition:translate .35s var(--ease),box-shadow .35s var(--ease)}
+.svc:hover{translate:0 -4px;box-shadow:0 20px 44px rgba(30,20,10,.12)}
+.svc .top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.svc .ic{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent-text);transition:transform .35s var(--ease),background .35s,color .35s}
 .svc .ic svg{width:24px;height:24px}
 .svc:hover .ic{transform:rotate(-8deg) scale(1.06);background:var(--accent);color:var(--accent-ink)}
+.time{display:inline-flex;align-items:center;gap:6px;font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:99px;background:var(--surface-2);color:var(--muted);white-space:nowrap}
+.time::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.svc h3{margin-top:6px}
 .svc p{color:var(--muted);font-size:.95rem}
-.svc .tag{margin-top:auto;padding-top:8px;font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.svc .more{margin-top:auto;padding-top:10px;font-weight:600;font-size:.9rem;color:var(--accent-text);display:inline-flex;align-items:center;gap:6px}
+.svc .more svg{width:16px;height:16px;transition:translate .3s var(--ease)}
+.svc:hover .more svg{translate:4px 0}
+.grid-in{animation:gridIn .5s var(--ease) both}
+@keyframes gridIn{from{opacity:0;translate:0 14px}to{opacity:1;translate:0 0}}
+
+/* Computadoras */
+.pc{position:relative;overflow:hidden}
+.pc::before{content:"";position:absolute;width:640px;height:640px;left:-260px;bottom:-300px;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--accent) 22%,transparent),transparent);pointer-events:none}
+.pc .wrap{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.pc h2{font-size:clamp(2.2rem,5.4vw,3.9rem);font-weight:900;letter-spacing:-.04em}
+.pc h2 em{font-style:normal;color:var(--accent)}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.badges span{padding:7px 14px;border-radius:99px;border:1px solid var(--band-line);background:var(--band-2);font-size:.88rem;font-weight:500}
+.pclist{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:28px}
+.pcbtn{display:flex;align-items:center;gap:12px;text-align:left;cursor:pointer;padding:14px 16px;border-radius:16px;border:1px solid var(--band-line);background:var(--band-2);color:var(--band-ink);transition:translate .3s var(--ease)}
+.pcbtn:hover{translate:0 -3px}
+.pcbtn .ic{width:38px;height:38px;border-radius:11px;flex:none;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 18%,transparent);color:var(--accent)}
+.pcbtn .ic svg{width:20px;height:20px}
+.pcbtn b{display:block;font-size:.95rem;line-height:1.25}
+.pcbtn small{color:var(--band-muted);font-size:.8rem}
+.pcvis{position:relative}
+.pcvis .frame{border-radius:26px;overflow:hidden;aspect-ratio:4/3.3;max-width:100%;background:var(--band-2);box-shadow:0 40px 80px rgba(0,0,0,.5)}
+.pcvis .frame img{width:100%;height:100%;object-fit:cover}
+.pcvis .pill.p1{left:-24px;top:auto;bottom:12%}
+.pcvis .pill.p2{right:-16px;top:8%;bottom:auto}
 
 /* Trabajos */
-.trabajos{position:relative;overflow:hidden}
 .rating{display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:16px;background:var(--band-2);border:1px solid var(--band-line)}
 .rating b{font-family:var(--display);font-weight:800;font-size:2rem;letter-spacing:-.03em;line-height:1}
 .rating small{display:block;color:var(--band-muted);font-size:.82rem}
@@ -170,11 +224,11 @@ section{padding-block:88px}
 .filters button:hover{color:var(--band-ink);border-color:var(--band-muted)}
 .filters button[aria-pressed="true"]{background:var(--band-ink);color:var(--band);border-color:var(--band-ink)}
 .rail{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(280px,340px);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:14px;scrollbar-width:thin;scrollbar-color:var(--band-line) transparent}
-.job{scroll-snap-align:start;background:var(--band-2);border:1px solid var(--band-line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:transform .35s var(--ease),border-color .35s}
-.job:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--accent) 50%,var(--band-line))}
+.job{scroll-snap-align:start;background:var(--band-2);border:1px solid var(--band-line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:translate .35s var(--ease)}
+.job:hover{translate:0 -4px}
 .job-img{position:relative;display:block;width:100%;aspect-ratio:4/3;border:0;padding:0;cursor:zoom-in;background:var(--band);overflow:hidden}
-.job-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
-.job:hover .job-img img{transform:scale(1.05)}
+.job-img img{width:100%;height:100%;object-fit:cover;transition:scale .6s var(--ease)}
+.job:hover .job-img img{scale:1.05}
 .job-img .n{position:absolute;right:10px;bottom:10px;background:rgba(0,0,0,.6);color:#fff;font-size:.75rem;padding:3px 9px;border-radius:99px}
 .job-img .ex{position:absolute;left:10px;top:10px;background:var(--star);color:#1d1400;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:99px}
 .job-body{padding:18px;display:flex;flex-direction:column;gap:8px;flex:1}
@@ -187,19 +241,19 @@ section{padding-block:88px}
 .job blockquote footer{margin-top:6px;display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--band-muted)}
 .empty{border:1.5px dashed var(--band-line);border-radius:20px;padding:40px 24px;text-align:center;color:var(--band-muted);display:flex;flex-direction:column;align-items:center;gap:10px}
 .empty b{color:var(--band-ink);font-family:var(--display);font-size:1.2rem}
+.rail-row{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:14px}
 .rail-nav{display:flex;gap:8px}
-.rail-nav button{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--band-line);background:transparent;cursor:pointer;display:grid;place-items:center;transition:border-color .2s,background .2s}
+.rail-nav button{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--band-line);background:transparent;cursor:pointer;display:grid;place-items:center;transition:border-color .2s}
 .rail-nav button:hover{border-color:var(--band-ink)}
 .rail-nav svg{width:18px;height:18px}
-
 .review{margin-top:44px;display:grid;grid-template-columns:1fr 1.1fr;gap:32px;align-items:center;padding:28px;border-radius:24px;background:linear-gradient(135deg,var(--band-2),var(--band));border:1px solid var(--band-line)}
 .review h3{font-size:clamp(1.3rem,2.6vw,1.8rem);font-weight:800}
 .review p{color:var(--band-muted);margin-top:8px}
 .rv-form{display:flex;flex-direction:column;gap:12px}
 .rv-stars{display:flex;gap:4px}
-.rv-stars button{border:0;background:none;cursor:pointer;font-size:1.9rem;line-height:1;color:var(--band-line);padding:2px;transition:transform .15s,color .15s}
+.rv-stars button{border:0;background:none;cursor:pointer;font-size:1.9rem;line-height:1;color:var(--band-line);padding:2px;transition:scale .15s,color .15s}
 .rv-stars button.on{color:var(--star)}
-.rv-stars button:hover{transform:scale(1.15)}
+.rv-stars button:hover{scale:1.15}
 .band input[type=text],.band textarea{background:var(--band);border-color:var(--band-line);color:var(--band-ink)}
 
 /* Formularios */
@@ -207,14 +261,6 @@ input[type=text],select,textarea{font:inherit;color:var(--ink);background:var(--
 input[type=text]:focus,select:focus,textarea:focus{border-color:var(--accent);outline:none}
 textarea{resize:vertical;min-height:84px}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-
-/* Computadoras */
-.pc .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:center}
-.pc figure{margin:0;border-radius:24px;overflow:hidden;aspect-ratio:4/5;max-width:100%;background:var(--sand)}
-.pc figure img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
-.ticks{list-style:none;padding:0;margin:24px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:12px 24px}
-.ticks li{display:flex;gap:10px;align-items:flex-start}
-.ticks li::before{content:"";flex:none;width:8px;height:8px;margin-top:.6em;border-radius:50%;background:var(--accent)}
 
 /* Presupuesto */
 .alt{background:var(--surface);border-block:1px solid var(--line)}
@@ -229,9 +275,9 @@ textarea{resize:vertical;min-height:84px}
 .seg input:focus-visible+label{outline:3px solid var(--accent);outline-offset:2px}
 .form input[type=text],.form select,.form textarea{background:var(--surface)}
 .preview{font-size:.85rem;color:var(--muted);background:var(--surface);border:1px dashed var(--line);border-radius:12px;padding:12px 14px;white-space:pre-wrap}
-.steps{list-style:none;margin:28px 0 0;padding:0;display:flex;flex-direction:column;gap:20px;counter-reset:s;position:relative}
+.steps{list-style:none;margin:28px 0 0;padding:0;display:flex;flex-direction:column;gap:20px;counter-reset:s}
 .steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:14px;position:relative}
-.steps li::before{content:counter(s);font-family:var(--display);font-weight:800;font-size:1.05rem;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--accent);color:var(--accent);background:var(--surface);position:relative;z-index:1}
+.steps li::before{content:counter(s);font-family:var(--display);font-weight:800;font-size:1.05rem;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--accent);color:var(--accent-text);background:var(--surface);position:relative;z-index:1}
 .steps li:not(:last-child)::after{content:"";position:absolute;left:19.5px;top:42px;bottom:-20px;width:1.5px;background:var(--line)}
 .steps b{display:block;font-family:var(--display);font-size:1rem}
 .steps span{color:var(--muted);font-size:.94rem}
@@ -254,32 +300,64 @@ table{width:100%;border-collapse:collapse;font-size:.95rem}
 td{padding:10px 0;border-bottom:1px solid var(--line)}
 tr:last-child td{border-bottom:0}
 td:last-child{text-align:right;font-variant-numeric:tabular-nums}
-tr.today td{font-weight:700;color:var(--accent)}
+tr.today td{font-weight:700;color:var(--accent-text)}
 .contact{display:flex;flex-direction:column;gap:6px}
 .contact a{text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:8px}
-.contact a:hover{color:var(--accent)}
+.contact a:hover{color:var(--accent-text)}
 .contact svg{width:18px;height:18px}
-
 details{border-bottom:1px solid var(--line);padding:18px 0}
 summary{cursor:pointer;font-weight:600;font-size:1.04rem;list-style:none;display:flex;justify-content:space-between;gap:16px}
 summary::-webkit-details-marker{display:none}
-summary::after{content:"+";font-family:var(--display);font-size:1.4rem;line-height:1;color:var(--accent);transition:transform .3s var(--ease)}
-details[open] summary::after{transform:rotate(45deg)}
+summary::after{content:"+";font-family:var(--display);font-size:1.4rem;line-height:1;color:var(--accent-text);transition:rotate .3s var(--ease)}
+details[open] summary::after{rotate:45deg}
 details p{margin-top:10px;color:var(--muted);max-width:65ch}
 
 footer.site .wrap{padding-block:48px 120px;display:flex;flex-wrap:wrap;gap:20px 40px;align-items:center;justify-content:space-between}
 footer.site p{color:var(--band-muted);font-size:.88rem}
 
-.float{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));width:60px;height:60px;border-radius:50%;background:var(--wa);color:#fff;display:grid;place-items:center;box-shadow:0 10px 28px rgba(0,0,0,.3);z-index:30;transition:transform .25s var(--ease)}
-.float:hover{transform:scale(1.08)}
+.float{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));width:60px;height:60px;border-radius:50%;background:var(--wa);color:#fff;display:grid;place-items:center;box-shadow:0 10px 28px rgba(0,0,0,.3);z-index:30;transition:scale .25s var(--ease)}
+.float:hover{scale:1.08}
 .float svg{width:30px;height:30px}
 .float::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--wa)}
 @media (prefers-reduced-motion:no-preference){.float::after{animation:ping 2.4s var(--ease) infinite}}
 
+/* Ficha del servicio */
+dialog{color:var(--ink)}
+dialog.sheet{border:0;padding:0;margin:0 0 0 auto;height:100%;max-height:100%;width:min(520px,100%);max-width:100%;background:var(--surface);box-shadow:-30px 0 60px rgba(0,0,0,.25)}
+dialog.sheet[open]{animation:sheetIn .45s var(--ease)}
+@keyframes sheetIn{from{translate:40px 0;opacity:0}to{translate:0 0;opacity:1}}
+dialog::backdrop{background:rgba(10,8,6,.55);backdrop-filter:blur(4px)}
+.sh{display:flex;flex-direction:column;min-height:100%}
+.sh-media{position:relative;aspect-ratio:16/10;background:var(--band);color:var(--accent);display:grid;place-items:center;overflow:hidden;flex:none}
+.sh-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sh-media .big{width:96px;height:96px;opacity:.9}
+.sh-media::after{content:"";position:absolute;inset:auto 0 0 0;height:50%;background:linear-gradient(transparent,rgba(0,0,0,.55))}
+.sh-x{position:absolute;right:calc(14px + env(safe-area-inset-right,0px));top:calc(14px + env(safe-area-inset-top,0px));z-index:2;width:42px;height:42px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;cursor:pointer;font-size:1.4rem;line-height:1}
+.sh-body{padding:26px 26px 32px;display:flex;flex-direction:column;gap:14px;flex:1;padding-left:max(26px,env(safe-area-inset-left,0px))}
+.sh-body h3{font-size:clamp(1.6rem,4vw,2.1rem);font-weight:800;letter-spacing:-.03em}
+.sh-body .lead{color:var(--muted);font-size:1.02rem}
+.proc{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;counter-reset:p}
+.proc li{counter-increment:p;display:grid;grid-template-columns:36px 1fr;gap:14px;padding-bottom:16px;position:relative}
+.proc li::before{content:counter(p);width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:.9rem;background:var(--accent);color:var(--accent-ink);position:relative;z-index:1}
+.proc li:not(:last-child)::after{content:"";position:absolute;left:15.25px;top:34px;bottom:0;width:1.5px;background:var(--line);transform-origin:top}
+@media (prefers-reduced-motion:no-preference){
+  dialog[open] .proc li{animation:stepIn .5s var(--ease) both;animation-delay:calc(var(--i) * 90ms + .15s)}
+  dialog[open] .proc li::after{animation:grow .5s var(--ease) both;animation-delay:calc(var(--i) * 90ms + .3s)}
+}
+@keyframes stepIn{from{opacity:0;translate:12px 0}to{opacity:1;translate:0 0}}
+@keyframes grow{from{scale:1 0}to{scale:1 1}}
+.proc span{padding-top:4px}
+.note{padding:14px 16px;border-radius:14px;background:color-mix(in srgb,var(--accent) 10%,var(--surface));border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);font-size:.94rem}
+.warn{display:flex;gap:10px;align-items:flex-start;color:var(--muted);font-size:.9rem}
+.warn svg{width:20px;height:20px;flex:none;color:var(--accent-text)}
+.sh-nav{display:flex;justify-content:space-between;gap:10px;margin-top:auto;padding-top:12px;border-top:1px solid var(--line)}
+.sh-nav button{border:0;background:none;cursor:pointer;color:var(--muted);font-weight:600;font-size:.9rem;padding:8px 0}
+.sh-nav button:hover{color:var(--ink)}
+
 /* Visor de fotos */
 dialog.lb{border:0;padding:0;background:transparent;max-width:min(920px,calc(100vw - 32px));width:100%;color:var(--band-ink)}
-dialog.lb::backdrop{background:rgba(0,0,0,.85);backdrop-filter:blur(6px)}
-.lb-in{background:var(--band-2);border:1px solid var(--band-line);border-radius:22px;overflow:hidden;display:grid;grid-template-columns:1.3fr 1fr;max-height:calc(100vh - 48px)}
+dialog.lb::backdrop{background:rgba(0,0,0,.85)}
+.lb-in{position:relative;background:var(--band-2);border:1px solid var(--band-line);border-radius:22px;overflow:hidden;display:grid;grid-template-columns:1.3fr 1fr;max-height:calc(100vh - 48px)}
 .lb-pics{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;background:#000;min-width:0}
 .lb-pics img{flex:none;width:100%;height:100%;max-height:calc(100vh - 48px);object-fit:contain;scroll-snap-align:start}
 .lb-txt{padding:24px;display:flex;flex-direction:column;gap:10px;overflow:auto}
@@ -288,23 +366,35 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85);backdrop-filter:blur(6px)}
 
 @media (max-width:920px){
   .hero .wrap,.pc .wrap,.quote,.local,.review{grid-template-columns:1fr}
-  .visual{max-width:520px}
+  .visual,.pcvis{max-width:540px}
   .pill.p1{left:-6px}.pill.p2{right:-6px}
+  .pcvis .pill.p1{left:-6px}.pcvis .pill.p2{right:-6px}
   .svcs{grid-template-columns:repeat(2,minmax(0,1fr))}
   .facts .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}
   .bar nav a{display:none}
+  .bar nav a.pc{display:inline-flex}
   .lb-in{grid-template-columns:1fr}
   .lb-pics img{max-height:56vh}
+  .hero h1{min-height:0}
 }
-@media (max-width:560px){
-  .svcs,.ticks,.row2{grid-template-columns:1fr}
+@media (max-width:600px){
+  .svcs,.row2,.pclist{grid-template-columns:1fr}
   .ctas .btn{width:100%}
   section{padding-block:64px}
   .warranty{grid-template-columns:1fr;justify-items:start}
-  .rail{grid-auto-columns:82%}
+  .rail{grid-auto-columns:84%}
   .pill{font-size:.8rem;padding:10px 12px}
   .pill .ic{width:28px;height:28px}
+  .switch button{padding:8px 14px}
+  .tabs{display:flex}
+  .tabs button{flex:1;justify-content:center;padding:10px 12px}
+  dialog.sheet{margin:auto 0 0;height:auto;max-height:92vh;width:100%;border-radius:22px 22px 0 0;box-shadow:0 -20px 50px rgba(0,0,0,.3)}
+  dialog.sheet[open]{animation-name:sheetUp}
+  .sh-body{padding-bottom:calc(28px + env(safe-area-inset-bottom,0px))}
+  .hero .lead{min-height:0}
+  .bar nav a.pc{display:none}
 }
+@keyframes sheetUp{from{translate:0 60px;opacity:0}to{translate:0 0;opacity:1}}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .ticker .track,.pill,.dot.on::after{animation:none}
@@ -313,77 +403,130 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85);backdrop-filter:blur(6px)}
 </head>
 <body>
 
+<div class="progress" id="progress"></div>
+
 <header class="bar" id="bar"><div class="wrap">
   <a class="logo" href="#inicio" aria-label="iBros Technology, inicio"><span class="w"><i>ı</i>Bros</span><span class="t">TECHNOLOGY</span></a>
   <nav>
-    <a href="#servicios">Servicios</a>
+    <a href="#servicios">Celulares</a>
+    <a href="#computadoras" class="pc">Computadoras</a>
     <a href="#trabajos">Trabajos</a>
-    <a href="#computadoras">Computadoras</a>
     <a href="#local">Local</a>
-    <span class="status"><i class="dot" id="dot"></i><span id="openTxt">Lun a Sáb</span></span>
+    <span class="status" aria-live="polite"><i class="dot" id="dot"></i><span id="openTxt">Lun a Sáb</span></span>
   </nav>
 </div></header>
 
 <div class="band">
-  <div class="hero" id="inicio"><div class="wrap">
+  <div class="hero" id="inicio" data-mode="cel"><div class="wrap">
     <div>
-      <p class="eyebrow ld" style="--d:.05s">Servicio técnico · Corrientes</p>
-      <h1><span class="ln ld" style="--d:.15s">Volvé a</span><span class="ln ld" style="--d:.3s">conectar.</span></h1>
-      <p class="lead ld" style="--d:.45s">Reparamos celulares y computadoras en <b>3 de Abril 917</b>. La mayoría de los trabajos <b>se entregan en el día</b> y todos tienen <b>2 meses de garantía</b>.</p>
+      <div class="switch ld" style="--d:.05s" id="switch" role="group" aria-label="Elegí tu equipo">
+        <span class="knob" id="knob"></span>
+        <button type="button" data-mode="cel" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg>Celulares</button>
+        <button type="button" data-mode="pc" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="4.5" width="16" height="11" rx="1.5"/><path d="M2 19.5h20"/></svg>Computadoras</button>
+      </div>
+      <h1 class="swap" id="h1"><span class="ln ld" style="--d:.15s">Volvé a</span><span class="ln ld" style="--d:.3s">conectar.</span></h1>
+      <p class="lead swap ld" style="--d:.45s" id="lead">Reparamos celulares en <b>3 de Abril 917</b>. La mayoría de los trabajos <b>se entregan en el día</b> y todos tienen <b>2 meses de garantía</b>.</p>
       <div class="ctas ld" style="--d:.6s">
-        <a class="btn btn-or" href="https://wa.me/5493794541449?text=Hola%20iBros%2C%20quiero%20un%20presupuesto." target="_blank" rel="noopener">
+        <a class="btn btn-or" id="heroWa" href="https://wa.me/5493794541449?text=Hola%20iBros%2C%20quiero%20un%20presupuesto%20para%20mi%20celular." target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3a.5.5 0 0 0 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3Z"/></svg>
-          WhatsApp 3794 541449
+          <span id="heroWaTxt">Pedir presupuesto</span>
         </a>
-        <a class="btn btn-ghost" href="#trabajos">Ver trabajos</a>
+        <a class="btn btn-ghost" id="heroMore" href="#servicios">Ver servicios</a>
       </div>
     </div>
     <div class="visual" id="visual">
-      <figure class="ld" style="--d:.2s"><img src="img/hero.webp" alt="iPhone con pin de carga y destornillador de precisión" width="900" height="713"></figure>
-      <div class="pill p1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span><span><b>En el día</b><small>la mayoría de los trabajos</small></span></div>
+      <div class="frame ld" style="--d:.2s">
+        <img id="imgCel" src="img/hero.webp" alt="iPhone con pin de carga y destornillador de precisión" width="900" height="713">
+        <img id="imgPc" class="off" src="img/pc-foto.webp" alt="Notebook en uso" width="900" height="692" loading="lazy">
+      </div>
+      <div class="pill p1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span><span><b id="pill1">En el día</b><small id="pill1s">la mayoría de los trabajos</small></span></div>
       <div class="pill p2"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg></span><span><b>2 meses</b><small>de garantía</small></span></div>
     </div>
   </div></div>
 
   <div class="facts"><div class="wrap">
-    <div class="fact"><b>En el día</b><span>Módulos, baterías, pin, mojados</span></div>
+    <div class="fact"><b>En el día</b><span>Módulos, baterías, pin y tapas</span></div>
     <div class="fact"><b>2 meses</b><span>de garantía en cada reparación</span></div>
     <div class="fact"><b id="factJobs">+0</b><span>trabajos publicados con foto</span></div>
-    <div class="fact"><b id="factRating">5,0 ★</b><span id="factRatingTxt">opinión de nuestros clientes</span></div>
+    <div class="fact"><b id="factRating">Nuevo</b><span id="factRatingTxt">sumando reseñas de clientes</span></div>
   </div></div>
 </div>
 
 <div class="ticker" aria-hidden="true"><div class="track" id="track">
-  <span>Cambio de módulo</span><span>Batería</span><span>Pin de carga</span><span>Mojados</span><span>Desbloqueo</span><span>Software</span><span>Cámara</span><span>Parlante y micrófono</span><span>Tapas traseras</span><span>Adaptaciones</span><span>Computadoras</span>
+  <span>Cambio de módulo</span><span>Batería</span><span>Pin de carga</span><span>Mojados</span><span>Desbloqueo</span><span>Tapas traseras</span><span>Formateo de PC</span><span>Notebooks</span><span>Disco SSD</span><span>Limpieza de PC</span>
 </div></div>
 
 <section id="servicios"><div class="wrap">
-  <div class="head reveal">
-    <p class="eyebrow or">Celulares</p>
-    <h2>Lo que arreglamos todos los días</h2>
-    <p>Sacamos la pieza dañada, ponemos la nueva y te lo devolvemos probado. Casi todo se resuelve en el mismo día.</p>
+  <div class="head-row">
+    <div class="head reveal">
+      <p class="eyebrow or">Servicios</p>
+      <h2>¿Qué le pasa a tu equipo?</h2>
+      <p>Tocá un arreglo para ver en qué consiste, cuánto tarda y cómo lo hacemos.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Tipo de equipo" id="tabs">
+      <span class="knob" id="tabKnob"></span>
+      <button type="button" role="tab" aria-selected="true" data-tab="celulares">Celulares <small id="nCel">9</small></button>
+      <button type="button" role="tab" aria-selected="false" data-tab="computadoras">Computadoras <small id="nPc">6</small></button>
+    </div>
   </div>
-  <div class="svcs" id="svcs">
-    <div class="svc reveal"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M9 8l6 6M14 7.5l2 2"/></svg></span><h3>Cambio de módulo</h3><p>Pantalla rota, manchas, líneas o táctil que no responde.</p><span class="tag">En el día</span></div>
-    <div class="svc reveal"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="7" width="16" height="10" rx="2"/><path d="M21 10.5v3M7 10v4M10 10v4"/></svg></span><h3>Batería</h3><p>Se descarga rápido, se apaga sola o está inflada.</p><span class="tag">En el día</span></div>
-    <div class="svc reveal"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="5" y="9" width="14" height="6" rx="3"/><path d="M9 12h6M12 4v3M12 17v3"/></svg></span><h3>Pin de carga</h3><p>Limpieza o cambio si no carga, carga lento o hay que mover el cable.</p><span class="tag">En el día</span></div>
-    <div class="svc reveal"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0"/><circle cx="12" cy="15.5" r="1.3"/></svg></span><h3>Desbloqueo y software</h3><p>Equipo lento, reinicios, actualizaciones y cuentas olvidadas, con titular comprobado.</p><span class="tag">En el día</span></div>
-    <div class="svc reveal"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 3c3.5 4.2 6 7.4 6 10.5a6 6 0 0 1-12 0C6 10.4 8.5 7.2 12 3Z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"/></svg></span><h3>Mojados</h3><p>Limpieza de placa y recuperación. Apagalo y traelo cuanto antes.</p><span class="tag">En el día</span></div>
-    <div class="svc reveal"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="6.5" width="18" height="13" rx="2.5"/><circle cx="12" cy="13" r="3.5"/><path d="M8.5 6.5l1.5-2h4l1.5 2"/></svg></span><h3>Cámara, parlante y micrófono</h3><p>Fotos borrosas, no se escucha al hablar o no te escuchan.</p><span class="tag">En el día</span></div>
-    <div class="svc reveal"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><circle cx="10" cy="7" r="1.6"/><circle cx="10" cy="11" r="1.6"/><circle cx="14" cy="9" r="1.6"/></svg></span><h3>Tapas traseras</h3><p>Vidrio trasero roto o rayado, con terminación prolija.</p><span class="tag">En el día</span></div>
-    <div class="svc reveal"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M14.5 4.5a4 4 0 0 0-5 5L4 15l2.5 2.5L12 12a4 4 0 0 0 5-5l-2.4 2.4-2-2L15 5"/><path d="M15 17h5M17.5 14.5v5"/></svg></span><h3>Adaptaciones</h3><p>Soluciones a medida cuando el repuesto original no se consigue.</p><span class="tag">Consultá</span></div>
-    <div class="svc reveal"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5M11 8v3l2 1.5"/></svg></span><h3>¿Otra falla?</h3><p>Si no está en la lista, preguntá igual. Lo revisamos y te decimos qué tiene.</p><span class="tag">Diagnóstico en el día</span></div>
+  <div class="svcs" id="svcs" role="tabpanel"></div>
+</div></section>
+
+<section class="band pc" id="computadoras"><div class="wrap">
+  <div class="reveal">
+    <p class="eyebrow or">Servicio técnico de computadoras</p>
+    <h2 style="margin-top:14px">¿Tu compu anda lenta o <em>no prende?</em></h2>
+    <p style="margin-top:18px;color:var(--band-muted);max-width:50ch;font-size:1.1rem">Traé tu notebook o PC de escritorio. La revisamos, te damos el presupuesto en el día y la arreglamos con garantía.</p>
+    <div class="badges"><span>Presupuesto en el día</span><span>Notebooks y PC</span><span>Todas las marcas</span><span>2 meses de garantía</span></div>
+    <div class="pclist" id="pclist"></div>
+    <div class="ctas"><a class="btn btn-or" href="https://wa.me/5493794541449?text=Hola%20iBros%2C%20quiero%20un%20presupuesto%20para%20mi%20computadora." target="_blank" rel="noopener">Consultar por mi computadora</a></div>
+  </div>
+  <div class="pcvis reveal">
+    <div class="frame"><img src="img/pc-foto.webp" alt="Notebook en uso" width="900" height="692" loading="lazy"></div>
+    <div class="pill p1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span><span><b>Presupuesto</b><small>en el día</small></span></div>
+    <div class="pill p2"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></span><span><b>SSD</b><small>hasta 5 veces más rápida</small></span></div>
   </div>
 </div></section>
 
-<section class="band trabajos" id="trabajos"><div class="wrap">
+<section class="alt" id="presupuesto"><div class="wrap quote">
+  <div class="reveal">
+    <p class="eyebrow or">Presupuesto</p>
+    <h2 style="margin-top:12px">Armá tu consulta en 20 segundos</h2>
+    <p style="margin-top:14px;color:var(--muted);max-width:46ch;font-size:1.05rem">Completá lo que sepas y se abre WhatsApp con el mensaje listo para enviar.</p>
+    <ol class="steps">
+      <li><div><b>Consultás</b><span>Por WhatsApp o en el local, con el modelo y la falla.</span></div></li>
+      <li><div><b>Presupuesto</b><span>Te decimos precio y tiempo. Sin tu ok no se toca nada.</span></div></li>
+      <li><div><b>Reparación</b><span>Te avisamos por WhatsApp apenas está listo.</span></div></li>
+      <li><div><b>Retiro con garantía</b><span>Lo probás con nosotros y te llevás 2 meses de garantía.</span></div></li>
+    </ol>
+  </div>
+  <form class="form spot reveal" id="qform">
+    <div class="field">
+      <span class="lbl">Equipo</span>
+      <div class="seg">
+        <input type="radio" name="tipo" id="t-cel" value="celular" checked><label for="t-cel">Celular</label>
+        <input type="radio" name="tipo" id="t-pc" value="computadora"><label for="t-pc">Computadora</label>
+      </div>
+    </div>
+    <div class="field"><label for="modelo">Marca y modelo</label><input type="text" id="modelo" placeholder="Ej: iPhone 12, Samsung A32, Lenovo IdeaPad" autocomplete="off"></div>
+    <div class="field"><label for="falla">¿Qué le pasa?</label><select id="falla"></select></div>
+    <div class="field"><label for="detalle">Detalle (opcional)</label><textarea id="detalle" placeholder="Ej: se cayó y la pantalla quedó negra"></textarea></div>
+    <div class="preview" id="prev" aria-live="polite"></div>
+    <a class="btn btn-or" id="send" href="https://wa.me/5493794541449" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3a.5.5 0 0 0 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3Z"/></svg>
+      Enviar por WhatsApp
+    </a>
+  </form>
+</div></section>
+
+<section class="band" id="trabajos"><div class="wrap">
   <div class="head-row">
     <div class="head reveal">
       <p class="eyebrow or">Trabajos entregados</p>
-      <h2>Lo que hicimos esta semana</h2>
-      <p>Cada equipo que sale del taller, con su foto y la opinión de su dueño.</p>
+      <h2>Lo que salió del taller</h2>
+      <p>Cada equipo que entregamos, con su foto y la opinión de su dueño.</p>
     </div>
-    <div class="rating reveal" id="ratingBox" hidden>
+    <div class="rating" id="ratingBox" hidden>
       <b id="avg">5,0</b>
       <div><div class="stars" id="avgStars"></div><small id="avgTxt"></small></div>
     </div>
@@ -391,12 +534,12 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85);backdrop-filter:blur(6px)}
   <div class="filters" id="filters" role="toolbar" aria-label="Filtrar trabajos"></div>
   <div class="rail" id="rail" tabindex="0" aria-label="Trabajos realizados"></div>
   <div class="empty" id="empty" hidden><b>Pronto vas a ver acá nuestros trabajos</b><span>Cada reparación que entregamos se publica con su foto y la reseña del cliente.</span></div>
-  <div class="head-row" style="margin:14px 0 0">
-    <span style="color:var(--band-muted);font-size:.88rem" id="railHint">Deslizá para ver más</span>
+  <div class="rail-row" id="railRow">
+    <span style="color:var(--band-muted);font-size:.88rem">Deslizá para ver más</span>
     <div class="rail-nav"><button type="button" id="prevBtn" aria-label="Anteriores"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" id="nextBtn" aria-label="Siguientes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button></div>
   </div>
 
-  <div class="review reveal" id="resena">
+  <div class="review spot" id="resena">
     <div>
       <p class="eyebrow or">Tu opinión</p>
       <h3 style="margin-top:8px">¿Te arreglamos el equipo? Contanos cómo te fue.</h3>
@@ -414,73 +557,20 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85);backdrop-filter:blur(6px)}
   </div>
 </div></section>
 
-<section class="pc" id="computadoras"><div class="wrap">
-  <figure class="reveal"><img src="img/computadoras.webp" alt="Reparación de computadoras, presupuestos en el día" width="820" height="1338" loading="lazy"></figure>
-  <div class="reveal">
-    <p class="eyebrow or">Computadoras</p>
-    <h2 style="margin-top:12px">También revisamos tu notebook o PC</h2>
-    <p style="margin-top:14px;color:var(--muted);max-width:52ch;font-size:1.05rem">Traela y te damos el presupuesto en el día. Hacemos todos los servicios, del software al hardware.</p>
-    <ul class="ticks">
-      <li>Lentitud, virus y formateo</li>
-      <li>Instalación de programas</li>
-      <li>Pantallas y teclados</li>
-      <li>Cargadores y pin de carga</li>
-      <li>Limpieza y temperatura</li>
-      <li>Mejoras de disco y memoria</li>
-    </ul>
-    <div class="ctas"><a class="btn btn-line" href="https://wa.me/5493794541449?text=Hola%20iBros%2C%20quiero%20un%20presupuesto%20para%20mi%20computadora." target="_blank" rel="noopener">Consultar por mi computadora</a></div>
-  </div>
-</div></section>
-
-<section class="alt" id="presupuesto"><div class="wrap quote">
-  <div class="reveal">
-    <p class="eyebrow or">Presupuesto</p>
-    <h2 style="margin-top:12px">Armá tu consulta en 20 segundos</h2>
-    <p style="margin-top:14px;color:var(--muted);max-width:46ch;font-size:1.05rem">Completá lo que sepas y se abre WhatsApp con el mensaje listo para enviar.</p>
-    <ol class="steps">
-      <li><div><b>Consultás</b><span>Por WhatsApp o en el local, con el modelo y la falla.</span></div></li>
-      <li><div><b>Presupuesto</b><span>Te decimos precio y tiempo. Sin tu ok no se toca nada.</span></div></li>
-      <li><div><b>Reparación</b><span>La mayoría queda lista en el día. Te avisamos por WhatsApp.</span></div></li>
-      <li><div><b>Retiro con garantía</b><span>Lo probás con nosotros y te llevás 2 meses de garantía.</span></div></li>
-    </ol>
-  </div>
-  <form class="form reveal" id="qform">
-    <div class="field">
-      <span class="lbl">Equipo</span>
-      <div class="seg">
-        <input type="radio" name="tipo" id="t-cel" value="celular" checked><label for="t-cel">Celular</label>
-        <input type="radio" name="tipo" id="t-pc" value="computadora"><label for="t-pc">Computadora</label>
-      </div>
-    </div>
-    <div class="field"><label for="modelo">Marca y modelo</label><input type="text" id="modelo" placeholder="Ej: iPhone 12, Samsung A32, Lenovo IdeaPad" autocomplete="off"></div>
-    <div class="field"><label for="falla">¿Qué le pasa?</label>
-      <select id="falla">
-        <option>Pantalla / módulo</option><option>Batería</option><option>No carga / pin de carga</option><option>Se mojó</option><option>Software / desbloqueo</option><option>Cámara, parlante o micrófono</option><option>Tapa trasera</option><option>Otra falla</option>
-      </select>
-    </div>
-    <div class="field"><label for="detalle">Detalle (opcional)</label><textarea id="detalle" placeholder="Ej: se cayó y la pantalla quedó negra"></textarea></div>
-    <div class="preview" id="prev" aria-live="polite"></div>
-    <a class="btn btn-or" id="send" href="https://wa.me/5493794541449" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3a.5.5 0 0 0 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3Z"/></svg>
-      Enviar por WhatsApp
-    </a>
-  </form>
-</div></section>
-
 <section id="garantia" style="padding-bottom:0"><div class="wrap">
-  <div class="warranty reveal">
+  <div class="warranty spot reveal">
     <div class="seal"><span><b>2</b><small>meses de<br>garantía</small></span></div>
     <div>
       <h2 style="font-size:clamp(1.5rem,3.2vw,2.2rem)">Cada reparación sale con garantía</h2>
-      <p>Tenés 2 meses de garantía sobre el trabajo y el repuesto. No cubre golpes ni humedad posteriores a la entrega, porque son daños nuevos.</p>
+      <p>Tenés 2 meses de garantía sobre el trabajo y el repuesto, en celulares y en computadoras. No cubre golpes ni humedad posteriores a la entrega, porque son daños nuevos.</p>
     </div>
   </div>
 </div></section>
 
 <section id="local"><div class="wrap">
-  <div class="head reveal"><p class="eyebrow or">Local</p><h2>Vení a vernos</h2></div>
+  <div class="head reveal" style="margin-bottom:32px"><p class="eyebrow or">Local</p><h2>Vení a vernos</h2></div>
   <div class="local">
-    <div class="card reveal">
+    <div class="card spot reveal">
       <p class="addr">3 de Abril 917</p>
       <p style="color:var(--muted)">Entre Salta y La Rioja · Corrientes Capital</p>
       <div class="ctas" style="margin-top:6px"><a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&query=3%20de%20Abril%20917%2C%20Corrientes%2C%20Argentina" target="_blank" rel="noopener">Abrir en Google Maps</a></div>
@@ -490,7 +580,7 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85);backdrop-filter:blur(6px)}
         <a href="https://www.instagram.com/ibrostechnology/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@IBrosTechnology</a>
       </div>
     </div>
-    <div class="card reveal">
+    <div class="card spot reveal">
       <span class="eyebrow">Horarios</span>
       <table id="horarios">
         <tr data-d="1"><td>Lunes</td><td>9:00–12:30 · 17:30–20:30</td></tr>
@@ -506,11 +596,11 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85);backdrop-filter:blur(6px)}
 </div></section>
 
 <section id="preguntas" style="padding-top:0"><div class="wrap">
-  <div class="head reveal"><p class="eyebrow or">Preguntas frecuentes</p><h2>Antes de traerlo</h2></div>
-  <details><summary>¿Cuánto tarda la reparación?</summary><p>La mayoría de los trabajos (módulo, batería, pin, mojados, tapas) se entregan en el día. Si hay que pedir un repuesto, te avisamos antes.</p></details>
+  <div class="head reveal" style="margin-bottom:20px"><p class="eyebrow or">Preguntas frecuentes</p><h2>Antes de traerlo</h2></div>
+  <details><summary>¿Cuánto tarda la reparación?</summary><p>Módulos, baterías, pin de carga, cámaras y tapas se entregan en el día. Mojados, desbloqueos y software llevan de 2 a 3 días. En computadoras te damos el presupuesto y el tiempo en el día.</p></details>
   <details><summary>¿Qué cubre la garantía?</summary><p>2 meses sobre la reparación y el repuesto. No cubre golpes ni humedad después de la entrega.</p></details>
-  <details><summary>¿Me pasan el precio antes?</summary><p>Sí. Te damos el presupuesto en el día y solo reparamos con tu aprobación.</p></details>
-  <details><summary>¿Pierdo mis fotos y contactos?</summary><p>En cambios de módulo, batería o pin no se borra nada. Si hace falta tocar el software, te avisamos antes.</p></details>
+  <details><summary>¿Me pasan el precio antes?</summary><p>Sí. Te damos el presupuesto y solo reparamos con tu aprobación.</p></details>
+  <details><summary>¿Pierdo mis fotos y archivos?</summary><p>En cambios de módulo, batería o pin no se borra nada. Si hace falta tocar el software, te avisamos antes y respaldamos cuando es posible.</p></details>
   <details><summary>Se me mojó el celular, ¿qué hago?</summary><p>Apagalo, no lo cargues y no lo pongas en arroz. Traelo lo antes posible: cuanto más rápido, más chances de recuperarlo.</p></details>
 </div></section>
 
@@ -523,154 +613,257 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85);backdrop-filter:blur(6px)}
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3a.5.5 0 0 0 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3Z"/></svg>
 </a>
 
+<dialog class="sheet" id="sheet" aria-labelledby="shTitle">
+  <div class="sh">
+    <button class="sh-x" type="button" id="shClose" aria-label="Cerrar">×</button>
+    <div class="sh-media" id="shMedia"></div>
+    <div class="sh-body">
+      <span class="time" id="shTime" style="align-self:flex-start"></span>
+      <h3 id="shTitle"></h3>
+      <p class="lead" id="shDet"></p>
+      <p class="eyebrow or" style="margin-top:8px">Cómo lo hacemos</p>
+      <ol class="proc" id="shSteps"></ol>
+      <div class="note" id="shNote" hidden></div>
+      <p class="warn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg><span>2 meses de garantía. No cubre golpes ni humedad posteriores a la entrega.</span></p>
+      <a class="btn btn-or" id="shWa" href="https://wa.me/5493794541449" target="_blank" rel="noopener">Consultar por este arreglo</a>
+      <div class="sh-nav"><button type="button" id="shPrev">← Anterior</button><button type="button" id="shNext">Siguiente →</button></div>
+    </div>
+  </div>
+</dialog>
+
 <dialog class="lb" id="lb" aria-label="Detalle del trabajo">
-  <div class="lb-in" style="position:relative">
+  <div class="lb-in">
     <button class="lb-close" type="button" id="lbClose" aria-label="Cerrar">×</button>
     <div class="lb-pics" id="lbPics"></div>
     <div class="lb-txt" id="lbTxt"></div>
   </div>
 </dialog>
 
+<script type="application/json" id="svcBase">{"celulares": [{"id": "pantalla", "nombre": "Cambio de módulo", "corto": "Pantalla rota, manchas, líneas o táctil que no responde.", "tiempo": "En el día", "foto": "img/iphone-foto.webp", "detalle": "Cambiamos el módulo completo: vidrio, pantalla y táctil. Te ofrecemos las opciones de repuesto que haya según calidad y precio.", "pasos": ["Revisamos el equipo y confirmamos que la falla es del módulo.", "Te pasamos el presupuesto con las opciones de repuesto.", "Cambiamos el módulo y colocamos sellos nuevos.", "Probamos táctil, brillo, sensor de proximidad y cámara frontal.", "Te lo entregamos funcionando y con garantía."], "nota": ""}, {"id": "bateria", "nombre": "Batería", "corto": "Se descarga rápido, se apaga sola o está inflada.", "tiempo": "En el día", "foto": "img/bateria-foto.webp", "detalle": "Cambiamos la batería por una nueva y controlamos que el equipo cargue y mida bien el porcentaje.", "pasos": ["Medimos el estado de la batería y revisamos el consumo.", "Te pasamos el presupuesto.", "Retiramos la batería vieja y colocamos la nueva con adhesivo nuevo.", "Probamos carga y descarga.", "Te lo entregamos funcionando y con garantía."], "nota": "Si la batería está inflada, no lo sigas usando ni lo cargues: traelo cuanto antes."}, {"id": "pin", "nombre": "Pin de carga", "corto": "No carga, carga lento o hay que mover el cable.", "tiempo": "En el día", "foto": "img/hero.webp", "detalle": "Muchas veces es suciedad acumulada. Primero hacemos una limpieza y, si el pin está dañado, lo cambiamos.", "pasos": ["Revisamos el puerto con lupa y probamos con distintos cables.", "Limpiamos el puerto de carga.", "Si con la limpieza no alcanza, te pasamos presupuesto para el cambio.", "Probamos carga rápida y conexión a la computadora.", "Te lo entregamos funcionando y con garantía."], "nota": ""}, {"id": "software", "nombre": "Desbloqueo y software", "corto": "Equipo lento, reinicios, sistema dañado o cuentas olvidadas.", "tiempo": "2 a 3 días", "foto": "", "detalle": "Reinstalamos o reparamos el sistema y resolvemos bloqueos de cuenta. Solo trabajamos con el titular del equipo y su comprobante.", "pasos": ["Diagnosticamos el sistema y el tipo de bloqueo.", "Te explicamos si se pueden conservar tus datos.", "Hacemos un respaldo cuando es posible.", "Reinstalamos, actualizamos o desbloqueamos el equipo.", "Lo configuramos con vos al momento de retirarlo."], "nota": "El tiempo depende del modelo y del tipo de bloqueo. Te avisamos al hacer el diagnóstico."}, {"id": "mojado", "nombre": "Mojados", "corto": "Se mojó, no prende o funciona a medias.", "tiempo": "2 a 3 días", "foto": "", "detalle": "Desarmamos el equipo, limpiamos la placa y reemplazamos lo que el agua haya dañado.", "pasos": ["Desarmamos el equipo y revisamos la placa.", "Limpiamos la placa por ultrasonido y la secamos.", "Te pasamos presupuesto si hay piezas para cambiar.", "Probamos el equipo durante varias horas.", "Te lo entregamos funcionando y con garantía."], "nota": "Apagalo, no lo cargues y no lo pongas en arroz. Cuanto antes lo traigas, más chances de recuperarlo."}, {"id": "camara", "nombre": "Cámara, parlante y micrófono", "corto": "Fotos borrosas, no se escucha o no te escuchan.", "tiempo": "En el día", "foto": "", "detalle": "Revisamos si es suciedad, configuración o una pieza dañada, y cambiamos solo lo que hace falta.", "pasos": ["Probamos cámara, parlante y micrófono para ubicar la falla.", "Limpiamos rejillas y lentes.", "Si es una pieza dañada, te pasamos presupuesto.", "Cambiamos la pieza y probamos llamadas, audio y fotos.", "Te lo entregamos funcionando y con garantía."], "nota": ""}, {"id": "tapa", "nombre": "Tapas traseras", "corto": "Vidrio trasero roto o rayado.", "tiempo": "En el día", "foto": "img/tapas-foto.webp", "detalle": "Cambiamos la tapa o el vidrio trasero con terminación prolija, como de fábrica.", "pasos": ["Revisamos que no haya otros daños por el golpe.", "Te pasamos el presupuesto según el modelo.", "Retiramos la tapa dañada y limpiamos el marco.", "Colocamos la tapa nueva y probamos carga inalámbrica y cámaras.", "Te lo entregamos con garantía."], "nota": ""}, {"id": "adaptacion", "nombre": "Adaptaciones", "corto": "Soluciones cuando el repuesto original no se consigue.", "tiempo": "Consultá", "foto": "", "detalle": "Cuando no hay repuesto exacto, buscamos una alternativa compatible y te explicamos qué cambia.", "pasos": ["Revisamos el equipo y buscamos alternativas compatibles.", "Te explicamos las opciones y sus diferencias.", "Hacemos la adaptación con tu aprobación.", "Probamos que todo funcione.", "Te lo entregamos con garantía."], "nota": ""}, {"id": "otro", "nombre": "¿Otra falla?", "corto": "Si no está en la lista, preguntá igual.", "tiempo": "Diagnóstico en el día", "foto": "", "detalle": "Revisamos el equipo y te decimos qué tiene, cuánto cuesta y cuánto tarda.", "pasos": ["Nos contás qué le pasa.", "Lo revisamos y te decimos qué tiene.", "Te pasamos presupuesto y tiempo.", "Reparamos solo con tu aprobación."], "nota": ""}], "computadoras": [{"id": "pc-lenta", "nombre": "Lentitud, virus y formateo", "corto": "Tarda en prender, se tilda o tiene publicidad rara.", "tiempo": "Presupuesto en el día", "foto": "", "detalle": "Limpiamos el sistema o lo reinstalamos desde cero, con tus archivos respaldados.", "pasos": ["Revisamos el sistema y el estado del disco.", "Te pasamos presupuesto.", "Respaldamos tus archivos.", "Limpiamos o reinstalamos Windows con controladores.", "Te la entregamos lista para usar."], "nota": ""}, {"id": "pc-programas", "nombre": "Programas y Windows", "corto": "Office, antivirus, impresoras y programas que necesites.", "tiempo": "Presupuesto en el día", "foto": "", "detalle": "Instalamos y configuramos los programas que usás para trabajar o estudiar.", "pasos": ["Nos decís qué programas necesitás.", "Te pasamos presupuesto.", "Instalamos y configuramos todo.", "Lo probamos con vos al entregar."], "nota": ""}, {"id": "pc-pantalla", "nombre": "Pantallas y teclados", "corto": "Pantalla rota o con líneas, teclas que no andan.", "tiempo": "Presupuesto en el día", "foto": "", "detalle": "Cambiamos pantallas, teclados y bisagras de notebooks.", "pasos": ["Revisamos la notebook y confirmamos la falla.", "Conseguimos el repuesto según tu modelo y te pasamos presupuesto.", "Hacemos el cambio.", "Probamos imagen, teclado y bisagras.", "Te la entregamos con garantía."], "nota": ""}, {"id": "pc-carga", "nombre": "No enciende o no carga", "corto": "No prende, se apaga sola o el cargador no anda.", "tiempo": "Presupuesto en el día", "foto": "", "detalle": "Buscamos si la falla está en el cargador, el pin de carga, la batería o la placa.", "pasos": ["Probamos cargador, batería y pin de carga.", "Ubicamos la falla.", "Te pasamos presupuesto.", "Reparamos o cambiamos la pieza.", "Te la entregamos con garantía."], "nota": ""}, {"id": "pc-limpieza", "nombre": "Limpieza y temperatura", "corto": "Se calienta, hace ruido o se apaga sola.", "tiempo": "Presupuesto en el día", "foto": "", "detalle": "Limpieza interna completa y cambio de pasta térmica para que no levante temperatura.", "pasos": ["Medimos la temperatura de trabajo.", "Desarmamos y limpiamos ventiladores y disipador.", "Cambiamos la pasta térmica.", "Volvemos a medir para confirmar la mejora."], "nota": ""}, {"id": "pc-mejoras", "nombre": "Mejoras: disco SSD y memoria", "corto": "Que tu computadora vuelva a andar rápido.", "tiempo": "Presupuesto en el día", "foto": "", "detalle": "Cambiar el disco por un SSD o sumar memoria es la forma más barata de que una computadora vieja ande rápida.", "pasos": ["Revisamos qué mejoras admite tu equipo.", "Te pasamos presupuesto con las opciones.", "Instalamos el SSD o la memoria y pasamos tus archivos.", "Probamos todo y te la entregamos."], "nota": ""}]}</script>
 <script>
 (function(){
   var WA="5493794541449";
-  var CATS={pantalla:"Módulo",bateria:"Batería",pin:"Pin de carga",mojado:"Mojados",software:"Software",camara:"Cámara y audio",tapa:"Tapa trasera",pc:"Computadoras",otro:"Otros"};
   var $=function(id){return document.getElementById(id)};
   var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+  function wa(msg){return"https://wa.me/"+WA+"?text="+encodeURIComponent(msg)}
+  var ICONS={
+    pantalla:'<rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M9 8l6 6M14 7.5l2 2"/>',
+    bateria:'<rect x="3" y="7" width="16" height="10" rx="2"/><path d="M21 10.5v3M7 10v4M10 10v4"/>',
+    pin:'<rect x="5" y="9" width="14" height="6" rx="3"/><path d="M9 12h6M12 4v3M12 17v3"/>',
+    software:'<rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0"/><circle cx="12" cy="15.5" r="1.3"/>',
+    mojado:'<path d="M12 3c3.5 4.2 6 7.4 6 10.5a6 6 0 0 1-12 0C6 10.4 8.5 7.2 12 3Z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"/>',
+    camara:'<rect x="3" y="6.5" width="18" height="13" rx="2.5"/><circle cx="12" cy="13" r="3.5"/><path d="M8.5 6.5l1.5-2h4l1.5 2"/>',
+    tapa:'<rect x="6" y="2.5" width="12" height="19" rx="2.5"/><circle cx="10" cy="7" r="1.6"/><circle cx="10" cy="11" r="1.6"/><circle cx="14" cy="9" r="1.6"/>',
+    adaptacion:'<path d="M14.5 4.5a4 4 0 0 0-5 5L4 15l2.5 2.5L12 12a4 4 0 0 0 5-5l-2.4 2.4-2-2L15 5"/><path d="M15 17h5M17.5 14.5v5"/>',
+    otro:'<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5M11 8v3l2 1.5"/>',
+    "pc-lenta":'<rect x="4" y="4.5" width="16" height="11" rx="1.5"/><path d="M2 19.5h20M12 7.5v3l2 1.5"/>',
+    "pc-programas":'<rect x="4" y="4.5" width="16" height="11" rx="1.5"/><path d="M2 19.5h20M8 8.5h3v3H8zM13 8.5h3v3h-3z"/>',
+    "pc-pantalla":'<rect x="4" y="4.5" width="16" height="11" rx="1.5"/><path d="M2 19.5h20M9 7l6 6"/>',
+    "pc-carga":'<rect x="4" y="4.5" width="16" height="11" rx="1.5"/><path d="M2 19.5h20M12.5 7l-2 3h3l-2 3"/>',
+    "pc-limpieza":'<circle cx="12" cy="12" r="8.5"/><path d="M12 12c0-3 1.5-5 4-5-1 2.5-2 4-4 5Zm0 0c-3 0-5 1.5-5 4 2.5-1 4-2 5-4Zm0 0c0 3-1.5 5-4 5 1-2.5 2-4 4-5Zm0 0c3 0 5-1.5 5-4-2.5 1-4 2-5 4Z"/>',
+    "pc-mejoras":'<path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/>'
+  };
+  function icon(id,cls){return'<svg class="'+(cls||"")+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">'+(ICONS[id]||ICONS.otro)+'</svg>'}
 
-  // Barra superior
-  var bar=$("bar");
-  addEventListener("scroll",function(){bar.classList.toggle("scrolled",scrollY>10)},{passive:true});
+  // Barra, progreso y estado del local
+  var bar=$("bar"),prog=$("progress");
+  function onScroll(){bar.classList.toggle("scrolled",scrollY>10);var h=document.documentElement.scrollHeight-innerHeight;prog.style.transform="scaleX("+(h>0?scrollY/h:0)+")"}
+  addEventListener("scroll",onScroll,{passive:true});onScroll();
+  // "Estamos atendiendo": lunes a viernes de 7 a 20:30 y sábados de 8 a 12:30 (hora de Corrientes, UTC-3)
+  var ATENCION={1:[7,20.5],2:[7,20.5],3:[7,20.5],4:[7,20.5],5:[7,20.5],6:[8,12.5]};
+  var now=new Date(Date.now()-3*3600e3),d=now.getUTCDay(),h=now.getUTCHours()+now.getUTCMinutes()/60;
+  function updStatus(){
+    var n=new Date(Date.now()-3*3600e3),dd=n.getUTCDay(),hh=n.getUTCHours()+n.getUTCMinutes()/60,r=ATENCION[dd];
+    var on=!!r&&hh>=r[0]&&hh<r[1];
+    $("dot").className="dot"+(on?" on":"");
+    $("openTxt").textContent=on?"Estamos atendiendo":"Cerrado ahora";
+  }
+  updStatus();setInterval(updStatus,60000);
+  var tr=document.querySelector('#horarios tr[data-d="'+d+'"]');if(tr)tr.className="today";
+  var track=$("track");track.innerHTML+=track.innerHTML;
 
-  // Abierto / cerrado según la hora de Corrientes (UTC-3)
-  var t=[[9,12.5],[17.5,20.5]], horas={1:t,2:t,3:t,4:t,5:t,6:[[9,12.5]],0:[]};
-  var now=new Date(Date.now()-3*3600e3), d=now.getUTCDay(), h=now.getUTCHours()+now.getUTCMinutes()/60;
-  var abierto=horas[d].some(function(r){return h>=r[0]&&h<r[1]});
-  $("dot").className="dot"+(abierto?" on":"");
-  $("openTxt").textContent=abierto?"Abierto ahora":"Cerrado ahora";
-  var tr=document.querySelector('#horarios tr[data-d="'+d+'"]'); if(tr) tr.className="today";
+  // Foco de luz: sigue al puntero en cualquier elemento .spot
+  document.addEventListener("pointermove",function(e){
+    var el=e.target.closest&&e.target.closest(".spot");if(!el)return;
+    var r=el.getBoundingClientRect();el.style.setProperty("--x",(e.clientX-r.left)+"px");el.style.setProperty("--y",(e.clientY-r.top)+"px");
+  },{passive:true});
+  document.addEventListener("pointerdown",function(e){
+    var el=e.target.closest&&e.target.closest(".spot");if(!el||e.pointerType==="mouse")return;
+    var r=el.getBoundingClientRect();el.style.setProperty("--x",(e.clientX-r.left)+"px");el.style.setProperty("--y",(e.clientY-r.top)+"px");
+    el.classList.add("touch");setTimeout(function(){el.classList.remove("touch")},600);
+  },{passive:true});
 
-  // Cinta: duplicar para que el loop no tenga cortes
-  var track=$("track"); track.innerHTML+=track.innerHTML;
-
-  // Foco que sigue al puntero en las tarjetas
-  document.querySelectorAll(".svc").forEach(function(c){
-    c.addEventListener("pointermove",function(e){var r=c.getBoundingClientRect();c.style.setProperty("--x",(e.clientX-r.left)+"px");c.style.setProperty("--y",(e.clientY-r.top)+"px")});
-  });
-
-  // Inclinación suave de la foto principal
-  var vis=$("visual"), fig=vis.querySelector("figure");
+  // Inclinación de la foto principal
+  var vis=$("visual"),frame=vis.querySelector(".frame");
   if(!reduce&&matchMedia("(pointer:fine)").matches){
-    vis.addEventListener("pointermove",function(e){var r=vis.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;fig.style.setProperty("--ry",(x*10)+"deg");fig.style.setProperty("--rx",(-y*10)+"deg")});
-    vis.addEventListener("pointerleave",function(){fig.style.setProperty("--ry","0deg");fig.style.setProperty("--rx","0deg")});
+    vis.addEventListener("pointermove",function(e){var r=vis.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;frame.style.setProperty("--ry",(x*10)+"deg");frame.style.setProperty("--rx",(-y*10)+"deg")});
+    vis.addEventListener("pointerleave",function(){frame.style.setProperty("--ry","0deg");frame.style.setProperty("--rx","0deg")});
   }
 
-  // Contadores
-  function countUp(el,to,fmt){
-    if(reduce){el.textContent=fmt(to);return}
-    var t0=null;function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/1100,1),e=1-Math.pow(1-p,3);el.textContent=fmt(to*e);if(p<1)requestAnimationFrame(step)}requestAnimationFrame(step);
+  // Selector Celulares / Computadoras del inicio
+  var MODES={
+    cel:{h:["Volvé a","conectar."],lead:'Reparamos celulares en <b>3 de Abril 917</b>. La mayoría de los trabajos <b>se entregan en el día</b> y todos tienen <b>2 meses de garantía</b>.',msg:"Hola iBros, quiero un presupuesto para mi celular.",more:"#servicios",p1:["En el día","la mayoría de los trabajos"]},
+    pc:{h:["Tu compu,","como nueva."],lead:'Notebooks y PC de escritorio: <b>formateo, programas, pantallas, limpieza y mejoras</b>. Te damos el <b>presupuesto en el día</b>.',msg:"Hola iBros, quiero un presupuesto para mi computadora.",more:"#computadoras",p1:["Presupuesto","en el día"]}
+  };
+  var hero=$("inicio"),sw=$("switch"),knob=$("knob"),mode="cel",auto=null;
+  function placeKnob(el,k){k.style.left=el.offsetLeft+"px";k.style.width=el.offsetWidth+"px"}
+  function setMode(m,user){
+    if(user&&auto){clearInterval(auto);auto=null}
+    if(m===mode)return;mode=m;var M=MODES[m];
+    sw.querySelectorAll("button").forEach(function(b){var on=b.dataset.mode===m;b.setAttribute("aria-pressed",on);if(on)placeKnob(b,knob)});
+    hero.dataset.mode=m;
+    $("imgCel").classList.toggle("off",m!=="cel");$("imgPc").classList.toggle("off",m!=="pc");
+    var h1=$("h1"),lead=$("lead");h1.classList.add("out");lead.classList.add("out");
+    setTimeout(function(){
+      h1.innerHTML='<span class="ln">'+M.h[0]+'</span><span class="ln">'+M.h[1]+'</span>';lead.innerHTML=M.lead;
+      $("heroWa").href=wa(M.msg);$("heroMore").href=M.more;$("pill1").textContent=M.p1[0];$("pill1s").textContent=M.p1[1];
+      h1.classList.remove("out");lead.classList.remove("out");
+    },reduce?0:300);
   }
+  sw.addEventListener("click",function(e){var b=e.target.closest("button");if(b)setMode(b.dataset.mode,true)});
+  requestAnimationFrame(function(){placeKnob(sw.querySelector('[aria-pressed="true"]'),knob)});
+  addEventListener("resize",function(){placeKnob(sw.querySelector('[aria-pressed="true"]'),knob);placeKnob($("tabs").querySelector('[aria-selected="true"]'),$("tabKnob"))});
+  if(!reduce)auto=setInterval(function(){setMode(mode==="cel"?"pc":"cel")},7000);
+  ["pointerdown","keydown"].forEach(function(ev){hero.addEventListener(ev,function(){if(auto){clearInterval(auto);auto=null}},{once:true})});
+
+  // Servicios
+  var SV={celulares:[],computadoras:[]};
+  try{SV=JSON.parse($("svcBase").textContent)}catch(e){}
+  var tab="celulares",svcs=$("svcs"),all=[];
+  function svcCard(s){
+    return'<button type="button" class="svc spot" data-id="'+esc(s.id)+'"><div class="top"><span class="ic">'+icon(s.id)+'</span><span class="time">'+esc(s.tiempo)+'</span></div><h3>'+esc(s.nombre)+'</h3><p>'+esc(s.corto)+'</p><span class="more">Ver cómo lo hacemos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>';
+  }
+  function renderSvcs(){
+    svcs.innerHTML=(SV[tab]||[]).map(svcCard).join("");
+    svcs.classList.remove("grid-in");void svcs.offsetWidth;svcs.classList.add("grid-in");
+  }
+  function renderPc(){
+    $("pclist").innerHTML=(SV.computadoras||[]).map(function(s){return'<button type="button" class="pcbtn spot" data-id="'+esc(s.id)+'"><span class="ic">'+icon(s.id)+'</span><span><b>'+esc(s.nombre)+'</b><small>'+esc(s.corto)+'</small></span></button>'}).join("");
+  }
+  function renderAllSvc(){
+    all=(SV.celulares||[]).concat(SV.computadoras||[]);
+    $("nCel").textContent=(SV.celulares||[]).length;$("nPc").textContent=(SV.computadoras||[]).length;
+    renderSvcs();renderPc();fillFalla();
+  }
+  var tabs=$("tabs");
+  tabs.addEventListener("click",function(e){var b=e.target.closest("button");if(!b||b.dataset.tab===tab)return;tab=b.dataset.tab;
+    tabs.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-selected",x===b)});placeKnob(b,$("tabKnob"));renderSvcs()});
+  requestAnimationFrame(function(){placeKnob(tabs.querySelector('[aria-selected="true"]'),$("tabKnob"))});
+
+  // Ficha del servicio
+  var sheet=$("sheet"),curIdx=0;
+  function openSvc(id){
+    curIdx=all.findIndex(function(s){return s.id===id});if(curIdx<0)return;fillSheet();
+    if(!sheet.open){sheet.showModal?sheet.showModal():sheet.setAttribute("open","")}
+  }
+  function fillSheet(){
+    var s=all[curIdx],pc=s.id.indexOf("pc-")===0;
+    $("shMedia").innerHTML=s.foto?'<img src="'+esc(s.foto)+'" alt="'+esc(s.nombre)+'">':icon(s.id,"big");
+    $("shTime").textContent=s.tiempo;$("shTitle").textContent=s.nombre;$("shDet").textContent=s.detalle||s.corto;
+    var st=$("shSteps");st.innerHTML=(s.pasos||[]).map(function(p,i){return'<li style="--i:'+i+'"><span>'+esc(p)+'</span></li>'}).join("");
+    st.style.animation="none";void st.offsetWidth;st.style.animation="";
+    st.querySelectorAll("li").forEach(function(li){li.style.animation="none";void li.offsetWidth;li.style.animation=""});
+    $("shNote").hidden=!s.nota;$("shNote").textContent=s.nota||"";
+    $("shWa").href=wa("Hola iBros, quiero consultar por: "+s.nombre+(pc?" (computadora)":"")+".\nEquipo: ");
+    sheet.querySelector(".sh-body").scrollTop=0;sheet.scrollTop=0;
+  }
+  document.addEventListener("click",function(e){var b=e.target.closest(".svc,.pcbtn");if(b)openSvc(b.dataset.id)});
+  $("shClose").onclick=function(){sheet.close()};
+  sheet.addEventListener("click",function(e){if(e.target===sheet)sheet.close()});
+  $("shPrev").onclick=function(){curIdx=(curIdx-1+all.length)%all.length;fillSheet()};
+  $("shNext").onclick=function(){curIdx=(curIdx+1)%all.length;fillSheet()};
 
   // Trabajos
-  var jobs=[], filtro="todos", rail=$("rail");
-  function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
-  function stars(n){n=Math.round(n||0);return "★".repeat(n)+'<span class="off">'+"★".repeat(5-n)+"</span>"}
+  var CATS={pantalla:"Módulo",bateria:"Batería",pin:"Pin de carga",mojado:"Mojados",software:"Software",camara:"Cámara y audio",tapa:"Tapa trasera",pc:"Computadoras",otro:"Otros"};
+  var jobs=[],filtro="todos",rail=$("rail");
+  function stars(n){n=Math.round(n||0);return"★".repeat(n)+'<span class="off">'+"★".repeat(5-n)+"</span>"}
   function fecha(s){try{return new Date(s+"T12:00:00").toLocaleDateString("es-AR",{day:"numeric",month:"short"})}catch(e){return s}}
   function card(j,i){
-    var fotos=j.fotos||[];
-    return '<article class="job" data-i="'+i+'">'+
-      '<button class="job-img" type="button" data-i="'+i+'" aria-label="Ver trabajo: '+esc(j.equipo)+'">'+
-        (fotos[0]?'<img src="'+esc(fotos[0])+'" alt="'+esc(j.equipo)+'" loading="lazy">':"")+
-        (j.ejemplo?'<span class="ex">Ejemplo</span>':"")+
-        (fotos.length>1?'<span class="n">'+fotos.length+' fotos</span>':"")+
-      '</button>'+
-      '<div class="job-body">'+
-        '<div class="job-meta"><span class="chip">'+esc(CATS[j.categoria]||"Reparación")+'</span><time>'+esc(fecha(j.fecha))+'</time></div>'+
-        '<h3>'+esc(j.equipo)+'</h3>'+
-        (j.trabajo?'<p class="job-desc">'+esc(j.trabajo)+'</p>':"")+
-        (j.resena?'<blockquote><p>'+esc(j.resena)+'</p><footer><span class="stars">'+stars(j.estrellas)+'</span>'+(j.cliente?'<span>'+esc(j.cliente)+'</span>':"")+'</footer></blockquote>':"")+
-      '</div></article>';
+    var f=j.fotos||[];
+    return'<article class="job"><button class="job-img" type="button" data-i="'+i+'" aria-label="Ver trabajo: '+esc(j.equipo)+'">'+
+      (f[0]?'<img src="'+esc(f[0])+'" alt="'+esc(j.equipo)+'" loading="lazy">':"")+(j.ejemplo?'<span class="ex">Ejemplo</span>':"")+(f.length>1?'<span class="n">'+f.length+' fotos</span>':"")+
+      '</button><div class="job-body"><div class="job-meta"><span class="chip">'+esc(CATS[j.categoria]||"Reparación")+'</span><time>'+esc(fecha(j.fecha))+'</time></div><h3>'+esc(j.equipo)+'</h3>'+
+      (j.trabajo?'<p class="job-desc">'+esc(j.trabajo)+'</p>':"")+
+      (j.resena?'<blockquote><p>'+esc(j.resena)+'</p><footer><span class="stars">'+stars(j.estrellas)+'</span>'+(j.cliente?'<span>'+esc(j.cliente)+'</span>':"")+'</footer></blockquote>':"")+'</div></article>';
   }
   function render(){
     var list=jobs.map(function(j,i){return[j,i]}).filter(function(p){return filtro==="todos"||p[0].categoria===filtro});
     rail.innerHTML=list.map(function(p){return card(p[0],p[1])}).join("");
-    var none=jobs.length===0;
-    $("empty").hidden=!none; rail.hidden=none;
-    $("prevBtn").parentNode.parentNode.hidden=none;
+    var none=!jobs.length;$("empty").hidden=!none;rail.hidden=none;$("railRow").hidden=none;
   }
   function renderFilters(){
     var used={};jobs.forEach(function(j){used[j.categoria]=1});
-    var keys=Object.keys(CATS).filter(function(k){return used[k]});
-    var f=$("filters");
+    var keys=Object.keys(CATS).filter(function(k){return used[k]}),f=$("filters");
     if(keys.length<2){f.hidden=true;return}
     f.innerHTML='<button type="button" data-c="todos" aria-pressed="true">Todos</button>'+keys.map(function(k){return'<button type="button" data-c="'+k+'" aria-pressed="false">'+CATS[k]+'</button>'}).join("");
-    f.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;filtro=b.dataset.c;f.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed",x===b)});render();rail.scrollTo({left:0,behavior:reduce?"auto":"smooth"})});
+    f.onclick=function(e){var b=e.target.closest("button");if(!b)return;filtro=b.dataset.c;f.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed",x===b)});render();rail.scrollTo({left:0,behavior:reduce?"auto":"smooth"})};
+  }
+  function countUp(el,to,fmt){
+    if(reduce){el.textContent=fmt(to);return}
+    var t0=null;function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/1100,1),e=1-Math.pow(1-p,3);el.textContent=fmt(to*e);if(p<1)requestAnimationFrame(step)}requestAnimationFrame(step);
   }
   function summary(){
-    var rated=jobs.filter(function(j){return j.estrellas});
-    var ej=jobs.length&&jobs.every(function(j){return j.ejemplo});
+    var rated=jobs.filter(function(j){return j.estrellas}),ej=jobs.length&&jobs.every(function(j){return j.ejemplo});
     countUp($("factJobs"),jobs.length,function(v){return"+"+Math.round(v)});
-    if(!rated.length){$("factRating").textContent="Nuevo";$("factRatingTxt").textContent="sumando reseñas de clientes";return}
-    var avg=rated.reduce(function(s,j){return s+Number(j.estrellas)},0)/rated.length;
-    var fmt=function(v){return v.toFixed(1).replace(".",",")};
-    $("ratingBox").hidden=false;
-    $("avg").textContent=fmt(avg);
-    $("avgStars").innerHTML=stars(avg);
-    $("avgTxt").textContent=rated.length+(rated.length===1?" reseña":" reseñas")+(ej?" de ejemplo":"");
-    countUp($("factRating"),avg,function(v){return fmt(v)+" ★"});
-    $("factRatingTxt").textContent="promedio de "+rated.length+(rated.length===1?" reseña":" reseñas")+(ej?" (ejemplo)":"");
+    if(!rated.length)return;
+    var avg=rated.reduce(function(s,j){return s+Number(j.estrellas)},0)/rated.length,fmt=function(v){return v.toFixed(1).replace(".",",")};
+    var txt=rated.length+(rated.length===1?" reseña":" reseñas")+(ej?" de ejemplo":"");
+    $("ratingBox").hidden=false;$("avg").textContent=fmt(avg);$("avgStars").innerHTML=stars(avg);$("avgTxt").textContent=txt;
+    countUp($("factRating"),avg,function(v){return fmt(v)+" ★"});$("factRatingTxt").textContent="promedio de "+txt;
   }
-  fetch("trabajos.json?v="+Date.now()).then(function(r){return r.ok?r.json():[]}).catch(function(){return[]}).then(function(data){
-    jobs=(Array.isArray(data)?data:[]).sort(function(a,b){return(b.fecha||"").localeCompare(a.fecha||"")});
-    renderFilters();render();summary();
-  });
   $("prevBtn").onclick=function(){rail.scrollBy({left:-rail.clientWidth*.8,behavior:reduce?"auto":"smooth"})};
   $("nextBtn").onclick=function(){rail.scrollBy({left:rail.clientWidth*.8,behavior:reduce?"auto":"smooth"})};
-
-  // Visor de fotos
   var lb=$("lb");
   rail.addEventListener("click",function(e){
     var b=e.target.closest(".job-img");if(!b)return;var j=jobs[b.dataset.i];
     $("lbPics").innerHTML=(j.fotos||[]).map(function(f){return'<img src="'+esc(f)+'" alt="'+esc(j.equipo)+'">'}).join("");
-    $("lbTxt").innerHTML='<span class="chip" style="align-self:flex-start">'+esc(CATS[j.categoria]||"Reparación")+'</span><h3>'+esc(j.equipo)+'</h3>'+
-      '<p style="color:var(--band-muted)">'+esc(fecha(j.fecha))+(j.ejemplo?" · ejemplo":"")+'</p>'+
+    $("lbTxt").innerHTML='<span class="chip" style="align-self:flex-start">'+esc(CATS[j.categoria]||"Reparación")+'</span><h3>'+esc(j.equipo)+'</h3><p style="color:var(--band-muted)">'+esc(fecha(j.fecha))+(j.ejemplo?" · ejemplo":"")+'</p>'+
       (j.trabajo?'<p>'+esc(j.trabajo)+'</p>':"")+
       (j.resena?'<blockquote style="margin:8px 0 0;padding:14px;border-radius:14px;background:var(--band);border:1px solid var(--band-line)"><p>“'+esc(j.resena)+'”</p><p style="margin-top:8px;font-size:.85rem;color:var(--band-muted)"><span class="stars">'+stars(j.estrellas)+'</span> '+esc(j.cliente||"")+'</p></blockquote>':"")+
       ((j.fotos||[]).length>1?'<p style="font-size:.82rem;color:var(--band-muted)">Deslizá la foto para ver las demás.</p>':"");
-    if(lb.showModal)lb.showModal();else lb.setAttribute("open","");
+    lb.showModal?lb.showModal():lb.setAttribute("open","");
   });
-  $("lbClose").onclick=function(){lb.close?lb.close():lb.removeAttribute("open")};
+  $("lbClose").onclick=function(){lb.close()};
   lb.addEventListener("click",function(e){if(e.target===lb)lb.close()});
 
   // Reseña por WhatsApp
-  var rv=0, sBox=$("rvStars");
-  for(var i=1;i<=5;i++){sBox.insertAdjacentHTML("beforeend",'<button type="button" role="radio" aria-checked="false" aria-label="'+i+' estrellas" data-v="'+i+'">★</button>')}
-  function paint(v){sBox.querySelectorAll("button").forEach(function(b){var on=+b.dataset.v<=v;b.classList.toggle("on",on);b.setAttribute("aria-checked",+b.dataset.v===rv)})}
+  var rv=5,sBox=$("rvStars");
+  for(var i=1;i<=5;i++)sBox.insertAdjacentHTML("beforeend",'<button type="button" role="radio" aria-checked="false" aria-label="'+i+' estrellas" data-v="'+i+'">★</button>');
+  function paint(v){sBox.querySelectorAll("button").forEach(function(b){b.classList.toggle("on",+b.dataset.v<=v);b.setAttribute("aria-checked",+b.dataset.v===rv)})}
   sBox.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;rv=+b.dataset.v;paint(rv);buildRv()});
   sBox.addEventListener("pointerover",function(e){var b=e.target.closest("button");if(b)paint(+b.dataset.v)});
   sBox.addEventListener("pointerleave",function(){paint(rv)});
   function buildRv(){
-    var msg="Hola iBros, quiero dejar mi reseña."+(rv?"\nPuntaje: "+"★".repeat(rv)+" ("+rv+"/5)":"")+
-      "\nNombre: "+($("rvName").value.trim()||"-")+"\nEquipo: "+($("rvEquipo").value.trim()||"-")+
-      ($("rvText").value.trim()?"\nReseña: "+$("rvText").value.trim():"");
-    $("rvSend").href="https://wa.me/"+WA+"?text="+encodeURIComponent(msg);
+    $("rvSend").href=wa("Hola iBros, quiero dejar mi reseña.\nPuntaje: "+"★".repeat(rv)+" ("+rv+"/5)\nNombre: "+($("rvName").value.trim()||"-")+"\nEquipo: "+($("rvEquipo").value.trim()||"-")+($("rvText").value.trim()?"\nReseña: "+$("rvText").value.trim():""));
   }
-  $("rvForm").addEventListener("input",buildRv);
-  $("rvForm").addEventListener("submit",function(e){e.preventDefault()});
-  rv=5;paint(rv);buildRv();
+  $("rvForm").addEventListener("input",buildRv);$("rvForm").addEventListener("submit",function(e){e.preventDefault()});
+  paint(rv);buildRv();
 
   // Presupuesto por WhatsApp
-  var f=$("qform"), send=$("send"), prev=$("prev");
-  function build(){
-    var tipo=f.querySelector('input[name=tipo]:checked').value;
-    var modelo=$("modelo").value.trim(), falla=$("falla").value, det=$("detalle").value.trim();
-    var msg="Hola iBros, quiero un presupuesto para mi "+tipo+".\nEquipo: "+(modelo||"(sin especificar)")+"\nFalla: "+falla+(det?"\nDetalle: "+det:"");
-    prev.textContent=msg;
-    send.href="https://wa.me/"+WA+"?text="+encodeURIComponent(msg);
+  var f=$("qform");
+  function fillFalla(){
+    var pc=f.querySelector('input[name=tipo]:checked').value==="computadora";
+    var list=(pc?SV.computadoras:SV.celulares)||[];
+    $("falla").innerHTML=list.map(function(s){return'<option>'+esc(s.nombre)+'</option>'}).join("");build();
   }
-  f.addEventListener("input",build); f.addEventListener("change",build);
+  function build(){
+    var tipo=f.querySelector('input[name=tipo]:checked').value,modelo=$("modelo").value.trim(),det=$("detalle").value.trim();
+    var msg="Hola iBros, quiero un presupuesto para mi "+tipo+".\nEquipo: "+(modelo||"(sin especificar)")+"\nFalla: "+$("falla").value+(det?"\nDetalle: "+det:"");
+    $("prev").textContent=msg;$("send").href=wa(msg);
+  }
+  f.addEventListener("input",build);f.addEventListener("change",function(e){if(e.target.name==="tipo")fillFalla();else build()});
   f.addEventListener("submit",function(e){e.preventDefault()});
-  build();
+
+  // Datos: servicios y trabajos (los edita el administrador)
+  renderAllSvc();
+  fetch("servicios.json?v="+Date.now()).then(function(r){return r.ok?r.json():null}).catch(function(){return null}).then(function(d){
+    if(d&&Array.isArray(d.celulares)){SV=d;renderAllSvc()}
+  });
+  fetch("trabajos.json?v="+Date.now()).then(function(r){return r.ok?r.json():[]}).catch(function(){return[]}).then(function(data){
+    jobs=(Array.isArray(data)?data:[]).sort(function(a,b){return(b.fecha||"").localeCompare(a.fecha||"")});
+    renderFilters();render();summary();
+  });
 })();
 </script>
 

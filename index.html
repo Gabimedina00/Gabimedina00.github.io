@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<meta name="color-scheme" content="only light">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="canonical" href="https://ibrostechnology.github.io/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -29,10 +30,6 @@
   --body:"DM Sans", "Segoe UI", system-ui, sans-serif;
   --ease:cubic-bezier(.2,.7,.2,1);
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#121110; --surface:#1b1a18; --surface-2:#242220; --ink:#f1eeea; --muted:#aaa39c; --line:#302d2a; --glow:26%;
-  --accent:#ff7a2e; --accent-text:#ff8f4d; --accent-ink:#1a0c02; --sand:#2a231c;
-  --band:#070707; --band-2:#151413; --band-3:#1f1d1b; --band-line:#272523; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#121110; --surface:#1b1a18; --surface-2:#242220; --ink:#f1eeea; --muted:#aaa39c; --line:#302d2a; --glow:26%;
   --accent:#ff7a2e; --accent-text:#ff8f4d; --accent-ink:#1a0c02; --sand:#2a231c;
@@ -495,14 +492,14 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
 <section class="band pc cel" id="celulares"><div class="wrap">
   <div class="reveal">
     <p class="eyebrow or">Servicio técnico de celulares</p>
-    <h2 style="margin-top:14px">¿Pantalla rota o <em>no carga?</em></h2>
-    <p style="margin-top:18px;color:var(--band-muted);max-width:50ch;font-size:1.1rem">iPhone y Android de todas las marcas. Lo revisamos, te pasamos el precio antes de tocarlo y la mayoría de los arreglos se entregan en el día.</p>
+    <h2 style="margin-top:14px">¿Problemas con el celular? <em>La solución está acá.</em></h2>
+    <p style="margin-top:18px;color:var(--band-muted);max-width:50ch;font-size:1.1rem">Trabajamos todas las marcas: iPhone, Samsung, Motorola, Xiaomi, Huawei, TCL, LG y más. Lo revisamos, te pasamos el precio antes de tocarlo y la mayoría de los arreglos se entregan en el día.</p>
     <div class="badges"><span>Entrega en el día</span><span>iPhone y Android</span><span>Precio antes de reparar</span><span>2 meses de garantía</span></div>
     <div class="pclist" id="cellist"></div>
     <div class="ctas"><a class="btn btn-or" href="https://wa.me/5493794541449?text=Hola%20iBros%2C%20quiero%20un%20presupuesto%20para%20mi%20celular." target="_blank" rel="noopener">Consultar por mi celular</a></div>
   </div>
   <div class="pcvis reveal">
-    <div class="frame"><img src="img/iphone-foto.webp" alt="iPhone en reparación" width="600" height="1015" loading="lazy"></div>
+    <div class="frame"><img src="img/tapas-foto.webp" alt="iPhone y tapa trasera de repuesto" width="900" height="745" loading="lazy"></div>
     <div class="pill p1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span><span><b>En el día</b><small>la mayoría de los arreglos</small></span></div>
     <div class="pill p2"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.1 7.5 9.5 4.3-1.4 7.5-4.9 7.5-9.5V6L12 3Z"/><path d="m8.8 12 2.2 2.2 4.2-4.4"/></svg></span><span><b>2 meses</b><small>de garantía</small></span></div>
   </div>

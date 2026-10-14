@@ -15,7 +15,7 @@
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans","Segoe UI",system-ui,sans-serif;font-size:16px;line-height:1.5;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-.wrap{max-width:680px;margin:0 auto;padding:18px max(16px,env(safe-area-inset-right,0px)) 80px max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:16px}
+.wrap{max-width:780px;margin:0 auto;padding:18px max(16px,env(safe-area-inset-right,0px)) 80px max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:16px}
 h1,h2{font-family:Montserrat,system-ui,sans-serif;margin:0;letter-spacing:-.02em}
 h1{font-size:1.4rem;font-weight:800}
 h2{font-size:1.1rem;font-weight:800}
@@ -71,6 +71,35 @@ code{background:var(--bg);padding:1px 6px;border-radius:6px;font-size:.85em}
 .pin input{width:56px;height:64px;text-align:center;font-size:1.6rem;font-family:Montserrat,sans-serif;font-weight:800;padding:0}
 a{color:var(--accent)}
 :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.chips button{flex:none;border:1.5px solid var(--line);background:transparent;color:var(--muted);border-radius:999px;padding:6px 12px;font:inherit;font-size:.82rem;cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.kpi{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.kpi span{color:var(--muted);font-size:.75rem}
+.kpi b{font-family:Montserrat,sans-serif;font-size:1.05rem;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kpi.hi{background:color-mix(in srgb,var(--accent) 16%,var(--card2));border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+.kpi.hi b{color:var(--accent)}
+table.mini{width:100%;border-collapse:collapse;font-size:.85rem}
+table.mini th{text-align:left;color:var(--muted);font-weight:600;padding:6px 4px;border-bottom:1px solid var(--line)}
+table.mini td{padding:6px 4px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+table.mini th:not(:first-child),table.mini td:not(:first-child){text-align:right}
+.order{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;text-align:left;border:0;border-bottom:1px solid var(--line);background:none;color:var(--ink);padding:12px 2px;cursor:pointer;font:inherit}
+.order:last-child{border-bottom:0}
+.order .o1{min-width:0}
+.order b{display:block;font-size:.95rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.order small{color:var(--muted);font-size:.8rem}
+.order .o2{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex:none}
+.st{font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:99px;white-space:nowrap}
+.st.run{background:color-mix(in srgb,#5b9cff 20%,transparent);color:#8fbcff}
+.st.wait{background:color-mix(in srgb,var(--star) 20%,transparent);color:var(--star)}
+.st.ready{background:color-mix(in srgb,var(--accent) 22%,transparent);color:var(--accent)}
+.st.ok{background:color-mix(in srgb,var(--ok) 20%,transparent);color:var(--ok)}
+.st.off{background:var(--card2);color:var(--muted)}
+.sect{font-family:Montserrat,sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-top:6px}
+.nro{font-family:Montserrat,sans-serif;font-weight:800;color:var(--muted)}
+input[readonly]{color:var(--muted)}
+@media (max-width:560px){.kpis{grid-template-columns:repeat(2,1fr)}.tabs{gap:2px}.tabs button{padding:10px 4px;font-size:.88rem}}
 @media (max-width:480px){.row{grid-template-columns:1fr}}
 </style>
 </head>
@@ -107,13 +136,102 @@ a{color:var(--accent)}
 
   <div id="app" hidden>
     <div class="tabs" role="tablist">
-      <button type="button" role="tab" aria-selected="true" data-tab="trabajos">Trabajos</button>
+      <button type="button" role="tab" aria-selected="true" data-tab="registro">Registro</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="trabajos">Trabajos</button>
       <button type="button" role="tab" aria-selected="false" data-tab="servicios">Servicios</button>
       <button type="button" role="tab" aria-selected="false" data-tab="ajustes">Ajustes</button>
     </div>
 
+    <!-- REGISTRO (privado) -->
+    <div data-pane="registro" style="display:flex;flex-direction:column;gap:16px;margin-top:16px">
+      <div class="card" id="regSetup" hidden>
+        <h2>Activar el registro privado</h2>
+        <p class="muted">El registro guarda datos de clientes y precios, así que va en un repositorio privado aparte, que solo vos podés ver. La página pública nunca lo lee.</p>
+        <ol>
+          <li>Creá el repositorio privado: <a href="https://github.com/new?name=ibros-registro&visibility=private&description=Registro%20de%20arreglos%20iBros" target="_blank" rel="noopener">crear ibros-registro</a>. Que quede <b>Private</b>.</li>
+          <li>En GitHub, abrí tu clave (<a href="https://github.com/settings/personal-access-tokens" target="_blank" rel="noopener">Fine-grained tokens</a> → <b>iBros web</b> → <b>Edit</b>) y en <b>Repository access</b> sumá <code>ibros-registro</code>. Guardá.</li>
+          <li>Volvé acá y tocá <b>Probar de nuevo</b>.</li>
+        </ol>
+        <button class="btn" id="regRetry" type="button">Probar de nuevo</button>
+        <div id="regSetupMsg"></div>
+      </div>
+
+      <div id="regMain" hidden style="display:flex;flex-direction:column;gap:16px">
+        <div class="card" style="gap:12px">
+          <div class="row" style="grid-template-columns:1fr 1fr;align-items:end">
+            <label>Mes<input type="month" id="regMes"></label>
+            <label>Buscar<input id="regQ" placeholder="Cliente, equipo, N°…"></label>
+          </div>
+          <div class="chips" id="regFiltro"></div>
+          <div class="kpis" id="regKpis"></div>
+          <div id="regTec"></div>
+          <div class="btns">
+            <button class="btn" id="regNew" type="button">+ Nueva orden</button>
+            <button class="btn ghost" id="regXlsMes" type="button">Exportar mes a Excel</button>
+            <button class="btn ghost" id="regXlsAnio" type="button">Exportar año</button>
+          </div>
+          <div id="regMsg"></div>
+        </div>
+
+        <form class="card" id="regForm" hidden>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h2 id="regFormTitle">Nueva orden</h2><span class="nro" id="regNro"></span></div>
+          <div class="sect">Cliente</div>
+          <div class="row">
+            <label>Nombre<input id="rCliente" placeholder="Ej: Juan Pérez" autocomplete="off"></label>
+            <label>Teléfono / WhatsApp<input id="rTel" inputmode="tel" placeholder="Ej: 3794 123456" autocomplete="off"></label>
+          </div>
+          <div class="sect">Equipo</div>
+          <div class="row">
+            <label>Tipo<select id="rTipo"><option>Celular</option><option>Computadora</option><option>Otro</option></select></label>
+            <label>Marca y modelo<input id="rEquipo" placeholder="Ej: Samsung A32" autocomplete="off"></label>
+          </div>
+          <div class="row">
+            <label>Servicio<select id="rServicio"></select></label>
+            <label>Técnico<input id="rTecnico" list="tecnicos" placeholder="Ej: Gabriel" autocomplete="off"><datalist id="tecnicos"></datalist></label>
+          </div>
+          <label>Falla que cuenta el cliente<textarea id="rFalla" style="min-height:60px" placeholder="Ej: se cayó y no da imagen"></textarea></label>
+          <label>Observaciones (estado al recibirlo, accesorios, detalles)<textarea id="rObs" style="min-height:60px" placeholder="Ej: vidrio trasero rayado, viene sin funda ni cargador"></textarea></label>
+          <div class="sect">Estado y fechas</div>
+          <div class="row">
+            <label>Estado<select id="rEstado"></select></label>
+            <label>Fecha de ingreso<input type="date" id="rIngreso"></label>
+          </div>
+          <div class="row">
+            <label>Fecha de entrega<input type="date" id="rEntrega"></label>
+            <label>Garantía hasta<input id="rGarantia" readonly placeholder="Se calcula al entregar"></label>
+          </div>
+          <div class="sect">Plata</div>
+          <div class="row">
+            <label>Presupuesto ($)<input id="rPresupuesto" inputmode="decimal" placeholder="0"></label>
+            <label>Seña ($)<input id="rSena" inputmode="decimal" placeholder="0"></label>
+          </div>
+          <div class="row">
+            <label>Cobrado total ($)<input id="rCobrado" inputmode="decimal" placeholder="0"></label>
+            <label>Medio de pago<select id="rPago"><option></option><option>Efectivo</option><option>Transferencia</option><option>Mercado Pago</option><option>Tarjeta</option><option>Otro</option></select></label>
+          </div>
+          <div class="row">
+            <label>Costo del repuesto ($)<input id="rRepuesto" inputmode="decimal" placeholder="0"></label>
+            <label>Pago al técnico ($)<input id="rPagoTec" inputmode="decimal" placeholder="0"></label>
+          </div>
+          <p class="muted" id="rGanancia"></p>
+          <div class="btns">
+            <button class="btn" id="rSave" type="submit">Guardar</button>
+            <button class="btn ghost" id="rCancel" type="button">Cancelar</button>
+            <a class="btn ghost" id="rAviso" href="#" target="_blank" rel="noopener" hidden>Avisar por WhatsApp</a>
+            <button class="btn danger" id="rDel" type="button" hidden>Borrar</button>
+          </div>
+          <div id="rMsg"></div>
+        </form>
+
+        <div class="card" style="gap:8px">
+          <h2 id="regListTitle">Arreglos del mes</h2>
+          <div id="regList"><p class="muted">Cargando…</p></div>
+        </div>
+      </div>
+    </div>
+
     <!-- TRABAJOS -->
-    <div data-pane="trabajos" style="display:flex;flex-direction:column;gap:16px;margin-top:16px">
+    <div data-pane="trabajos" hidden style="flex-direction:column;gap:16px;margin-top:16px">
       <button class="btn" id="newJob" type="button">+ Nuevo trabajo</button>
       <form class="card" id="form" hidden>
         <h2 id="formTitle">Nuevo trabajo</h2>
@@ -242,7 +360,7 @@ a{color:var(--accent)}
     $("setup").hidden=locked||!!token;
     $("app").hidden=locked||!token;
     if(locked){setTimeout(function(){$("pinIn").querySelector("input").focus()},50);return}
-    if(token){loadJobs();loadSvcs();pinState()}
+    if(token){loadJobs();loadSvcs();pinState();regInit()}
   }
   document.querySelector(".tabs").onclick=function(e){
     var b=e.target.closest("button");if(!b)return;
@@ -408,6 +526,198 @@ a{color:var(--accent)}
       $("svcForm").hidden=true;renderSvcs()}catch(err){msg("svcMsg","err",err.message)}
     b.dataset.sure="";b.textContent="Borrar servicio";
   };
+
+  // ---- Registro privado de arreglos (repositorio privado ibros-registro) ----
+  var REG="https://api.github.com/repos/"+OWNER+"/ibros-registro";
+  var ESTADOS=["Recibido","En diagnóstico","Esperando aprobación","En reparación","Listo para retirar","Entregado","Sin reparación"];
+  var ABIERTOS=["Recibido","En diagnóstico","Esperando aprobación","En reparación","Listo para retirar"];
+  var regYear=null,regData=[],regSha=null,regEdit=null,regEstado="Todos",regReady=false;
+  function anio(m){return(m||hoy()).slice(0,4)}
+  function regFile(y){return"registro-"+y+".json"}
+  function num(v){v=String(v==null?"":v).replace(/[^\d,.-]/g,"");if(!v)return 0;if(v.indexOf(",")>=0)v=v.replace(/\./g,"").replace(",",".");else if(/^\d{1,3}(\.\d{3})+$/.test(v))v=v.replace(/\./g,"");return Number(v)||0}
+  function plata(n){return"$ "+Math.round(n||0).toLocaleString("es-AR")}
+  function addMonths(d,m){if(!d)return"";var x=new Date(d+"T12:00:00");x.setMonth(x.getMonth()+m);return x.toISOString().slice(0,10)}
+  function fmtFecha(d){if(!d)return"";var p=d.split("-");return p[2]+"/"+p[1]+"/"+p[0]}
+  function waNum(t){t=String(t||"").replace(/\D/g,"");if(!t)return"";if(t.indexOf("54")===0)t=t.slice(2);if(t[0]==="0")t=t.slice(1);if(t.indexOf("9")===0&&t.length===11)t=t.slice(1);if(t.length===12)t=t.replace(/^(\d{2,4})15/,"$1");return t.length===10?"549"+t:""}
+
+  async function regLoad(y){
+    var r=await gh(REG+"/contents/"+regFile(y));
+    regYear=y;
+    if(!r){regData=[];regSha=null;return}
+    try{regData=JSON.parse(unb64(r.content))}catch(e){regData=[]}
+    if(!Array.isArray(regData))regData=[];regSha=r.sha;
+  }
+  async function regSave(y,fn,message){
+    for(var t=0;t<2;t++){
+      try{
+        await regLoad(y);var next=fn(regData.slice());
+        var body={message:message,content:b64(JSON.stringify(next,null,2)+"\n")};if(regSha)body.sha=regSha;
+        var res=await gh(REG+"/contents/"+regFile(y),"PUT",body);
+        regData=next;regSha=res&&res.content?res.content.sha:null;return;
+      }catch(e){if(t||e.status!==409)throw e}
+    }
+  }
+  async function regInit(){
+    $("regSetup").hidden=true;$("regMain").hidden=true;
+    try{
+      var r=await fetch(REG,{cache:"no-store",headers:{Authorization:"Bearer "+token,Accept:"application/vnd.github+json"}});
+      if(!r.ok){$("regSetup").hidden=false;if(r.status!==404)msg("regSetupMsg","err","GitHub respondió "+r.status+". Revisá la clave.");return}
+      var info=await r.json();
+      if(!info.private){$("regSetup").hidden=false;msg("regSetupMsg","err","El repositorio ibros-registro es público. Cambialo a privado en GitHub (Settings → Danger Zone → Change visibility) antes de guardar datos de clientes.");return}
+      if(info.permissions&&!info.permissions.push){$("regSetup").hidden=false;msg("regSetupMsg","err","La clave puede ver ibros-registro pero no escribir. Revisá que Contents esté en Read and write.");return}
+      msg("regSetupMsg","","");$("regMain").hidden=false;regReady=true;
+      if(!$("regMes").value)$("regMes").value=hoy().slice(0,7);
+      await regLoad(anio($("regMes").value));regRender();
+    }catch(e){$("regSetup").hidden=false;msg("regSetupMsg","err",e.message)}
+  }
+  $("regRetry").onclick=regInit;
+
+  // Filtros
+  $("regFiltro").innerHTML=["Todos","En curso"].concat(ESTADOS).map(function(e){return'<button type="button" data-e="'+e+'" aria-pressed="'+(e==="Todos")+'">'+e+'</button>'}).join("");
+  $("regFiltro").onclick=function(e){var b=e.target.closest("button");if(!b)return;regEstado=b.dataset.e;this.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed",x===b)});regRender()};
+  $("regQ").oninput=function(){regRender()};
+  $("regMes").onchange=async function(){var y=anio(this.value);if(y!==regYear){$("regList").innerHTML='<p class="muted">Cargando…</p>';try{await regLoad(y)}catch(e){msg("regMsg","err",e.message)}}regRender()};
+
+  function delMes(){var m=$("regMes").value;return regData.filter(function(o){return(o.ingreso||"").slice(0,7)===m})}
+  function filtrados(){
+    var q=$("regQ").value.trim().toLowerCase();
+    return delMes().filter(function(o){
+      if(regEstado==="En curso"&&ABIERTOS.indexOf(o.estado)<0)return false;
+      if(regEstado!=="Todos"&&regEstado!=="En curso"&&o.estado!==regEstado)return false;
+      if(q&&[o.nro,o.cliente,o.telefono,o.equipo,o.servicio,o.falla,o.observaciones,o.tecnico].join(" ").toLowerCase().indexOf(q)<0)return false;
+      return true;
+    }).sort(function(a,b){return(b.ingreso||"").localeCompare(a.ingreso||"")||String(b.nro).localeCompare(String(a.nro))});
+  }
+  function totales(list){
+    var t={n:list.length,entregados:0,curso:0,presupuesto:0,cobrado:0,repuestos:0,tecnicos:0,porTec:{}};
+    list.forEach(function(o){
+      if(o.estado==="Entregado")t.entregados++;if(ABIERTOS.indexOf(o.estado)>=0)t.curso++;
+      t.presupuesto+=o.presupuesto||0;t.cobrado+=o.cobrado||0;t.repuestos+=o.repuesto||0;t.tecnicos+=o.pago_tecnico||0;
+      var k=o.tecnico||"Sin asignar";var p=t.porTec[k]=t.porTec[k]||{n:0,cobrado:0,pago:0};p.n++;p.cobrado+=o.cobrado||0;p.pago+=o.pago_tecnico||0;
+    });
+    t.ganancia=t.cobrado-t.repuestos-t.tecnicos;return t;
+  }
+  function estadoClass(e){return{"Entregado":"ok","Listo para retirar":"ready","Sin reparación":"off","Esperando aprobación":"wait"}[e]||"run"}
+  function regRender(){
+    if(!regReady)return;
+    var mesTxt=new Date($("regMes").value+"-15T12:00:00").toLocaleDateString("es-AR",{month:"long",year:"numeric"});
+    var t=totales(delMes());
+    $("regKpis").innerHTML=[["Arreglos",t.n],["En curso",t.curso],["Entregados",t.entregados],["Presupuestado",plata(t.presupuesto)],["Cobrado",plata(t.cobrado)],["Repuestos",plata(t.repuestos)],["Pagos a técnicos",plata(t.tecnicos)],["Ganancia",plata(t.ganancia)]]
+      .map(function(k,i){return'<div class="kpi'+(i===7?" hi":"")+'"><span>'+k[0]+'</span><b>'+k[1]+'</b></div>'}).join("");
+    var tecs=Object.keys(t.porTec);
+    $("regTec").innerHTML=tecs.length?'<table class="mini"><thead><tr><th>Técnico</th><th>Arreglos</th><th>Cobrado</th><th>Pago</th></tr></thead><tbody>'+tecs.map(function(k){var p=t.porTec[k];return'<tr><td>'+esc(k)+'</td><td>'+p.n+'</td><td>'+plata(p.cobrado)+'</td><td>'+plata(p.pago)+'</td></tr>'}).join("")+'</tbody></table>':"";
+    $("tecnicos").innerHTML=Array.from(new Set(["Gabriel"].concat(regData.map(function(o){return o.tecnico}).filter(Boolean)))).map(function(x){return'<option value="'+esc(x)+'">'}).join("");
+    var list=filtrados();
+    $("regListTitle").textContent="Arreglos de "+mesTxt+" ("+list.length+")";
+    $("regList").innerHTML=list.length?list.map(function(o){
+      return'<button type="button" class="order" data-id="'+esc(o.id)+'"><span class="o1"><b>N° '+esc(o.nro)+' · '+esc(o.equipo||"Sin modelo")+'</b><small>'+esc(fmtFecha(o.ingreso))+' · '+esc(o.cliente||"Sin nombre")+(o.servicio?' · '+esc(o.servicio):"")+(o.tecnico?' · '+esc(o.tecnico):"")+'</small></span><span class="o2"><span class="st '+estadoClass(o.estado)+'">'+esc(o.estado)+'</span><small>'+(o.cobrado?plata(o.cobrado)+" cobrado":o.presupuesto?plata(o.presupuesto)+" presup.":"")+'</small></span></button>';
+    }).join(""):'<p class="muted">No hay arreglos con este filtro. Tocá "Nueva orden" para cargar uno.</p>';
+  }
+
+  // Formulario de orden
+  $("rEstado").innerHTML=ESTADOS.map(function(e){return"<option>"+e+"</option>"}).join("");
+  function fillServicios(){
+    var tipo=$("rTipo").value,list=(tipo==="Computadora"?svc.computadoras:svc.celulares)||[];
+    var cur=$("rServicio").value;
+    $("rServicio").innerHTML=list.map(function(s){return"<option>"+esc(s.nombre)+"</option>"}).join("")+"<option>Otro</option>";
+    var ok=Array.prototype.some.call($("rServicio").options,function(o){return o.value===cur});
+    $("rServicio").value=ok?cur:$("rServicio").options[0].value;
+  }
+  $("rTipo").onchange=fillServicios;
+  function calc(){
+    var c=num($("rCobrado").value),g=c-num($("rRepuesto").value)-num($("rPagoTec").value);
+    $("rGanancia").innerHTML=c?"Ganancia de este arreglo: <b>"+plata(g)+"</b>":"";
+    var ent=$("rEntrega").value;$("rGarantia").value=ent?fmtFecha(addMonths(ent,2)):"";
+  }
+  ["rCobrado","rRepuesto","rPagoTec","rEntrega"].forEach(function(id){$(id).addEventListener("input",calc)});
+  $("rEstado").onchange=function(){if(this.value==="Entregado"&&!$("rEntrega").value){$("rEntrega").value=hoy();calc()}aviso()};
+  function aviso(){
+    var n=waNum($("rTel").value),e=$("rEstado").value,eq=$("rEquipo").value.trim()||"equipo",nombre=$("rCliente").value.trim().split(" ")[0];
+    var txt=e==="Listo para retirar"?"Hola"+(nombre?" "+nombre:"")+", tu "+eq+" ya está listo para retirar en iBros Technology (3 de Abril 917)."+(regEdit?" Orden N° "+regEdit.nro+".":"")+" Te esperamos de lunes a viernes de 9 a 12:30 y de 17:30 a 20:30, y sábados de 9 a 12:30.":
+      e==="Esperando aprobación"?"Hola"+(nombre?" "+nombre:"")+", ya revisamos tu "+eq+". El presupuesto es de "+plata(num($("rPresupuesto").value))+". ¿Querés que avancemos con la reparación?":
+      "Hola"+(nombre?" "+nombre:"")+", te escribimos de iBros Technology por tu "+eq+".";
+    $("rAviso").hidden=!n;if(n)$("rAviso").href="https://wa.me/"+n+"?text="+encodeURIComponent(txt);
+  }
+  ["rTel","rEquipo","rCliente","rPresupuesto"].forEach(function(id){$(id).addEventListener("input",aviso)});
+  function nextNro(){var y=anio($("rIngreso").value||hoy()),max=0;regData.forEach(function(o){var m=String(o.nro||"").split("-");if(m[0]===y)max=Math.max(max,+m[1]||0)});return y+"-"+String(max+1).padStart(4,"0")}
+  function regOpen(o){
+    regEdit=o||null;$("regForm").hidden=false;msg("rMsg","","");
+    $("regFormTitle").textContent=o?"Orden":"Nueva orden";$("rDel").hidden=!o;
+    $("rCliente").value=o?o.cliente||"":"";$("rTel").value=o?o.telefono||"":"";
+    $("rTipo").value=o?o.tipo||"Celular":"Celular";fillServicios();$("rServicio").value=o?o.servicio||"Otro":$("rServicio").options[0].value;
+    $("rEquipo").value=o?o.equipo||"":"";$("rTecnico").value=o?o.tecnico||"":"Gabriel";
+    $("rFalla").value=o?o.falla||"":"";$("rObs").value=o?o.observaciones||"":"";
+    $("rEstado").value=o?o.estado:"Recibido";$("rIngreso").value=o?o.ingreso:hoy();$("rEntrega").value=o?o.entrega||"":"";
+    ["presupuesto:rPresupuesto","sena:rSena","cobrado:rCobrado","repuesto:rRepuesto","pago_tecnico:rPagoTec"].forEach(function(p){var k=p.split(":");$(k[1]).value=o&&o[k[0]]?o[k[0]]:""});
+    $("rPago").value=o?o.medio_pago||"":"";
+    $("regNro").textContent=o?"N° "+o.nro:"N° "+nextNro();
+    calc();aviso();$("regForm").scrollIntoView({behavior:"smooth",block:"start"});
+  }
+  $("regNew").onclick=function(){regOpen()};
+  $("rCancel").onclick=function(){$("regForm").hidden=true;regEdit=null};
+  $("regList").onclick=function(e){var b=e.target.closest(".order");if(b)regOpen(regData.find(function(o){return o.id===b.dataset.id}))};
+  $("regForm").onsubmit=async function(e){
+    e.preventDefault();
+    if(!$("rEquipo").value.trim()&&!$("rCliente").value.trim()){msg("rMsg","err","Completá al menos el cliente o el equipo.");return}
+    var ingreso=$("rIngreso").value||hoy(),y=anio(ingreso);
+    if(regEdit&&anio(regEdit.ingreso)!==y){msg("rMsg","err","No se puede pasar una orden a otro año. Borrala y cargala de nuevo.");return}
+    var o={id:regEdit?regEdit.id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),nro:regEdit?regEdit.nro:"",
+      ingreso:ingreso,cliente:$("rCliente").value.trim(),telefono:$("rTel").value.trim(),tipo:$("rTipo").value,equipo:$("rEquipo").value.trim(),
+      servicio:$("rServicio").value,tecnico:$("rTecnico").value.trim(),falla:$("rFalla").value.trim(),observaciones:$("rObs").value.trim(),
+      estado:$("rEstado").value,entrega:$("rEntrega").value,garantia_hasta:$("rEntrega").value?addMonths($("rEntrega").value,2):"",
+      presupuesto:num($("rPresupuesto").value),sena:num($("rSena").value),cobrado:num($("rCobrado").value),medio_pago:$("rPago").value,
+      repuesto:num($("rRepuesto").value),pago_tecnico:num($("rPagoTec").value),actualizado:new Date().toISOString()};
+    $("rSave").disabled=true;msg("rMsg","info","Guardando…");
+    try{
+      await regSave(y,function(list){
+        var ix=list.findIndex(function(x){return x.id===o.id});
+        if(!o.nro){var max=0;list.forEach(function(x){var m=String(x.nro||"").split("-");if(m[0]===y)max=Math.max(max,+m[1]||0)});o.nro=y+"-"+String(max+1).padStart(4,"0")}
+        if(ix>=0)list[ix]=o;else list.push(o);return list;
+      },(regEdit?"Actualizar orden ":"Nueva orden ")+(o.nro||""));
+      regEdit=o;$("regNro").textContent="N° "+o.nro;$("regFormTitle").textContent="Orden";$("rDel").hidden=false;
+      msg("rMsg","ok","Orden N° "+o.nro+" guardada.");aviso();
+      if($("regMes").value!==ingreso.slice(0,7))$("regMes").value=ingreso.slice(0,7);
+      regRender();
+    }catch(err){msg("rMsg","err",err.message)}
+    $("rSave").disabled=false;
+  };
+  $("rDel").onclick=async function(){
+    var b=this;if(!regEdit)return;
+    if(b.dataset.sure!=="1"){b.dataset.sure="1";b.textContent="¿Seguro? Tocá otra vez";setTimeout(function(){b.dataset.sure="";b.textContent="Borrar"},4000);return}
+    try{var id=regEdit.id;await regSave(anio(regEdit.ingreso),function(list){return list.filter(function(x){return x.id!==id})},"Borrar orden "+regEdit.nro);
+      $("regForm").hidden=true;regEdit=null;regRender()}catch(err){msg("rMsg","err",err.message)}
+    b.dataset.sure="";b.textContent="Borrar";
+  };
+
+  // Exportar a Excel
+  var xlsxReady=null;
+  function loadXlsx(){
+    if(window.XLSX)return Promise.resolve();
+    if(!xlsxReady)xlsxReady=new Promise(function(ok,ko){var s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js";s.onload=ok;s.onerror=function(){xlsxReady=null;ko(new Error("No se pudo cargar el generador de Excel. Revisá la conexión."))};document.head.appendChild(s)});
+    return xlsxReady;
+  }
+  async function exportar(lista,titulo,archivo){
+    if(!lista.length){msg("regMsg","err","No hay arreglos para exportar en "+titulo+".");return}
+    msg("regMsg","info","Armando el Excel…");
+    try{
+      await loadXlsx();
+      lista=lista.slice().sort(function(a,b){return(a.ingreso||"").localeCompare(b.ingreso||"")||String(a.nro).localeCompare(String(b.nro))});
+      var filas=lista.map(function(o){return{"N°":o.nro,"Ingreso":fmtFecha(o.ingreso),"Cliente":o.cliente,"Teléfono":o.telefono,"Tipo":o.tipo,"Equipo":o.equipo,"Servicio":o.servicio,"Falla":o.falla,"Observaciones":o.observaciones,"Técnico":o.tecnico,"Estado":o.estado,"Entrega":fmtFecha(o.entrega),"Garantía hasta":fmtFecha(o.garantia_hasta),"Presupuesto":o.presupuesto||0,"Seña":o.sena||0,"Cobrado":o.cobrado||0,"Medio de pago":o.medio_pago,"Repuesto":o.repuesto||0,"Pago técnico":o.pago_tecnico||0,"Ganancia":(o.cobrado||0)-(o.repuesto||0)-(o.pago_tecnico||0)}});
+      var ws=XLSX.utils.json_to_sheet(filas);
+      ws["!cols"]=[8,11,20,14,11,20,22,30,30,12,18,11,13,12,10,12,14,11,12,12].map(function(w){return{wch:w}});
+      var money=["N","O","P","R","S","T"];
+      for(var r=2;r<=filas.length+1;r++)money.forEach(function(c){var cell=ws[c+r];if(cell)cell.z='"$" #,##0'});
+      var t=totales(lista),res=[["iBros Technology · Registro de arreglos"],[titulo],[],["Arreglos",t.n],["Entregados",t.entregados],["En curso",t.curso],["Presupuestado",t.presupuesto],["Cobrado",t.cobrado],["Repuestos",t.repuestos],["Pagos a técnicos",t.tecnicos],["Ganancia",t.ganancia],[],["Técnico","Arreglos","Cobrado","Pago al técnico"]];
+      Object.keys(t.porTec).forEach(function(k){var p=t.porTec[k];res.push([k,p.n,p.cobrado,p.pago])});
+      var ws2=XLSX.utils.aoa_to_sheet(res);ws2["!cols"]=[{wch:22},{wch:12},{wch:14},{wch:16}];
+      ["B7","B8","B9","B10","B11"].forEach(function(a){if(ws2[a])ws2[a].z='"$" #,##0'});
+      for(var i=14;i<=res.length;i++)["C","D"].forEach(function(c){if(ws2[c+i])ws2[c+i].z='"$" #,##0'});
+      var wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws2,"Resumen");XLSX.utils.book_append_sheet(wb,ws,"Arreglos");
+      XLSX.writeFile(wb,archivo);msg("regMsg","ok","Listo: se descargó "+archivo+".");
+    }catch(err){msg("regMsg","err",err.message)}
+  }
+  $("regXlsMes").onclick=function(){var m=$("regMes").value,txt=new Date(m+"-15T12:00:00").toLocaleDateString("es-AR",{month:"long",year:"numeric"});exportar(delMes(),txt,"iBros-registro-"+m+".xlsx")};
+  $("regXlsAnio").onclick=function(){exportar(regData,"Año "+regYear,"iBros-registro-"+regYear+".xlsx")};
 
   show();
 })();

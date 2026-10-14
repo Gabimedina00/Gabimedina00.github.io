@@ -21,7 +21,7 @@
 <style>
 /* Layout: bandas negras de marca alternadas con secciones crema; servicios como botones que abren su ficha con el procedimiento, sección propia para computadoras, carrusel de trabajos con reseñas y WhatsApp siempre a mano */
 :root{
-  --bg:#ebe7e0; --surface:#f5f2ec; --surface-2:#e2ddd4; --ink:#161412; --muted:#5f5850; --line:#d5cec3;
+  --bg:#e6dfd3; --surface:#faf5ec; --surface-2:#ede5d8; --ink:#161412; --muted:#5c554c; --line:#d6ccbc; --glow:38%;
   --accent:#ee6a1c; --accent-text:#b9500f; --accent-ink:#ffffff; --sand:#e6dccf;
   --band:#0b0b0b; --band-2:#171615; --band-3:#211f1d; --band-ink:#f5f3f0; --band-muted:#a8a29c; --band-line:#2c2a27;
   --wa:#1fa855; --star:#f5a524;
@@ -30,11 +30,11 @@
   --ease:cubic-bezier(.2,.7,.2,1);
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#121110; --surface:#1b1a18; --surface-2:#242220; --ink:#f1eeea; --muted:#aaa39c; --line:#302d2a;
+  --bg:#121110; --surface:#1b1a18; --surface-2:#242220; --ink:#f1eeea; --muted:#aaa39c; --line:#302d2a; --glow:26%;
   --accent:#ff7a2e; --accent-text:#ff8f4d; --accent-ink:#1a0c02; --sand:#2a231c;
   --band:#070707; --band-2:#151413; --band-3:#1f1d1b; --band-line:#272523; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#121110; --surface:#1b1a18; --surface-2:#242220; --ink:#f1eeea; --muted:#aaa39c; --line:#302d2a;
+  --bg:#121110; --surface:#1b1a18; --surface-2:#242220; --ink:#f1eeea; --muted:#aaa39c; --line:#302d2a; --glow:26%;
   --accent:#ff7a2e; --accent-text:#ff8f4d; --accent-ink:#1a0c02; --sand:#2a231c;
   --band:#070707; --band-2:#151413; --band-3:#1f1d1b; --band-line:#272523; color-scheme:dark}
 
@@ -78,7 +78,7 @@ button{font:inherit;color:inherit}
 /* Foco de luz que sigue al puntero */
 .spot{position:relative;isolation:isolate}
 .spot::before{content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;pointer-events:none;opacity:0;transition:opacity .3s;
-  background:radial-gradient(340px circle at var(--x,50%) var(--y,50%),color-mix(in srgb,var(--accent) 24%,transparent),transparent 65%)}
+  background:radial-gradient(360px circle at var(--x,50%) var(--y,50%),color-mix(in srgb,var(--accent) var(--glow),transparent),color-mix(in srgb,var(--accent) 6%,transparent) 55%,transparent 75%)}
 .spot::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;pointer-events:none;opacity:0;transition:opacity .3s;
   background:radial-gradient(220px circle at var(--x,50%) var(--y,50%),var(--accent),transparent 70%);
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
@@ -176,7 +176,7 @@ section{padding-block:88px}
 /* Servicios */
 .svcs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .svc{text-align:left;cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:8px;transition:translate .35s var(--ease),box-shadow .35s var(--ease)}
-.svc:hover{translate:0 -4px;box-shadow:0 20px 44px rgba(30,20,10,.12)}
+.svc:hover{translate:0 -4px;box-shadow:0 22px 48px rgba(120,60,10,.16)}
 .svc .top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
 .svc .ic{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent-text);transition:transform .35s var(--ease),background .35s,color .35s}
 .svc .ic svg{width:24px;height:24px}

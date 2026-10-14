@@ -19,6 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
+<link rel="stylesheet" href="apariencia.css">
 <style>
 /* Layout: bandas negras de marca alternadas con secciones crema; servicios como botones que abren su ficha con el procedimiento, sección propia para computadoras, carrusel de trabajos con reseñas y WhatsApp siempre a mano */
 :root{
@@ -489,8 +490,8 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
     </div>
     <div class="visual" id="visual">
       <div class="frame ld" style="--d:.2s">
-        <img id="imgCel" src="img/hero.webp" alt="iPhone con pin de carga y destornillador de precisión" width="900" height="713">
-        <img id="imgPc" class="off" src="img/pc-foto.webp" alt="Notebook en uso" width="900" height="692" loading="lazy">
+        <img id="imgCel" data-foto="portada-cel" src="img/hero.webp" alt="iPhone con pin de carga y destornillador de precisión" width="900" height="713">
+        <img id="imgPc" data-foto="portada-pc" class="off" src="img/pc-foto.webp" alt="Notebook en uso" width="900" height="692" loading="lazy">
       </div>
       <div class="pill p1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span><span><b id="pill1">En el día</b><small id="pill1s">la mayoría de los trabajos</small></span></div>
       <div class="pill p2"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg></span><span><b>2 meses</b><small>de garantía</small></span></div>
@@ -546,7 +547,7 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
     <div class="ctas"><a class="btn btn-or" href="https://wa.me/5493794541449?text=Hola%20iBros%2C%20quiero%20un%20presupuesto%20para%20mi%20celular." target="_blank" rel="noopener">Consultar por mi celular</a></div>
   </div>
   <div class="pcvis reveal">
-    <div class="frame"><img src="img/bateria-foto.webp" alt="iPhone y batería de repuesto" width="900" height="598" loading="lazy"></div>
+    <div class="frame"><img data-foto="celulares" src="img/bateria-foto.webp" alt="iPhone y batería de repuesto" width="900" height="598" loading="lazy"></div>
     <div class="pill p1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span><span><b>En el día</b><small>la mayoría de los arreglos</small></span></div>
     <div class="pill p2"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.1 7.5 9.5 4.3-1.4 7.5-4.9 7.5-9.5V6L12 3Z"/><path d="m8.8 12 2.2 2.2 4.2-4.4"/></svg></span><span><b>2 meses</b><small>de garantía</small></span></div>
   </div>
@@ -562,7 +563,7 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
     <div class="ctas"><a class="btn btn-or" href="https://wa.me/5493794541449?text=Hola%20iBros%2C%20quiero%20un%20presupuesto%20para%20mi%20computadora." target="_blank" rel="noopener">Consultar por mi computadora</a></div>
   </div>
   <div class="pcvis reveal">
-    <div class="frame"><img src="img/pc-foto.webp" alt="Notebook en uso" width="900" height="692" loading="lazy"></div>
+    <div class="frame"><img data-foto="computadoras" src="img/pc-foto.webp" alt="Notebook en uso" width="900" height="692" loading="lazy"></div>
     <div class="pill p1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span><span><b>Presupuesto</b><small>en el día</small></span></div>
     <div class="pill p2"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></span><span><b>SSD</b><small>hasta 5 veces más rápida</small></span></div>
   </div>
@@ -688,21 +689,21 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
   <div class="head reveal" style="margin-bottom:28px"><p class="eyebrow or">Explorá más</p><h2>¿Qué estás buscando?</h2></div>
   <nav class="xp" aria-label="Explorá más">
     <a class="xp-card reveal" href="#celulares">
-      <img src="img/iphone-foto.webp" alt="" width="600" height="1015" loading="lazy">
+      <img data-foto="explorar-cel" src="img/iphone-foto.webp" alt="" width="600" height="1015" loading="lazy">
       <span class="xp-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       <span class="xp-k">Celulares</span>
       <b>Arreglos para todas las marcas</b>
       <p>Módulo, batería, pin de carga, cámara y más.</p>
     </a>
     <a class="xp-card reveal" href="#computadoras">
-      <img src="img/pc-foto.webp" alt="" width="900" height="692" loading="lazy">
+      <img data-foto="explorar-pc" src="img/pc-foto.webp" alt="" width="900" height="692" loading="lazy">
       <span class="xp-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       <span class="xp-k">Computadoras</span>
       <b>Notebooks y PC</b>
       <p>Formateo, limpieza, disco SSD y presupuesto en el día.</p>
     </a>
     <a class="xp-card reveal" href="#trabajos">
-      <img src="img/tapas-foto.webp" alt="" width="900" height="745" loading="lazy">
+      <img data-foto="explorar-trabajos" src="img/tapas-foto.webp" alt="" width="900" height="745" loading="lazy">
       <span class="xp-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       <span class="xp-k">Trabajos</span>
       <b>Trabajos y reseñas</b>
@@ -1001,6 +1002,28 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
   renderAllSvc();
   fetch("servicios.json?v="+Date.now()).then(function(r){return r.ok?r.json():null}).catch(function(){return null}).then(function(d){
     if(d&&Array.isArray(d.celulares)){SV=d;renderAllSvc()}
+  });
+  // Apariencia: color de acento y fotos elegidas en el panel (apariencia.css evita el parpadeo; esto toma lo último aunque el CSS esté en caché)
+  var FOTO_ALT={"portada-cel":"Reparación de celulares en iBros","portada-pc":"Reparación de computadoras en iBros","celulares":"Celulares en el taller de iBros","computadoras":"Computadoras en el taller de iBros"};
+  function verFotos(){document.querySelectorAll("img[data-foto]").forEach(function(i){i.style.visibility="visible"})}
+  setTimeout(verFotos,2500);
+  fetch("apariencia.json?v="+Date.now()).then(function(r){return r.ok?r.json():null}).catch(function(){return null}).then(function(d){
+    var hx=/^#[0-9a-f]{6}$/i,c=d&&d.color,rs=document.documentElement.style,st=$("apBand");
+    if(d&&typeof d==="object"){
+      var on=c&&hx.test(c.accent)&&hx.test(c.text)&&hx.test(c.ink);
+      rs.setProperty("--accent",on?c.accent:"#ee6a1c");rs.setProperty("--accent-text",on?c.text:"#b9500f");rs.setProperty("--accent-ink",on?c.ink:"#ffffff");
+      if(!st){st=document.createElement("style");st.id="apBand";document.head.appendChild(st)}
+      var b=on&&hx.test(c.band)&&hx.test(c.bandInk);
+      st.textContent="html .band,html .bar,html .progress,html .xp-card,html .sh-media{--accent:"+(b?c.band:on?c.accent:"#ee6a1c")+";--accent-ink:"+(b?c.bandInk:on?c.ink:"#ffffff")+"}";
+    }
+    var F=d&&d.fotos&&typeof d.fotos==="object"?d.fotos:{};
+    document.querySelectorAll("img[data-foto]").forEach(function(i){
+      var p=F[i.dataset.foto];
+      if(typeof p==="string"&&/^apariencia\/[a-z0-9-]+\.jpg$/.test(p)){
+        i.onload=i.onerror=function(){i.style.visibility="visible"};i.removeAttribute("srcset");i.src=p;
+        if(i.getAttribute("alt"))i.alt=FOTO_ALT[i.dataset.foto]||i.alt;
+      }else i.style.visibility="visible";
+    });
   });
   // Redes sociales del pie (las edita el administrador; sin enlace el ícono se ve apagado)
   var REDES={facebook:"",instagram:"https://www.instagram.com/ibrostechnology/",youtube:""};

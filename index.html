@@ -88,8 +88,6 @@ button{font:inherit;color:inherit}
 .bar nav{display:flex;align-items:center;gap:22px;font-size:.92rem}
 .bar nav a{text-decoration:none;color:var(--band-muted);transition:color .2s}
 .bar nav a:hover,.bar nav a.on{color:var(--band-ink)}
-.bar nav a.pc{color:var(--band-ink);display:inline-flex;align-items:center;gap:6px}
-.bar nav a.pc::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent)}
 .bar nav a.cta{display:inline-flex;align-items:center;padding:7px 16px;border-radius:99px;background:var(--accent);color:var(--accent-ink);font-weight:600;transition:filter .2s}
 .bar nav a.cta:hover{color:var(--accent-ink);filter:brightness(1.08)}
 .status{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;color:var(--band-muted);white-space:nowrap}
@@ -323,7 +321,8 @@ footer.site .wrap{padding-block:64px 120px;display:grid;grid-template-columns:1.
 .f-claim em{font-style:normal;color:var(--accent)}
 .f-sub{color:var(--band-muted);font-size:.9rem;max-width:38ch;margin:0}
 .social{display:flex;gap:10px;margin-top:22px}
-.social a{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:var(--band-3);color:var(--band-ink);transition:background .2s,color .2s,translate .2s var(--ease)}
+.social a,.social .soon{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:var(--band-3);color:var(--band-ink);transition:background .2s,color .2s,translate .2s var(--ease)}
+.social .soon{opacity:.6;cursor:default}
 .social a:hover{background:var(--accent);color:var(--accent-ink);translate:0 -2px}
 .social svg{width:19px;height:19px}
 .f-col{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
@@ -393,7 +392,7 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
   .svcs{grid-template-columns:repeat(2,minmax(0,1fr))}
   .facts .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}
   .bar nav a{display:none}
-  .bar nav a.pc,.bar nav a.cta{display:inline-flex}
+  .bar nav a.nav-pc,.bar nav a.cta{display:inline-flex}
   .lb-in{grid-template-columns:1fr}
   .lb-pics img{max-height:56vh}
   .hero h1{min-height:0}
@@ -413,7 +412,7 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
   dialog.sheet[open]{animation-name:sheetUp}
   .sh-body{padding-bottom:calc(28px + env(safe-area-inset-bottom,0px))}
   .hero .lead{min-height:0}
-  .bar nav a.pc,.bar nav a.cta{display:none}
+  .bar nav a.nav-pc,.bar nav a.cta{display:none}
 }
 @keyframes sheetUp{from{translate:0 60px;opacity:0}to{translate:0 0;opacity:1}}
 @media (prefers-reduced-motion:reduce){
@@ -430,7 +429,7 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
   <a class="logo" href="#inicio" aria-label="iBros Technology, inicio"><span class="w"><i>ı</i>Bros</span><span class="t">TECHNOLOGY</span></a>
   <nav>
     <a href="#celulares">Celulares</a>
-    <a href="#computadoras" class="pc">Computadoras</a>
+    <a href="#computadoras" class="nav-pc">Computadoras</a>
     <a href="#trabajos">Trabajos</a>
     <a href="#local">Ubicación</a>
     <a href="#preguntas">Preguntas</a>
@@ -648,7 +647,7 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
     <a class="logo" href="#inicio" aria-label="iBros Technology, volver al inicio"><span class="w"><i>ı</i>Bros</span><span class="t">TECHNOLOGY</span></a>
     <p class="f-claim">Diagnóstico antes de abrir. <em>Prueba completa antes de cerrar.</em></p>
     <p class="f-sub">Servicio técnico de celulares y computadoras en Corrientes. Precio antes de reparar y 2 meses de garantía.</p>
-    <div class="social" id="social" hidden></div>
+    <div class="social" id="social"></div>
   </div>
   <nav class="f-col" aria-label="Reparaciones">
     <p class="f-h">Reparaciones</p>
@@ -927,7 +926,7 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
   fetch("servicios.json?v="+Date.now()).then(function(r){return r.ok?r.json():null}).catch(function(){return null}).then(function(d){
     if(d&&Array.isArray(d.celulares)){SV=d;renderAllSvc()}
   });
-  // Redes sociales del pie (las edita el administrador; si un enlace está vacío no se muestra)
+  // Redes sociales del pie (las edita el administrador; sin enlace el ícono se ve apagado)
   var REDES={facebook:"",instagram:"https://www.instagram.com/ibrostechnology/",youtube:""};
   var RED_N={facebook:"Facebook",instagram:"Instagram",youtube:"YouTube"};
   var RED_I={
@@ -936,8 +935,9 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
     youtube:'<svg viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M22 8.2a3 3 0 0 0-2.1-2.1C18 5.6 12 5.6 12 5.6s-6 0-7.9.5A3 3 0 0 0 2 8.2c-.3 1.2-.4 2.5-.4 3.8s.1 2.6.4 3.8a3 3 0 0 0 2.1 2.1c1.9.5 7.9.5 7.9.5s6 0 7.9-.5a3 3 0 0 0 2.1-2.1c.3-1.2.4-2.5.4-3.8s-.1-2.6-.4-3.8ZM10 15V9l5.2 3L10 15Z"/></svg>'
   };
   function renderRedes(){
-    var h=["facebook","instagram","youtube"].filter(function(k){return/^https:\/\//i.test(REDES[k]||"")}).map(function(k){return'<a href="'+esc(REDES[k])+'" target="_blank" rel="noopener" aria-label="iBros en '+RED_N[k]+'">'+RED_I[k]+'</a>'}).join("");
-    $("social").innerHTML=h;$("social").hidden=!h;
+    $("social").innerHTML=["facebook","instagram","youtube"].map(function(k){
+      return/^https:\/\//i.test(REDES[k]||"")?'<a href="'+esc(REDES[k])+'" target="_blank" rel="noopener" aria-label="iBros en '+RED_N[k]+'">'+RED_I[k]+'</a>':'<span class="soon" role="img" title="Próximamente" aria-label="'+RED_N[k]+', próximamente">'+RED_I[k]+'</span>';
+    }).join("");
   }
   $("year").textContent=new Date().getFullYear();
   renderRedes();

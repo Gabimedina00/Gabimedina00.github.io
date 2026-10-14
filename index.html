@@ -777,7 +777,7 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
   // Trabajos
   var CATS={pantalla:"Módulo",bateria:"Batería",pin:"Pin de carga",mojado:"Mojados",software:"Software",camara:"Cámara y audio",tapa:"Tapa trasera",pc:"Computadoras",otro:"Otros"};
   var jobs=[],filtro="todos",rail=$("rail");
-  function stars(n){n=Math.round(n||0);return"★".repeat(n)+'<span class="off">'+"★".repeat(5-n)+"</span>"}
+  function stars(n){n=Math.min(5,Math.max(0,Math.round(Number(n)||0)));return"★".repeat(n)+'<span class="off">'+"★".repeat(5-n)+"</span>"}
   function fecha(s){try{return new Date(s+"T12:00:00").toLocaleDateString("es-AR",{day:"numeric",month:"short"})}catch(e){return s}}
   function card(j,i){
     var f=j.fotos||[];

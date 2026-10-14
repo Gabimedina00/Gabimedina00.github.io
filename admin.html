@@ -101,6 +101,30 @@ table.mini th:not(:first-child),table.mini td:not(:first-child){text-align:right
 .sect{font-family:Montserrat,sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-top:6px}
 .nro{font-family:Montserrat,sans-serif;font-weight:800;color:var(--muted)}
 input[readonly]{color:var(--muted)}
+.swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.swatches button{display:flex;flex-direction:column;align-items:center;gap:6px;border:1.5px solid var(--line);background:var(--card2);color:var(--ink);border-radius:14px;padding:10px 4px;font:inherit;font-size:.8rem;cursor:pointer}
+.swatches button i{width:30px;height:30px;border-radius:50%;display:block;box-shadow:inset 0 0 0 2px rgba(255,255,255,.15)}
+.swatches button[aria-pressed="true"]{border-color:var(--ink);background:var(--bg)}
+.colorrow{display:flex;align-items:center;gap:12px;font-size:.85rem;font-weight:600}
+.colorrow input[type=color]{width:56px;height:44px;padding:4px;border-radius:12px;cursor:pointer}
+.prev{border-radius:16px;overflow:hidden;border:1px solid var(--line);font-family:"DM Sans",system-ui,sans-serif}
+.prev .pv-top{background:#e6dfd3;color:#161412;padding:16px;display:flex;flex-direction:column;gap:10px}
+.prev .pv-logo{font-family:Montserrat,sans-serif;font-weight:800;letter-spacing:-.03em}
+.prev .pv-logo i{font-style:normal;position:relative}
+.prev .pv-logo i::before{content:"";position:absolute;left:50%;top:.02em;width:.26em;height:.26em;margin-left:-.13em;border-radius:50%;background:var(--pa)}
+.prev .pv-h{font-family:Montserrat,sans-serif;font-weight:800;font-size:1.35rem;line-height:1.1;letter-spacing:-.02em}
+.prev .pv-h span{color:var(--pa)}
+.prev .pv-link{color:var(--pt);font-weight:600;font-size:.9rem}
+.prev .pv-btn{align-self:flex-start;background:var(--pa);color:var(--pi);border-radius:99px;padding:9px 16px;font-weight:600;font-size:.9rem}
+.prev .pv-tick{background:var(--pa);color:var(--pi);font-family:Montserrat,sans-serif;font-weight:700;padding:9px 16px;font-size:.88rem;white-space:nowrap;overflow:hidden}
+.prev .pv-band{background:#0b0b0b;color:#f5f3f0;padding:16px;display:flex;flex-direction:column;gap:8px}
+.prev .pv-eb{color:var(--pb);font-family:Montserrat,sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase}
+.prev .pv-band b{font-family:Montserrat,sans-serif;font-size:1.1rem}
+.prev .pv-band b span{color:var(--pb)}
+.prev .pv-chip{align-self:flex-start;background:var(--pb);color:var(--pbi);border-radius:99px;padding:5px 11px;font-size:.75rem;font-weight:700}
+.fotos .item img{background:var(--bg)}
+.fotos .item .tag{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:99px;font-size:.7rem;font-weight:700;background:color-mix(in srgb,var(--accent) 20%,transparent);color:var(--accent)}
+@media (max-width:420px){.swatches{grid-template-columns:repeat(4,1fr);gap:6px}.swatches button{font-size:.72rem}}
 @media (max-width:560px){.kpis{grid-template-columns:repeat(2,1fr)}.tabs{gap:2px}.tabs button{padding:10px 4px;font-size:.88rem}}
 @media (max-width:480px){.row{grid-template-columns:1fr}.item{grid-template-columns:60px 1fr}.item .btns{grid-column:1/-1;flex-wrap:wrap}}
 </style>
@@ -141,6 +165,7 @@ input[readonly]{color:var(--muted)}
       <button type="button" role="tab" aria-selected="true" data-tab="registro">Registro</button>
       <button type="button" role="tab" aria-selected="false" data-tab="trabajos">Trabajos</button>
       <button type="button" role="tab" aria-selected="false" data-tab="servicios">Servicios</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="diseno">Diseño</button>
       <button type="button" role="tab" aria-selected="false" data-tab="ajustes">Ajustes</button>
     </div>
 
@@ -301,6 +326,40 @@ input[readonly]{color:var(--muted)}
       </form>
     </div>
 
+    <!-- DISEÑO: color de acento y fotos de la página -->
+    <div data-pane="diseno" hidden style="flex-direction:column;gap:16px;margin-top:16px">
+      <div class="card">
+        <h2>Color de la página</h2>
+        <p class="muted">Cambia el naranja de botones, cintas y detalles. El negro y el crema quedan como están.</p>
+        <div class="swatches" id="apSw"></div>
+        <label class="colorrow"><input type="color" id="apPick" value="#ee6a1c" aria-label="Elegir otro color">Otro color</label>
+        <div class="prev" id="apPrev" aria-label="Vista previa">
+          <div class="pv-top">
+            <div class="pv-logo"><i>ı</i>Bros</div>
+            <div class="pv-h">Volvé a <span>conectar.</span></div>
+            <div class="pv-btn">Consultar por WhatsApp</div>
+            <div class="pv-link">Ver procedimiento →</div>
+          </div>
+          <div class="pv-tick">Módulos · Baterías · Pin de carga · Mojados</div>
+          <div class="pv-band">
+            <div class="pv-eb">Celulares</div>
+            <b>¿Problemas con el celular? <span>La solución está acá.</span></b>
+            <div class="pv-chip">En el día</div>
+          </div>
+        </div>
+        <p class="muted" id="apNote"></p>
+        <div class="btns"><button class="btn" type="button" id="apSave">Guardar color</button><button class="btn ghost" type="button" id="apReset">Volver al naranja original</button></div>
+        <div id="apMsg"></div>
+      </div>
+      <div class="card fotos">
+        <h2>Fotos de la página</h2>
+        <p class="muted">Tocá <b>Cambiar</b> y elegí una foto. Se achica sola antes de subir. Conviene horizontal, salvo donde dice vertical. <b>Original</b> vuelve a la foto de siempre.</p>
+        <input type="file" id="apFile" accept="image/*" hidden>
+        <div id="apFotos"></div>
+        <div id="apFotoMsg"></div>
+      </div>
+    </div>
+
     <!-- AJUSTES -->
     <div data-pane="ajustes" hidden style="flex-direction:column;gap:16px;margin-top:16px">
       <div class="card">
@@ -377,7 +436,7 @@ input[readonly]{color:var(--muted)}
     $("setup").hidden=locked||!!token;
     $("app").hidden=locked||!token;
     if(locked){setTimeout(function(){$("pinIn").querySelector("input").focus()},50);return}
-    if(token){loadJobs();loadSvcs();loadRedes();pinState();regInit()}
+    if(token){loadJobs();loadSvcs();loadRedes();loadAp();pinState();regInit()}
   }
   document.querySelector(".tabs").onclick=function(e){
     var b=e.target.closest("button");if(!b)return;
@@ -531,6 +590,109 @@ input[readonly]{color:var(--muted)}
     try{await update("redes.json",{},function(){return d},"Actualizar redes sociales");msg("redMsg","ok","Guardado. Se ve en la página en 1 o 2 minutos.")}
     catch(err){msg("redMsg","err",err.message)}
     $("rSave").disabled=false;
+  };
+
+  // ---- Diseño: color de acento y fotos (apariencia.json + apariencia.css; build.py no los pisa) ----
+  var ORIG="#ee6a1c",ORIG_C={accent:ORIG,text:"#b9500f",ink:"#ffffff"};
+  var PRESETS=[["Naranja",ORIG],["Azul","#2563eb"],["Celeste","#0ea5e9"],["Verde","#16a34a"],["Rojo","#dc2626"],["Violeta","#7c3aed"],["Rosa","#db2777"],["Amarillo","#eab308"]];
+  var SLOTS=[
+    ["portada-cel","Portada: celular","Arriba de todo, con el botón Celulares","img/hero.webp"],
+    ["portada-pc","Portada: computadora","Arriba de todo, con el botón Computadoras","img/pc-foto.webp"],
+    ["celulares","Sección Celulares","Junto a la lista de arreglos de celulares","img/bateria-foto.webp"],
+    ["computadoras","Sección Computadoras","Junto a la lista de arreglos de computadoras","img/pc-foto.webp"],
+    ["explorar-cel","Explorá más: Celulares","Tarjeta al final de la página (vertical)","img/iphone-foto.webp"],
+    ["explorar-pc","Explorá más: Computadoras","Tarjeta al final de la página (vertical)","img/pc-foto.webp"],
+    ["explorar-trabajos","Explorá más: Trabajos","Tarjeta al final de la página (vertical)","img/tapas-foto.webp"]
+  ];
+  var ap={color:null,fotos:{}},apHex=ORIG,apSlot=null,apLocal={};
+  function rgb(h){return[1,3,5].map(function(i){return parseInt(h.substr(i,2),16)})}
+  function hex(c){return"#"+c.map(function(v){return Math.round(Math.max(0,Math.min(255,v))).toString(16).padStart(2,"0")}).join("")}
+  function lum(h){return rgb(h).map(function(v){v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)}).reduce(function(a,v,i){return a+v*[.2126,.7152,.0722][i]},0)}
+  function contrast(a,b){var x=lum(a),y=lum(b);return(Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
+  function mix(h,to,t){var a=rgb(h),b=rgb(to);return hex(a.map(function(v,i){return v+(b[i]-v)*t}))}
+  function until(h,to,bg,min){for(var t=0;t<=1;t+=.04){var c=mix(h,to,t);if(contrast(c,bg)>=min)return c}return to}
+  function inkFor(h){return contrast("#ffffff",h)>=3?"#ffffff":"#161412"}
+  // Arma los colores para que todo se lea: texto sobre el color, texto de color sobre crema y sobre negro
+  function colores(h){
+    h=h.toLowerCase();if(h===ORIG)return null;
+    var c={accent:h,text:until(h,"#000000","#e6dfd3",4.5),ink:inkFor(h)};
+    if(contrast(h,"#0b0b0b")<4.5){c.band=until(h,"#ffffff","#0b0b0b",4.5);c.bandInk=inkFor(c.band)}
+    return c;
+  }
+  function apCss(a){
+    var hx=/^#[0-9a-f]{6}$/i,c=a.color,o="/* Lo escribe el panel (pestaña Diseño). No editar a mano. */\n";
+    if(c&&hx.test(c.accent)&&hx.test(c.text)&&hx.test(c.ink)){
+      o+="html:root{--accent:"+c.accent+";--accent-text:"+c.text+";--accent-ink:"+c.ink+"}\n";
+      if(c.band&&hx.test(c.band)&&hx.test(c.bandInk))o+="html .band,html .bar,html .progress,html .xp-card,html .sh-media{--accent:"+c.band+";--accent-ink:"+c.bandInk+"}\n";
+    }
+    var f=Object.keys(a.fotos||{}).filter(function(k){return/^[a-z0-9-]+$/.test(k)});
+    if(f.length)o+=f.map(function(k){return'img[data-foto="'+k+'"]'}).join(",")+"{visibility:hidden}\n";
+    return o;
+  }
+  async function apWrite(message){
+    var cur=await readJson("apariencia.json",{});
+    await writeJson("apariencia.json",ap,cur.sha,message);
+    var css=await gh(API+"/contents/apariencia.css"),body={message:message,content:b64(apCss(ap))};if(css)body.sha=css.sha;
+    await gh(API+"/contents/apariencia.css","PUT",body);
+  }
+  function apPaint(){
+    var c=colores(apHex)||ORIG_C,pv=$("apPrev").style;
+    pv.setProperty("--pa",c.accent);pv.setProperty("--pt",c.text);pv.setProperty("--pi",c.ink);
+    pv.setProperty("--pb",c.band||c.accent);pv.setProperty("--pbi",c.bandInk||c.ink);
+    $("apPick").value=apHex;
+    $("apSw").querySelectorAll("button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.c===apHex)});
+    var n=[];if(c.ink!=="#ffffff")n.push("las letras sobre el color van en negro");if(c.band)n.push("sobre las partes negras se usa un tono más claro");
+    $("apNote").textContent=n.length?"Para que se lea bien, con este color "+n.join(" y ")+".":"";
+    var saved=ap.color?ap.color.accent:ORIG;
+    $("apSave").disabled=apHex===saved;$("apReset").hidden=saved===ORIG&&apHex===ORIG;
+  }
+  $("apSw").innerHTML=PRESETS.map(function(p){return'<button type="button" data-c="'+p[1]+'"><i style="background:'+p[1]+'"></i>'+p[0]+'</button>'}).join("");
+  $("apSw").onclick=function(e){var b=e.target.closest("button");if(b){apHex=b.dataset.c;msg("apMsg","","");apPaint()}};
+  $("apPick").oninput=function(){apHex=this.value.toLowerCase();msg("apMsg","","");apPaint()};
+  async function apSaveColor(h,txt){
+    $("apSave").disabled=true;$("apReset").disabled=true;msg("apMsg","info","Guardando…");
+    var prev=ap.color;
+    try{var r=await readJson("apariencia.json",{});ap.fotos=r.data&&r.data.fotos||{};ap.color=colores(h);await apWrite(txt);apHex=h;msg("apMsg","ok","Guardado. Se ve en la página en 1 o 2 minutos.")}
+    catch(err){ap.color=prev;msg("apMsg","err",err.message)}
+    $("apReset").disabled=false;apPaint();
+  }
+  $("apSave").onclick=function(){apSaveColor(apHex,"Cambiar color de la página")};
+  $("apReset").onclick=function(){apSaveColor(ORIG,"Volver al naranja original")};
+  function apFotos(){
+    $("apFotos").innerHTML=SLOTS.map(function(s){
+      var p=ap.fotos[s[0]],src=apLocal[s[0]]||(p?RAW+p:s[3]);
+      return'<div class="item"><img src="'+esc(src)+'" alt=""><div><b>'+esc(s[1])+(p?'<span class="tag">Tuya</span>':'')+'</b><span>'+esc(s[2])+'</span></div>'+
+        '<div class="btns"><button class="btn small" type="button" data-up="'+s[0]+'">Cambiar</button>'+(p?'<button class="btn small ghost" type="button" data-orig="'+s[0]+'">Original</button>':'')+'</div></div>';
+    }).join("");
+  }
+  async function loadAp(){
+    apFotos();apPaint();
+    try{var r=await readJson("apariencia.json",{});var d=r.data&&typeof r.data==="object"?r.data:{};
+      ap={color:d.color||null,fotos:d.fotos&&typeof d.fotos==="object"?d.fotos:{}};apHex=ap.color&&/^#[0-9a-f]{6}$/i.test(ap.color.accent)?ap.color.accent.toLowerCase():ORIG;apFotos();apPaint()}
+    catch(err){msg("apMsg","err",err.message)}
+  }
+  $("apFotos").onclick=async function(e){
+    var b=e.target.closest("button");if(!b||b.disabled)return;
+    if(b.dataset.up){apSlot=b.dataset.up;$("apFile").click();return}
+    var k=b.dataset.orig,old=ap.fotos[k];b.disabled=true;msg("apFotoMsg","info","Volviendo a la foto original…");
+    try{var r=await readJson("apariencia.json",{});ap.color=r.data&&r.data.color||null;ap.fotos=r.data&&r.data.fotos||{};old=ap.fotos[k];delete ap.fotos[k];delete apLocal[k];
+      await apWrite("Foto original en "+k);if(old)await delFile(old).catch(function(){});msg("apFotoMsg","ok","Listo. Se ve en la página en 1 o 2 minutos.")}
+    catch(err){msg("apFotoMsg","err",err.message)}
+    apFotos();
+  };
+  $("apFile").onchange=async function(){
+    var f=this.files[0],k=apSlot;this.value="";if(!f||!k)return;
+    $("apFotos").querySelectorAll("button").forEach(function(x){x.disabled=true});
+    msg("apFotoMsg","info","Achicando y subiendo la foto…");
+    try{
+      var path="apariencia/"+k+"-"+Date.now().toString(36)+".jpg";
+      await gh(API+"/contents/"+path,"PUT",{message:"Foto nueva en "+k,content:await compress(f)});
+      var r=await readJson("apariencia.json",{});ap.color=r.data&&r.data.color||null;ap.fotos=r.data&&r.data.fotos||{};
+      var old=ap.fotos[k];ap.fotos[k]=path;await apWrite("Foto nueva en "+k);
+      if(old&&old!==path)await delFile(old).catch(function(){});
+      apLocal[k]=URL.createObjectURL(f);msg("apFotoMsg","ok","Foto cambiada. Se ve en la página en 1 o 2 minutos.");
+    }catch(err){msg("apFotoMsg","err",err.message==="EncodingError"||/decode/i.test(err.message)?"No se pudo leer esa foto. Probá con otra (JPG o PNG).":err.message)}
+    apFotos();
   };
 
   // ---- Servicios ----

@@ -14,6 +14,7 @@
 <meta property="og:url" content="https://ibrostechnology.github.io/">
 <meta name="twitter:card" content="summary_large_image">
 <title>iBros Technology</title>
+<script>(function(d){if(window.IntersectionObserver&&window.MutationObserver&&matchMedia("(prefers-reduced-motion: no-preference)").matches){d.classList.add("mv-on");setTimeout(function(){if(!window.__mvOk)d.classList.remove("mv-on")},2500)}})(document.documentElement)</script>
 <meta name="description" content="iBros Technology: servicio técnico de celulares y computadoras en Corrientes. Módulos, baterías, pin de carga, mojados, formateo y más, con 2 meses de garantía.">
 <meta name="theme-color" content="#0b0b0b">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -174,13 +175,31 @@ button{font:inherit;color:inherit}
 .xp-go svg{width:20px;height:20px}
 .xp-card:hover .xp-go{background:var(--accent);rotate:-45deg}
 
-/* Aparición al hacer scroll */
-@supports (animation-timeline:view()){
-  @media (prefers-reduced-motion:no-preference){
-    .reveal{animation:reveal linear both;animation-timeline:view();animation-range:entry 0% entry 40%}
-  }
-}
-@keyframes reveal{from{opacity:0;translate:0 34px}to{opacity:1;translate:0 0}}
+/* Movimiento al hacer scroll: lo prende el script "mv" (sin JS o con "reducir movimiento" todo se ve quieto) */
+:root{--mv-ease:cubic-bezier(.16,1,.3,1)}
+.reveal>:nth-child(2){--ri:1}.reveal>:nth-child(3){--ri:2}.reveal>:nth-child(4){--ri:3}.reveal>:nth-child(5){--ri:4}.reveal>:nth-child(6){--ri:5}.reveal>:nth-child(7){--ri:6}.reveal>:nth-child(8){--ri:7}.reveal>:nth-child(9){--ri:8}
+.mv-on .reveal:not(.pcvis,.spot,.xp-card):not(.in)>:not(.mv-each),.mv-on .reveal:is(.spot,.xp-card):not(.in),.mv-on .mv-up:not(.in),.mv-on .pcvis.reveal:not(.in) .frame{opacity:0}
+.mv-on .reveal:not(.pcvis,.spot,.xp-card).in>:not(.mv-each,.mv-words){animation:mvText 1s var(--mv-ease) backwards;animation-delay:calc(var(--rd,0s) + var(--ri,0) * 90ms)}
+.mv-on .reveal:is(.spot,.xp-card).in,.mv-on .pcvis.reveal.in .frame{animation:mvCard 1.2s var(--mv-ease) var(--rd,0s) backwards}
+.mv-on .mv-up.in{animation:mvRise 1s var(--mv-ease) var(--rd,0s) backwards}
+/* Títulos: cada palabra sube desde atrás de una máscara */
+.mv-on .mvm{display:inline-block;overflow:hidden;vertical-align:top;padding:.1em .05em .18em;margin:-.1em -.05em -.18em}
+.mv-on .mvi{display:inline-block;transform-origin:0 100%}
+.mv-on .mv-words:not(.in) .mvi{translate:0 118%}
+.mv-on .mv-words.in .mvi{animation:mvWord 1.25s var(--mv-ease) backwards;animation-delay:calc(var(--rd,0s) + var(--ri,0) * 90ms + var(--wi,0) * 55ms)}
+/* Fotos: se descubren de abajo hacia arriba y se acomodan; después acompañan el scroll */
+.mv-on .pcvis .frame img{scale:1.1;translate:0 var(--py,0%)}
+.mv-on .pcvis.reveal.in .frame img{animation:mvPhoto 1.6s var(--mv-ease) calc(var(--rd,0s) + .1s) backwards}
+.mv-on .pcvis.reveal .pill{transition:opacity .9s var(--mv-ease),scale .9s var(--mv-ease);transition-delay:calc(var(--rd,0s) + .7s)}
+.mv-on .pcvis.reveal .pill.p2{transition-delay:calc(var(--rd,0s) + .85s)}
+.mv-on .pcvis.reveal:not(.in) .pill{opacity:0;scale:.82}
+.mv-on .xp-card.reveal.in img{animation:mvZoom 1.8s var(--mv-ease) var(--rd,0s) backwards}
+@keyframes mvText{from{opacity:0;translate:0 26px;filter:blur(6px)}}
+@keyframes mvRise{from{opacity:0;translate:0 34px}}
+@keyframes mvCard{from{opacity:0;translate:0 48px;scale:.97}}
+@keyframes mvWord{from{translate:0 118%;rotate:6deg}}
+@keyframes mvPhoto{from{clip-path:inset(100% 0 0 0);scale:1.35}to{clip-path:inset(0 0 0 0)}}
+@keyframes mvZoom{from{scale:1.25}}
 
 section{padding-block:88px}
 .head{display:flex;flex-direction:column;gap:12px;max-width:62ch}
@@ -505,10 +524,10 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
   </div></div>
 
   <div class="facts"><div class="wrap">
-    <div class="fact"><b>En el día</b><span>Módulos, baterías, pin y tapas</span></div>
-    <div class="fact"><b>2 meses</b><span>de garantía en cada reparación</span></div>
-    <div class="fact"><b id="factJobs">+0</b><span>trabajos publicados con foto</span></div>
-    <div class="fact"><b id="factRating">Nuevo</b><span id="factRatingTxt">sumando reseñas de clientes</span></div>
+    <div class="fact ld" style="--d:0.75s"><b>En el día</b><span>Módulos, baterías, pin y tapas</span></div>
+    <div class="fact ld" style="--d:0.85s"><b>2 meses</b><span>de garantía en cada reparación</span></div>
+    <div class="fact ld" style="--d:0.95s"><b id="factJobs">+0</b><span>trabajos publicados con foto</span></div>
+    <div class="fact ld" style="--d:1.05s"><b id="factRating">Nuevo</b><span id="factRatingTxt">sumando reseñas de clientes</span></div>
   </div></div>
 </div>
 
@@ -782,6 +801,68 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
 </dialog>
 
 <script type="application/json" id="svcBase">{"celulares": [{"id": "pantalla", "nombre": "Cambio de módulo", "corto": "Pantalla rota, manchas, líneas o táctil que no responde.", "tiempo": "En el día", "foto": "img/iphone-foto.webp", "detalle": "Cambiamos el módulo completo: vidrio, pantalla y táctil. Te ofrecemos las opciones de repuesto que haya según calidad y precio.", "pasos": ["Revisamos el equipo y confirmamos que la falla es del módulo.", "Te pasamos el presupuesto con las opciones de repuesto.", "Cambiamos el módulo y colocamos sellos nuevos.", "Probamos táctil, brillo, sensor de proximidad y cámara frontal.", "Te lo entregamos funcionando y con garantía."], "nota": ""}, {"id": "bateria", "nombre": "Batería", "corto": "Se descarga rápido, se apaga sola o está inflada.", "tiempo": "En el día", "foto": "img/bateria-foto.webp", "detalle": "Cambiamos la batería por una nueva y controlamos que el equipo cargue y mida bien el porcentaje.", "pasos": ["Medimos el estado de la batería y revisamos el consumo.", "Te pasamos el presupuesto.", "Retiramos la batería vieja y colocamos la nueva con adhesivo nuevo.", "Probamos carga y descarga.", "Te lo entregamos funcionando y con garantía."], "nota": "Si la batería está inflada, no lo sigas usando ni lo cargues: traelo cuanto antes."}, {"id": "pin", "nombre": "Pin de carga", "corto": "No carga, carga lento o hay que mover el cable.", "tiempo": "En el día", "foto": "img/hero.webp", "detalle": "Muchas veces es suciedad acumulada. Primero hacemos una limpieza y, si el pin está dañado, lo cambiamos.", "pasos": ["Revisamos el puerto con lupa y probamos con distintos cables.", "Limpiamos el puerto de carga.", "Si con la limpieza no alcanza, te pasamos presupuesto para el cambio.", "Probamos carga rápida y conexión a la computadora.", "Te lo entregamos funcionando y con garantía."], "nota": ""}, {"id": "software", "nombre": "Desbloqueo y software", "corto": "Equipo lento, reinicios, sistema dañado o cuentas olvidadas.", "tiempo": "2 a 3 días", "foto": "", "detalle": "Reinstalamos o reparamos el sistema y resolvemos bloqueos de cuenta. Solo trabajamos con el titular del equipo y su comprobante.", "pasos": ["Diagnosticamos el sistema y el tipo de bloqueo.", "Te explicamos si se pueden conservar tus datos.", "Hacemos un respaldo cuando es posible.", "Reinstalamos, actualizamos o desbloqueamos el equipo.", "Lo configuramos con vos al momento de retirarlo."], "nota": "El tiempo depende del modelo y del tipo de bloqueo. Te avisamos al hacer el diagnóstico."}, {"id": "mojado", "nombre": "Mojados", "corto": "Se mojó, no prende o funciona a medias.", "tiempo": "2 a 3 días", "foto": "", "detalle": "Desarmamos el equipo, limpiamos la placa y reemplazamos lo que el agua haya dañado.", "pasos": ["Desarmamos el equipo y revisamos la placa.", "Limpiamos la placa por ultrasonido y la secamos.", "Te pasamos presupuesto si hay piezas para cambiar.", "Probamos el equipo durante varias horas.", "Te lo entregamos funcionando y con garantía."], "nota": "Apagalo, no lo cargues y no lo pongas en arroz. Cuanto antes lo traigas, más chances de recuperarlo."}, {"id": "camara", "nombre": "Cámara, parlante y micrófono", "corto": "Fotos borrosas, no se escucha o no te escuchan.", "tiempo": "En el día", "foto": "", "detalle": "Revisamos si es suciedad, configuración o una pieza dañada, y cambiamos solo lo que hace falta.", "pasos": ["Probamos cámara, parlante y micrófono para ubicar la falla.", "Limpiamos rejillas y lentes.", "Si es una pieza dañada, te pasamos presupuesto.", "Cambiamos la pieza y probamos llamadas, audio y fotos.", "Te lo entregamos funcionando y con garantía."], "nota": ""}, {"id": "tapa", "nombre": "Tapas traseras", "corto": "Vidrio trasero roto o rayado.", "tiempo": "En el día", "foto": "img/tapas-foto.webp", "detalle": "Cambiamos la tapa o el vidrio trasero con terminación prolija, como de fábrica.", "pasos": ["Revisamos que no haya otros daños por el golpe.", "Te pasamos el presupuesto según el modelo.", "Retiramos la tapa dañada y limpiamos el marco.", "Colocamos la tapa nueva y probamos carga inalámbrica y cámaras.", "Te lo entregamos con garantía."], "nota": ""}, {"id": "adaptacion", "nombre": "Adaptaciones", "corto": "Soluciones cuando el repuesto original no se consigue.", "tiempo": "Consultá", "foto": "", "detalle": "Cuando no hay repuesto exacto, buscamos una alternativa compatible y te explicamos qué cambia.", "pasos": ["Revisamos el equipo y buscamos alternativas compatibles.", "Te explicamos las opciones y sus diferencias.", "Hacemos la adaptación con tu aprobación.", "Probamos que todo funcione.", "Te lo entregamos con garantía."], "nota": ""}, {"id": "otro", "nombre": "¿Otra falla?", "corto": "Si no está en la lista, preguntá igual.", "tiempo": "Diagnóstico en el día", "foto": "", "detalle": "Revisamos el equipo y te decimos qué tiene, cuánto cuesta y cuánto tarda.", "pasos": ["Nos contás qué le pasa.", "Lo revisamos y te decimos qué tiene.", "Te pasamos presupuesto y tiempo.", "Reparamos solo con tu aprobación."], "nota": ""}], "computadoras": [{"id": "pc-lenta", "nombre": "Lentitud, virus y formateo", "corto": "Tarda en prender, se tilda o tiene publicidad rara.", "tiempo": "Presupuesto en el día", "foto": "", "detalle": "Limpiamos el sistema o lo reinstalamos desde cero, con tus archivos respaldados.", "pasos": ["Revisamos el sistema y el estado del disco.", "Te pasamos presupuesto.", "Respaldamos tus archivos.", "Limpiamos o reinstalamos Windows con controladores.", "Te la entregamos lista para usar."], "nota": ""}, {"id": "pc-programas", "nombre": "Programas y Windows", "corto": "Office, antivirus, impresoras y programas que necesites.", "tiempo": "Presupuesto en el día", "foto": "", "detalle": "Instalamos y configuramos los programas que usás para trabajar o estudiar.", "pasos": ["Nos decís qué programas necesitás.", "Te pasamos presupuesto.", "Instalamos y configuramos todo.", "Lo probamos con vos al entregar."], "nota": ""}, {"id": "pc-pantalla", "nombre": "Pantallas y teclados", "corto": "Pantalla rota o con líneas, teclas que no andan.", "tiempo": "Presupuesto en el día", "foto": "", "detalle": "Cambiamos pantallas, teclados y bisagras de notebooks.", "pasos": ["Revisamos la notebook y confirmamos la falla.", "Conseguimos el repuesto según tu modelo y te pasamos presupuesto.", "Hacemos el cambio.", "Probamos imagen, teclado y bisagras.", "Te la entregamos con garantía."], "nota": ""}, {"id": "pc-carga", "nombre": "No enciende o no carga", "corto": "No prende, se apaga sola o el cargador no anda.", "tiempo": "Presupuesto en el día", "foto": "", "detalle": "Buscamos si la falla está en el cargador, el pin de carga, la batería o la placa.", "pasos": ["Probamos cargador, batería y pin de carga.", "Ubicamos la falla.", "Te pasamos presupuesto.", "Reparamos o cambiamos la pieza.", "Te la entregamos con garantía."], "nota": ""}, {"id": "pc-limpieza", "nombre": "Limpieza y temperatura", "corto": "Se calienta, hace ruido o se apaga sola.", "tiempo": "Presupuesto en el día", "foto": "", "detalle": "Limpieza interna completa y cambio de pasta térmica para que no levante temperatura.", "pasos": ["Medimos la temperatura de trabajo.", "Desarmamos y limpiamos ventiladores y disipador.", "Cambiamos la pasta térmica.", "Volvemos a medir para confirmar la mejora."], "nota": ""}, {"id": "pc-mejoras", "nombre": "Mejoras: disco SSD y memoria", "corto": "Que tu computadora vuelva a andar rápido.", "tiempo": "Presupuesto en el día", "foto": "", "detalle": "Cambiar el disco por un SSD o sumar memoria es la forma más barata de que una computadora vieja ande rápida.", "pasos": ["Revisamos qué mejoras admite tu equipo.", "Te pasamos presupuesto con las opciones.", "Instalamos el SSD o la memoria y pasamos tus archivos.", "Probamos todo y te la entregamos."], "nota": ""}]}</script>
+<script>
+/* Movimiento al hacer scroll: cada bloque aparece cuando entra en pantalla */
+(function(){
+  var doc=document.documentElement;
+  if(!doc.classList.contains("mv-on"))return;
+  window.__mvOk=1;
+  var io=new IntersectionObserver(function(es){
+    var vis=[];
+    es.forEach(function(e){if(e.isIntersecting)vis.push(e.target)});
+    vis.sort(function(a,b){var r=a.getBoundingClientRect(),q=b.getBoundingClientRect();return(r.top-q.top)||(r.left-q.left)});
+    vis.forEach(function(el,k){
+      io.unobserve(el);
+      el.style.setProperty("--rd",Math.min(k,6)*0.09+"s");
+      el.classList.add("in");
+      [].forEach.call(el.querySelectorAll(".mv-words"),function(h){h.classList.add("in")});
+    });
+  },{rootMargin:"0px 0px -8% 0px"});
+  function words(h){
+    var n=0;
+    (function walk(el){
+      [].slice.call(el.childNodes).forEach(function(c){
+        if(c.nodeType===1){walk(c);return}
+        if(c.nodeType!==3||!c.textContent.trim())return;
+        var f=document.createDocumentFragment();
+        c.textContent.split(/(\s+)/).forEach(function(p){
+          if(!p)return;
+          if(!p.trim()){f.appendChild(document.createTextNode(p));return}
+          var m=document.createElement("span"),i=document.createElement("span");
+          m.className="mvm";i.className="mvi";i.style.setProperty("--wi",n++);i.textContent=p;
+          m.appendChild(i);f.appendChild(m);
+        });
+        el.replaceChild(f,c);
+      });
+    })(h);
+    h.classList.add("mv-words");
+  }
+  function up(el){if(el&&!el.classList.contains("mv-up")){el.classList.add("mv-up");io.observe(el)}}
+  // Listas que se arman o cambian después (servicios, trabajos, filtros): cada tarjeta entra sola
+  function each(box){
+    if(!box)return;
+    box.classList.add("mv-each");
+    function mark(){[].forEach.call(box.children,up)}
+    mark();new MutationObserver(mark).observe(box,{childList:true});
+  }
+  var q=function(sel){return[].slice.call(document.querySelectorAll(sel))};
+  q(".reveal h2").forEach(words);
+  ["svcs","cellist","pclist","filters","rail"].forEach(function(id){each(document.getElementById(id))});
+  q(".steps, footer.site .wrap").forEach(each);
+  q("#preguntas details, #ratingBox, #resena").forEach(up);
+  q(".reveal").forEach(function(el){io.observe(el)});
+  // Las fotos de Celulares y Computadoras se mueven un poco más lento que la página
+  var fr=q(".pcvis .frame"),tick=0;
+  function para(){
+    tick=0;var vh=innerHeight;
+    fr.forEach(function(f){var r=f.getBoundingClientRect();if(r.bottom<0||r.top>vh)return;var p=(r.top+r.height/2-vh/2)/(vh/2+r.height/2);f.style.setProperty("--py",(-4*Math.max(-1,Math.min(1,p))).toFixed(2)+"%")});
+  }
+  addEventListener("scroll",function(){if(!tick){tick=1;requestAnimationFrame(para)}},{passive:true});
+  addEventListener("resize",para);para();
+  // Al imprimir se ve todo
+  addEventListener("beforeprint",function(){doc.classList.remove("mv-on")});
+})();
+</script>
 <script>
 (function(){
   var WA="5493794541449";

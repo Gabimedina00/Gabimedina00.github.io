@@ -1,3 +1,4 @@
 /* Lo escribe el panel (pestaña Diseño). No editar a mano. */
 html:root{--accent:#2563eb;--accent-text:#2157cf;--accent-ink:#ffffff}
 html .band,html .bar,html .progress,html .xp-card,html .sh-media{--accent:#3f76ed;--accent-ink:#ffffff}
+img[data-foto="explorar-trabajos"]{visibility:hidden}

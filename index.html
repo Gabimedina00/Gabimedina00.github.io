@@ -630,15 +630,18 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
     <div>
       <p class="eyebrow or">Tu opinión</p>
       <h3 style="margin-top:8px">¿Te arreglamos el equipo? Contanos cómo te fue.</h3>
-      <p>Tu reseña nos llega por WhatsApp y la publicamos junto a la foto de tu trabajo.</p>
+      <p id="rvLead">Tu reseña nos llega por WhatsApp y la publicamos junto a la foto de tu trabajo.</p>
     </div>
     <form class="rv-form" id="rvForm">
       <div class="rv-stars" id="rvStars" role="radiogroup" aria-label="Puntaje"></div>
       <div class="row2">
-        <input type="text" id="rvName" placeholder="Tu nombre" autocomplete="given-name">
-        <input type="text" id="rvEquipo" placeholder="Equipo (ej: iPhone 11)" autocomplete="off">
+        <input type="text" id="rvName" placeholder="Tu nombre" autocomplete="given-name" maxlength="60">
+        <input type="text" id="rvEquipo" placeholder="Equipo (ej: iPhone 11)" autocomplete="off" maxlength="60">
       </div>
-      <textarea id="rvText" placeholder="¿Cómo te atendimos? ¿Quedó bien tu equipo?"></textarea>
+      <textarea id="rvText" placeholder="¿Cómo te atendimos? ¿Quedó bien tu equipo?" maxlength="800"></textarea>
+      <input type="text" id="rvWeb" name="web" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+      <button class="btn btn-or" id="rvSubmit" type="submit" hidden>Enviar mi reseña</button>
+      <p id="rvMsg" role="status" aria-live="polite" style="margin:0;font-size:.92rem" hidden></p>
       <a class="btn btn-or" id="rvSend" href="https://wa.me/5493794541449" target="_blank" rel="noopener">Enviar mi reseña por WhatsApp</a>
     </form>
   </div>
@@ -986,8 +989,32 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
   function buildRv(){
     $("rvSend").href=wa("Hola iBros, quiero dejar mi reseña.\nPuntaje: "+"★".repeat(rv)+" ("+rv+"/5)\nNombre: "+($("rvName").value.trim()||"-")+"\nEquipo: "+($("rvEquipo").value.trim()||"-")+($("rvText").value.trim()?"\nReseña: "+$("rvText").value.trim():""));
   }
-  $("rvForm").addEventListener("input",buildRv);$("rvForm").addEventListener("submit",function(e){e.preventDefault()});
+  $("rvForm").addEventListener("input",buildRv);
   paint(rv);buildRv();
+  // Si el panel activó las reseñas (resenas.json), se guardan en Supabase sin publicarse: Gabriel decide desde el panel
+  var RVC=null;
+  function rvMsg(t,bad){var m=$("rvMsg");m.hidden=!t;m.textContent=t||"";m.style.color=bad?"#e5484d":""}
+  fetch("resenas.json?v="+Date.now()).then(function(r){return r.ok?r.json():null}).catch(function(){return null}).then(function(c){
+    if(!c||!/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(c.url||"")||!/^[\w.-]{20,}$/.test(c.key||""))return;
+    RVC=c;$("rvSubmit").hidden=false;$("rvSend").hidden=true;
+    $("rvLead").textContent="Tu reseña nos llega directo. La leemos y la publicamos junto a la foto de tu trabajo.";
+  });
+  $("rvForm").addEventListener("submit",async function(e){
+    e.preventDefault();if(!RVC)return;
+    var txt=$("rvText").value.trim(),b=$("rvSubmit");
+    if(txt.length<3){rvMsg("Contanos en unas palabras cómo te fue.",1);$("rvText").focus();return}
+    if($("rvWeb").value){rvMsg("¡Gracias! Recibimos tu reseña.");return}
+    b.disabled=true;rvMsg("Enviando…");
+    try{
+      var r=await fetch(RVC.url+"/rest/v1/resenas",{method:"POST",headers:{apikey:RVC.key,"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify({estrellas:rv,nombre:$("rvName").value.trim().slice(0,60),equipo:$("rvEquipo").value.trim().slice(0,60),texto:txt.slice(0,800)})});
+      if(!r.ok)throw new Error(r.status);
+      $("rvForm").reset();rv=5;paint(rv);b.hidden=true;
+      rvMsg("¡Gracias! Recibimos tu reseña.");
+    }catch(err){
+      b.disabled=false;$("rvSend").hidden=false;buildRv();
+      rvMsg("No se pudo enviar ahora. Probá de nuevo o mandala por WhatsApp.",1);
+    }
+  });
 
   // Presupuesto por WhatsApp
   var f=$("qform");

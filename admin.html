@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' blob: data: https://raw.githubusercontent.com; connect-src https://api.github.com; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' blob: data: https://raw.githubusercontent.com; connect-src https://api.github.com https://*.supabase.co; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#0b0b0b">
 <title>iBros · Panel</title>
@@ -41,8 +41,8 @@ textarea{min-height:84px;resize:vertical}
 .btn.small{padding:8px 14px;font-size:.85rem}
 .btn.danger{background:transparent;border:1.5px solid color-mix(in srgb,var(--err) 50%,transparent);color:var(--err)}
 .btns{display:flex;flex-wrap:wrap;gap:10px}
-.tabs{display:flex;gap:6px;padding:5px;border-radius:999px;background:var(--card);border:1px solid var(--line);position:sticky;top:calc(8px + env(safe-area-inset-top,0px));z-index:5}
-.tabs button{flex:1;border:0;background:none;color:var(--muted);font:inherit;font-weight:600;padding:10px;border-radius:999px;cursor:pointer}
+.tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:5px;border-radius:999px;background:var(--card);border:1px solid var(--line);position:sticky;top:calc(8px + env(safe-area-inset-top,0px));z-index:5}
+.tabs button{flex:1 0 auto;white-space:nowrap;border:0;background:none;color:var(--muted);font:inherit;font-weight:600;padding:10px;border-radius:999px;cursor:pointer}
 .tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg)}
 .pick{border:1.5px dashed var(--line);border-radius:14px;padding:20px;text-align:center;cursor:pointer;color:var(--muted)}
 .pick b{color:var(--ink);display:block;font-size:1rem}
@@ -123,6 +123,15 @@ input[readonly]{color:var(--muted)}
 .prev .pv-band b span{color:var(--pb)}
 .prev .pv-chip{align-self:flex-start;background:var(--pb);color:var(--pbi);border-radius:99px;padding:5px 11px;font-size:.75rem;font-weight:700}
 .fotos .item img{background:var(--bg)}
+.rs{display:flex;flex-direction:column;gap:6px;padding:14px 0;border-bottom:1px solid var(--line)}
+.rs:last-child{border-bottom:0}
+.rs-top{display:flex;align-items:center;gap:8px}
+.rs-st{color:#f5a623;letter-spacing:2px}
+.rs .tag{padding:1px 8px;border-radius:99px;font-size:.72rem;font-weight:700;background:color-mix(in srgb,var(--ok) 18%,transparent);color:var(--ok)}
+.rs .tag.nueva{background:color-mix(in srgb,var(--accent) 20%,transparent);color:var(--accent)}
+.rs-txt{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.rs-pick{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.steps-list{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:14px}
 .fotos .item .tag{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:99px;font-size:.7rem;font-weight:700;background:color-mix(in srgb,var(--accent) 20%,transparent);color:var(--accent)}
 @media (max-width:420px){.swatches{grid-template-columns:repeat(4,1fr);gap:6px}.swatches button{font-size:.72rem}}
 @media (max-width:560px){.kpis{grid-template-columns:repeat(2,1fr)}.tabs{gap:2px}.tabs button{padding:10px 4px;font-size:.88rem}}
@@ -164,6 +173,7 @@ input[readonly]{color:var(--muted)}
     <div class="tabs" role="tablist">
       <button type="button" role="tab" aria-selected="true" data-tab="registro">Registro</button>
       <button type="button" role="tab" aria-selected="false" data-tab="trabajos">Trabajos</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="resenas">Reseñas</button>
       <button type="button" role="tab" aria-selected="false" data-tab="servicios">Servicios</button>
       <button type="button" role="tab" aria-selected="false" data-tab="diseno">Diseño</button>
       <button type="button" role="tab" aria-selected="false" data-tab="ajustes">Ajustes</button>
@@ -288,6 +298,53 @@ input[readonly]{color:var(--muted)}
       <div class="card">
         <h2>Publicados</h2>
         <div id="list"><p class="muted">Cargando…</p></div>
+      </div>
+    </div>
+
+    <!-- RESEÑAS (llegan desde la página, quedan acá hasta que decidas) -->
+    <div data-pane="resenas" hidden style="flex-direction:column;gap:16px;margin-top:16px">
+      <div class="card" id="rsSetup" hidden>
+        <h2>Activar reseñas en el panel</h2>
+        <p class="muted">Las reseñas que escriben los clientes en la página se guardan en Supabase (gratis), donde solo vos podés leerlas. Nada se publica solo: vos elegís cuáles van a la página.</p>
+        <ol class="steps-list">
+          <li>Entrá a <a href="https://supabase.com/dashboard/sign-up" target="_blank" rel="noopener">supabase.com</a> y creá tu cuenta (podés usar la de GitHub). Tocá <b>New project</b>, nombre <code>ibros</code>, región <b>South America (São Paulo)</b>, inventá una contraseña de base de datos (no la vas a usar acá) y creá el proyecto.</li>
+          <li>En el proyecto, abrí <b>Project Settings → Data API</b> (o <b>API Keys</b>) y copiá la <b>URL</b> y la clave <b>publishable</b> (o <b>anon public</b>). Pegalas acá. Nunca uses la clave <b>secret</b> ni <b>service_role</b>.
+            <div class="row" style="margin-top:10px">
+              <label>URL del proyecto<input id="rsUrl" placeholder="https://xxxx.supabase.co" autocomplete="off" spellcheck="false"></label>
+              <label>Clave publishable / anon<input id="rsKey" placeholder="sb_publishable_… o eyJ…" autocomplete="off" spellcheck="false"></label>
+            </div>
+          </li>
+          <li>Escribí tu mail. Es el usuario con el que vas a entrar a leer las reseñas.
+            <label style="margin-top:10px">Tu mail<input id="rsMail" type="email" inputmode="email" autocomplete="username" placeholder="tu@mail.com"></label>
+          </li>
+          <li>En Supabase abrí <b>SQL Editor → New query</b>, pegá este texto y tocá <b>Run</b>. Crea la tabla y deja que solo tu mail la lea.
+            <textarea id="rsSql" readonly style="min-height:120px;font-family:ui-monospace,monospace;font-size:.75rem;margin-top:10px"></textarea>
+            <button class="btn ghost small" id="rsCopy" type="button" style="margin-top:8px">Copiar texto</button>
+          </li>
+          <li>En <b>Authentication → Users</b> tocá <b>Add user → Create new user</b>, con tu mail y una contraseña nueva, y marcá <b>Auto Confirm User</b>.</li>
+          <li>En <b>Authentication → Sign In / Providers</b> apagá <b>Allow new users to sign up</b> y guardá. Así nadie más puede crearse un usuario.</li>
+          <li>Escribí la contraseña del paso 5 y tocá <b>Conectar</b>.</li>
+        </ol>
+      </div>
+      <form class="card" id="rsLogin" hidden>
+        <h2 id="rsLoginTitle">Entrar a las reseñas</h2>
+        <p class="muted" id="rsLoginTxt">Con el mail y la contraseña de tu usuario de Supabase.</p>
+        <div class="row">
+          <label>Mail<input id="rsUser" type="email" inputmode="email" autocomplete="username"></label>
+          <label>Contraseña<input id="rsPass" type="password" autocomplete="current-password"></label>
+        </div>
+        <div class="btns"><button class="btn" id="rsGo" type="submit">Conectar</button></div>
+        <div id="rsLoginMsg"></div>
+      </form>
+      <div class="card" id="rsMain" hidden>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h2>Reseñas de clientes</h2><button class="btn ghost small" id="rsReload" type="button">Actualizar</button></div>
+        <div class="chips" id="rsFiltro"><button type="button" data-f="nueva" aria-pressed="true">Sin publicar</button><button type="button" data-f="publicada" aria-pressed="false">Publicadas</button><button type="button" data-f="" aria-pressed="false">Todas</button></div>
+        <div id="rsMsg"></div>
+        <div id="rsList"><p class="muted">Cargando…</p></div>
+      </div>
+      <div class="card" id="rsCuenta" hidden>
+        <p class="muted" id="rsCuentaTxt"></p>
+        <div class="btns"><button class="btn ghost small" id="rsOut" type="button">Salir de reseñas en este dispositivo</button></div>
       </div>
     </div>
 
@@ -437,7 +494,7 @@ input[readonly]{color:var(--muted)}
     $("setup").hidden=locked||!!token;
     $("app").hidden=locked||!token;
     if(locked){setTimeout(function(){$("pinIn").querySelector("input").focus()},50);return}
-    if(token){loadJobs();loadSvcs();loadRedes();loadAp();pinState();regInit()}
+    if(token){loadJobs();loadSvcs();loadRedes();loadAp();pinState();regInit();rsInit()}
   }
   document.querySelector(".tabs").onclick=function(e){
     var b=e.target.closest("button");if(!b)return;
@@ -476,7 +533,7 @@ input[readonly]{color:var(--muted)}
       token=t;ls("ibros_token",t);msg("setupMsg","","");show();
     }catch(e){msg("setupMsg","err",e.message)}
   };
-  $("logout").onclick=function(){ls("ibros_token",null);token="";show()};
+  $("logout").onclick=function(){ls("ibros_token",null);ls("ibros_sb",null);token="";show()};
 
   // ---- Trabajos ----
   var jobs=[],editing=null,newFiles=[],keepFotos=[],dropFotos=[],rv=5,fromOrder=null;
@@ -500,7 +557,7 @@ input[readonly]{color:var(--muted)}
     keepFotos=j?(j.fotos||[]).slice():[];dropFotos=[];newFiles=[];thumbs();
     $("form").scrollIntoView({behavior:"smooth",block:"start"});
   }
-  function closeForm(){$("form").hidden=true;$("newJob").hidden=false;editing=null;fromOrder=null}
+  function closeForm(){$("form").hidden=true;$("newJob").hidden=false;editing=null;fromOrder=null;fromReview=null}
   $("newJob").onclick=function(){openForm()};
   $("cancel").onclick=closeForm;
   async function compress(file){
@@ -539,6 +596,7 @@ input[readonly]{color:var(--muted)}
           if(regEdit&&regEdit.id===oid)regEdit.trabajo_id=id;regRender();nota=" Quedó anotado en la orden N° "+fromOrder.nro+"."}
         catch(err){nota=" (No se pudo anotar en la orden: "+err.message+")"}
       }
+      if(fromReview&&!editing&&item.resena){var rid=fromReview;fromReview=null;try{await rsMark(rid)}catch(err){nota+=" (La reseña quedó como sin publicar en la pestaña Reseñas.)"}}
       msg("pubMsg","ok",(editing?"Cambios guardados.":"Trabajo publicado.")+" Se ve en la página en 1 o 2 minutos."+nota);
       setTimeout(closeForm,1600);renderJobs();
     }catch(err){msg("pubMsg","err",err.message)}
@@ -956,6 +1014,152 @@ input[readonly]{color:var(--muted)}
   }
   $("regXlsMes").onclick=function(){var m=$("regMes").value,txt=new Date(m+"-15T12:00:00").toLocaleDateString("es-AR",{month:"long",year:"numeric"});exportar(delMes(),txt,"iBros-registro-"+m+".xlsx")};
   $("regXlsAnio").onclick=function(){exportar(regData,"Año "+regYear,"iBros-registro-"+regYear+".xlsx")};
+
+  // ---- Reseñas de clientes (Supabase: los clientes solo pueden escribir; leer, publicar y borrar solo desde acá) ----
+  var RS=null,rsData=[],rsF="nueva",rsOpen=null,fromReview=null;
+  function rsSess(){try{return JSON.parse(ls("ibros_sb")||"null")}catch(e){return null}}
+  function rsCfgOk(c){return c&&/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(c.url||"")&&/^[\w.-]{20,}$/.test(c.key||"")}
+  function rsSecret(k){
+    if(/^sb_secret_/.test(k))return true;
+    try{return JSON.parse(atob(k.split(".")[1].replace(/-/g,"+").replace(/_/g,"/"))).role==="service_role"}catch(e){return false}
+  }
+  function rsSqlTxt(mail){
+    var m=String(mail||"TU_MAIL").trim().toLowerCase().replace(/'/g,"''");
+    return["-- Reseñas de clientes de iBros. Se puede correr de nuevo sin problema.",
+"create table if not exists public.resenas (",
+"  id uuid primary key default gen_random_uuid(),",
+"  creada timestamptz not null default now(),",
+"  estrellas smallint not null check (estrellas between 1 and 5),",
+"  nombre text not null default '' check (char_length(nombre) <= 60),",
+"  equipo text not null default '' check (char_length(equipo) <= 60),",
+"  texto text not null check (char_length(texto) between 3 and 800),",
+"  estado text not null default 'nueva' check (estado in ('nueva','publicada'))",
+");",
+"alter table public.resenas enable row level security;",
+"revoke all on public.resenas from anon, authenticated;",
+"grant insert (estrellas, nombre, equipo, texto) on public.resenas to anon;",
+"grant select, delete, update (estado) on public.resenas to authenticated;",
+"drop policy if exists \"clientes escriben\" on public.resenas;",
+"create policy \"clientes escriben\" on public.resenas for insert to anon with check (estado = 'nueva');",
+"drop policy if exists \"solo el dueno\" on public.resenas;",
+"create policy \"solo el dueno\" on public.resenas for all to authenticated",
+"  using (lower(auth.jwt() ->> 'email') = '"+m+"') with check (lower(auth.jwt() ->> 'email') = '"+m+"');",
+"create or replace function public.resenas_tope() returns trigger language plpgsql security definer set search_path = public as $$",
+"begin",
+"  if (select count(*) from public.resenas where creada > now() - interval '1 hour') >= 30 then",
+"    raise exception 'Demasiadas reseñas seguidas';",
+"  end if;",
+"  return new;",
+"end $$;",
+"revoke execute on function public.resenas_tope() from public, anon, authenticated;",
+"drop trigger if exists resenas_tope on public.resenas;",
+"create trigger resenas_tope before insert on public.resenas for each row execute function public.resenas_tope();"].join("\n");
+  }
+  $("rsMail").oninput=function(){$("rsSql").value=rsSqlTxt(this.value);$("rsUser").value=this.value};
+  $("rsCopy").onclick=function(){var t=$("rsSql");t.select();try{navigator.clipboard.writeText(t.value)}catch(e){document.execCommand("copy")}this.textContent="Copiado"};
+  async function rsAuth(grant,body,cfg){
+    var r=await fetch(cfg.url+"/auth/v1/token?grant_type="+grant,{method:"POST",headers:{apikey:cfg.key,"Content-Type":"application/json"},body:JSON.stringify(body)});
+    var d=await r.json().catch(function(){return{}});
+    if(!r.ok){var e=new Error(r.status===400?"Mail o contraseña incorrectos, o el usuario no está confirmado.":"Supabase respondió "+r.status+".");e.status=r.status;throw e}
+    var s={at:d.access_token,rt:d.refresh_token,exp:Date.now()+(d.expires_in||3600)*1e3,mail:d.user&&d.user.email||""};
+    ls("ibros_sb",JSON.stringify(s));return s;
+  }
+  async function rsToken(){
+    var s=rsSess();if(!s){var e=new Error("login");e.login=1;throw e}
+    if(Date.now()>s.exp-60e3){
+      try{s=await rsAuth("refresh_token",{refresh_token:s.rt},RS)}
+      catch(err){if(err.status===400||err.status===401){ls("ibros_sb",null);err.login=1}throw err}
+    }
+    return s.at;
+  }
+  async function rsApi(path,method,body){
+    var at=await rsToken();
+    var r=await fetch(RS.url+"/rest/v1/"+path,{method:method||"GET",cache:"no-store",headers:{apikey:RS.key,Authorization:"Bearer "+at,"Content-Type":"application/json",Prefer:"return=representation"},body:body?JSON.stringify(body):undefined});
+    if(r.status===401){ls("ibros_sb",null);var e=new Error("login");e.login=1;throw e}
+    if(!r.ok){var t=await r.text().catch(function(){return""});throw new Error(/resenas/.test(t)&&r.status===404?"Falta la tabla: corré el texto del paso 4 en Supabase.":"Supabase respondió "+r.status+".")}
+    return r.status===204?null:r.json();
+  }
+  function rsView(v){
+    $("rsSetup").hidden=v!=="setup";$("rsLogin").hidden=v!=="setup"&&v!=="login";
+    $("rsMain").hidden=$("rsCuenta").hidden=v!=="main";
+    $("rsLoginTitle").textContent=v==="setup"?"Conectar":"Entrar a las reseñas";$("rsLoginTxt").hidden=v==="setup";
+  }
+  async function rsInit(){
+    try{var r=await readJson("resenas.json",null);RS=rsCfgOk(r.data)?r.data:null}catch(err){RS=null}
+    if(!RS){$("rsSql").value=rsSqlTxt($("rsMail").value);rsView("setup");return}
+    if(!rsSess()){$("rsUser").value=$("rsUser").value||ls("ibros_sb_mail");rsView("login");return}
+    rsView("main");$("rsCuentaTxt").textContent="Conectado como "+(rsSess().mail||"")+". Las reseñas se guardan en Supabase, no en la página.";rsLoad();
+  }
+  $("rsLogin").onsubmit=async function(e){
+    e.preventDefault();
+    var setup=!$("rsSetup").hidden,cfg=RS;
+    if(setup){
+      cfg={url:$("rsUrl").value.trim().replace(/\/+(rest\/v1)?\/*$/,""),key:$("rsKey").value.trim()};
+      if(!rsCfgOk(cfg)){msg("rsLoginMsg","err","Revisá la URL (termina en .supabase.co) y la clave del paso 2.");return}
+      if(rsSecret(cfg.key)){msg("rsLoginMsg","err","Esa es la clave secreta. Pegá la publishable (o anon public): la secreta nunca va en la página.");return}
+    }
+    var mail=$("rsUser").value.trim(),pass=$("rsPass").value;
+    if(!mail||!pass){msg("rsLoginMsg","err","Completá mail y contraseña.");return}
+    $("rsGo").disabled=true;msg("rsLoginMsg","info","Conectando…");
+    try{
+      var prev=RS;RS=cfg;await rsAuth("password",{email:mail,password:pass},cfg);
+      try{await rsApi("resenas?select=id&limit=1")}catch(err){RS=prev;ls("ibros_sb",null);throw err}
+      if(setup){msg("rsLoginMsg","info","Activando el formulario de la página…");await update("resenas.json",null,function(){return{url:cfg.url,key:cfg.key}},"Activar reseñas de clientes")}
+      ls("ibros_sb_mail",mail);$("rsPass").value="";msg("rsLoginMsg","","");
+      if(setup)msg("rsMsg","ok","Listo. En 1 o 2 minutos la página empieza a mandar las reseñas acá.");
+      rsInit();
+    }catch(err){msg("rsLoginMsg","err",err.message==="login"?"No se pudo entrar. Revisá el mail del paso 3 y del paso 5.":err.message)}
+    $("rsGo").disabled=false;
+  };
+  $("rsOut").onclick=function(){ls("ibros_sb",null);rsData=[];rsBadge();rsInit()};
+  $("rsReload").onclick=function(){rsLoad()};
+  $("rsFiltro").onclick=function(e){var b=e.target.closest("button");if(!b)return;rsF=b.dataset.f;this.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed",x===b)});rsRender()};
+  async function rsLoad(){
+    msg("rsMsg","","");
+    try{rsData=await rsApi("resenas?select=*&order=creada.desc&limit=500")||[];rsRender()}
+    catch(err){if(err.login){rsInit();return}$("rsList").innerHTML='<div class="msg err">'+esc(err.message)+'</div>'}
+  }
+  function rsBadge(){var n=rsData.filter(function(x){return x.estado==="nueva"}).length,t=document.querySelector('.tabs [data-tab="resenas"]');t.textContent=n?"Reseñas ("+n+")":"Reseñas"}
+  function rsStars(n){n=Math.min(5,Math.max(1,Math.round(Number(n)||0)));return"★".repeat(n)+"☆".repeat(5-n)}
+  function rsRender(){
+    rsBadge();
+    var l=rsData.filter(function(x){return!rsF||x.estado===rsF});
+    $("rsList").innerHTML=l.length?l.map(function(x){
+      var f=new Date(x.creada).toLocaleDateString("es-AR",{day:"numeric",month:"short",year:"numeric"});
+      var pick=rsOpen===x.id?'<div class="rs-pick"><label>¿En qué trabajo va?<select data-sel="'+esc(x.id)+'"><option value="">Trabajo nuevo (con foto)</option>'+jobs.map(function(j){return'<option value="'+esc(j.id)+'">'+esc(j.equipo)+' · '+esc(j.fecha)+(j.resena?' (reemplaza su reseña)':'')+'</option>'}).join("")+'</select></label><div class="btns"><button class="btn small" type="button" data-go="'+esc(x.id)+'">Publicar</button><button class="btn ghost small" type="button" data-x="1">Cancelar</button></div></div>':"";
+      return'<div class="rs"><div class="rs-top"><span class="rs-st" aria-label="'+esc(x.estrellas)+' de 5">'+rsStars(x.estrellas)+'</span>'+(x.estado==="publicada"?'<span class="tag">Publicada</span>':'<span class="tag nueva">Sin publicar</span>')+'</div>'+
+        '<p class="rs-txt">'+esc(x.texto)+'</p><span class="muted">'+esc(x.nombre||"Sin nombre")+(x.equipo?' · '+esc(x.equipo):"")+' · '+esc(f)+'</span>'+pick+
+        (rsOpen===x.id?"":'<div class="btns">'+(x.estado==="nueva"?'<button class="btn small" type="button" data-pub="'+esc(x.id)+'">Publicar en la página</button>':"")+'<button class="btn danger small" type="button" data-rdel="'+esc(x.id)+'">Borrar</button></div>')+'</div>';
+    }).join(""):'<p class="muted">'+(rsF==="nueva"?"No hay reseñas nuevas. Cuando un cliente deje una en la página, aparece acá.":"No hay reseñas acá.")+'</p>';
+  }
+  async function rsMark(id){await rsApi("resenas?id=eq."+encodeURIComponent(id),"PATCH",{estado:"publicada"});rsData.forEach(function(x){if(x.id===id)x.estado="publicada"});rsRender()}
+  $("rsList").onclick=async function(e){
+    var p=e.target.closest("[data-pub]");if(p){rsOpen=p.dataset.pub;rsRender();return}
+    if(e.target.closest("[data-x]")){rsOpen=null;rsRender();return}
+    var g=e.target.closest("[data-go]");
+    if(g){
+      var x=rsData.find(function(r){return r.id===g.dataset.go}),jid=$("rsList").querySelector("[data-sel]").value;
+      rsOpen=null;
+      if(!jid){
+        document.querySelector('.tabs [data-tab="trabajos"]').click();
+        openForm();fromReview=x.id;
+        $("equipo").value=x.equipo||"";$("cliente").value=x.nombre||"";$("resena").value=x.texto;rv=Math.min(5,Math.max(1,+x.estrellas||5));paint();
+        msg("pubMsg","info","Reseña traída. Agregá las fotos, revisá el equipo y el tipo de trabajo, y tocá Publicar.");
+        rsRender();return;
+      }
+      g.disabled=true;g.textContent="Publicando…";
+      try{
+        jobs=await update("trabajos.json",[],function(list){return list.map(function(j){if(j.id===jid){j=Object.assign({},j);j.resena=x.texto;j.estrellas=Math.min(5,Math.max(1,+x.estrellas||5));j.cliente=x.nombre||""}return j})},"Reseña publicada: "+(x.nombre||"cliente"));
+        renderJobs();await rsMark(x.id);msg("rsMsg","ok","Publicada. Se ve en la página en 1 o 2 minutos.");
+      }catch(err){if(err.login){rsInit();return}msg("rsMsg","err",err.message);rsRender()}
+      return;
+    }
+    var d=e.target.closest("[data-rdel]");if(!d)return;
+    if(d.dataset.sure!=="1"){d.dataset.sure="1";d.textContent="¿Borrar?";setTimeout(function(){d.dataset.sure="";d.textContent="Borrar"},4000);return}
+    d.disabled=true;d.textContent="Borrando…";
+    try{await rsApi("resenas?id=eq."+encodeURIComponent(d.dataset.rdel),"DELETE");rsData=rsData.filter(function(x){return x.id!==d.dataset.rdel});rsRender()}
+    catch(err){if(err.login){rsInit();return}msg("rsMsg","err",err.message);rsRender()}
+  };
 
   show();
 })();

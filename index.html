@@ -39,6 +39,7 @@
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{scroll-behavior:smooth;scroll-padding-top:80px}
+@media (max-width:900px){html{scroll-padding-top:118px}}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;overflow-x:hidden}
 .wrap{max-width:1140px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.06;letter-spacing:-.025em}
@@ -86,7 +87,8 @@ button{font:inherit;color:inherit}
 .bar{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--band) 84%,transparent);backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);color:var(--band-ink);border-bottom:1px solid transparent;transition:border-color .3s;padding-top:env(safe-area-inset-top,0px)}
 .bar.scrolled{border-bottom-color:var(--band-line)}
 .bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
-.bar nav{display:flex;align-items:center;gap:22px;font-size:.92rem}
+.bar .wrap>.status{margin-left:6px}
+.bar nav{display:flex;align-items:center;gap:22px;font-size:.92rem;margin-left:auto}
 .bar nav a{text-decoration:none;color:var(--band-muted);transition:color .2s}
 .bar nav a:hover,.bar nav a.on{color:var(--band-ink)}
 .bar nav a.cta{display:inline-flex;align-items:center;padding:7px 16px;border-radius:99px;background:var(--accent);color:var(--accent-ink);font-weight:600;transition:filter .2s}
@@ -415,8 +417,13 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
   .pcvis .pill.p1{left:-6px}.pcvis .pill.p2{right:-6px}
   .svcs{grid-template-columns:repeat(2,minmax(0,1fr))}
   .facts .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .bar nav a{display:none}
-  .bar nav a.nav-pc,.bar nav a.cta{display:inline-flex}
+  /* Celular y tablet: atajos a las secciones en una segunda fila que se desliza de costado */
+  .bar .wrap{flex-wrap:wrap;row-gap:10px;padding-block:10px 12px}
+  .bar .wrap>.status{margin-left:auto}
+  .bar nav{order:3;flex:1 0 100%;margin:0 -16px;padding:0 16px;gap:8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;font-size:.88rem;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 32px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 32px),transparent)}
+  .bar nav::-webkit-scrollbar{display:none}
+  .bar nav a{display:inline-flex;align-items:center;flex:none;white-space:nowrap;padding:7px 14px;border-radius:99px;border:1px solid var(--band-line);color:var(--band-ink)}
+  .bar nav a.cta{border-color:transparent;padding:7px 16px}
   .lb-in{grid-template-columns:1fr}
   .lb-pics img{max-height:56vh}
   .hero h1{min-height:0}
@@ -436,7 +443,6 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
   dialog.sheet[open]{animation-name:sheetUp}
   .sh-body{padding-bottom:calc(28px + env(safe-area-inset-bottom,0px))}
   .hero .lead{min-height:0}
-  .bar nav a.nav-pc,.bar nav a.cta{display:none}
   .xp{grid-template-columns:1fr;gap:12px}
   .xp-card{min-height:190px;padding:20px}
   .xp-card b{font-size:1.3rem}
@@ -466,8 +472,8 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
     <a href="#local">Ubicación</a>
     <a href="#preguntas">Preguntas</a>
     <a href="#presupuesto" class="cta">Consultar</a>
-    <span class="status" aria-live="polite"><i class="dot" id="dot"></i><span id="openTxt">Lun a Sáb</span></span>
   </nav>
+  <span class="status" aria-live="polite"><i class="dot" id="dot"></i><span id="openTxt">Lun a Sáb</span></span>
 </div></header>
 
 <div class="band">
@@ -664,12 +670,12 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
     <div class="card spot reveal">
       <span class="eyebrow">Horarios</span>
       <table id="horarios">
-        <tr data-d="1"><td>Lunes</td><td>9:00–12:30 · 17:30–20:30</td></tr>
-        <tr data-d="2"><td>Martes</td><td>9:00–12:30 · 17:30–20:30</td></tr>
-        <tr data-d="3"><td>Miércoles</td><td>9:00–12:30 · 17:30–20:30</td></tr>
-        <tr data-d="4"><td>Jueves</td><td>9:00–12:30 · 17:30–20:30</td></tr>
-        <tr data-d="5"><td>Viernes</td><td>9:00–12:30 · 17:30–20:30</td></tr>
-        <tr data-d="6"><td>Sábado</td><td>9:00–12:30</td></tr>
+        <tr data-d="1"><td>Lunes</td><td>09:00–12:30 · 17:30–20:30</td></tr>
+        <tr data-d="2"><td>Martes</td><td>09:00–12:30 · 17:30–20:30</td></tr>
+        <tr data-d="3"><td>Miércoles</td><td>09:00–12:30 · 17:30–20:30</td></tr>
+        <tr data-d="4"><td>Jueves</td><td>09:00–12:30 · 17:30–20:30</td></tr>
+        <tr data-d="5"><td>Viernes</td><td>09:00–12:30 · 17:30–20:30</td></tr>
+        <tr data-d="6"><td>Sábado</td><td>09:00–12:30</td></tr>
         <tr data-d="0"><td>Domingo</td><td>Cerrado</td></tr>
       </table>
     </div>
@@ -737,7 +743,7 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
     <p class="f-h">Contacto</p>
     <a href="https://wa.me/5493794541449" target="_blank" rel="noopener">WhatsApp 3794 541449</a>
     <span>3 de Abril 917</span>
-    <small>Entre Salta y La Rioja, Corrientes<br>Lun a vie 9 a 12:30 y 17:30 a 20:30<br>Sáb 9 a 12:30</small>
+    <small>Entre Salta y La Rioja, Corrientes<br>Lun a vie 09:00 a 12:30 y 17:30 a 20:30<br>Sáb 09:00 a 12:30</small>
   </div>
   <div class="f-bottom"><span>© <span id="year">2026</span> iBros Technology</span><span>Corrientes, Argentina</span></div>
 </div></footer>

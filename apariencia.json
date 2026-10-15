@@ -1,4 +1,10 @@
 {
-  "color": null,
+  "color": {
+    "accent": "#2563eb",
+    "text": "#2157cf",
+    "ink": "#ffffff",
+    "band": "#3f76ed",
+    "bandInk": "#ffffff"
+  },
   "fotos": {}
 }

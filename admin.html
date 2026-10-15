@@ -245,6 +245,7 @@ input[readonly]{color:var(--muted)}
             <button class="btn" id="rSave" type="submit">Guardar</button>
             <button class="btn ghost" id="rCancel" type="button">Cancelar</button>
             <a class="btn ghost" id="rAviso" href="#" target="_blank" rel="noopener" hidden>Avisar por WhatsApp</a>
+            <button class="btn ghost" id="rPub" type="button" hidden title="Lo publica en la página con equipo, servicio y fotos, sin datos del cliente">Subir a Trabajos</button>
             <button class="btn danger" id="rDel" type="button" hidden>Borrar</button>
           </div>
           <div id="rMsg"></div>
@@ -478,7 +479,7 @@ input[readonly]{color:var(--muted)}
   $("logout").onclick=function(){ls("ibros_token",null);token="";show()};
 
   // ---- Trabajos ----
-  var jobs=[],editing=null,newFiles=[],keepFotos=[],dropFotos=[],rv=5;
+  var jobs=[],editing=null,newFiles=[],keepFotos=[],dropFotos=[],rv=5,fromOrder=null;
   var sb=$("stars");
   for(var i=1;i<=5;i++)sb.insertAdjacentHTML("beforeend",'<button type="button" data-v="'+i+'" aria-label="'+i+' estrellas">★</button>');
   function paint(){sb.querySelectorAll("button").forEach(function(b){b.classList.toggle("on",+b.dataset.v<=rv)})}
@@ -499,7 +500,7 @@ input[readonly]{color:var(--muted)}
     keepFotos=j?(j.fotos||[]).slice():[];dropFotos=[];newFiles=[];thumbs();
     $("form").scrollIntoView({behavior:"smooth",block:"start"});
   }
-  function closeForm(){$("form").hidden=true;$("newJob").hidden=false;editing=null}
+  function closeForm(){$("form").hidden=true;$("newJob").hidden=false;editing=null;fromOrder=null}
   $("newJob").onclick=function(){openForm()};
   $("cancel").onclick=closeForm;
   async function compress(file){
@@ -531,7 +532,14 @@ input[readonly]{color:var(--muted)}
         if(ix>=0)list[ix]=item;else list.unshift(item);return list;
       },(editing?"Editar trabajo: ":"Nuevo trabajo: ")+item.equipo);
       for(var p of dropFotos){try{await delFile(p)}catch(err){}}
-      msg("pubMsg","ok",(editing?"Cambios guardados.":"Trabajo publicado.")+" Se ve en la página en 1 o 2 minutos.");
+      var nota="";
+      if(fromOrder&&!editing){
+        var oid=fromOrder.id;
+        try{await regSave(anio(fromOrder.ingreso),function(list){return list.map(function(x){if(x.id===oid){x=Object.assign({},x);x.trabajo_id=id}return x})},"Orden "+fromOrder.nro+" subida a Trabajos");
+          if(regEdit&&regEdit.id===oid)regEdit.trabajo_id=id;regRender();nota=" Quedó anotado en la orden N° "+fromOrder.nro+"."}
+        catch(err){nota=" (No se pudo anotar en la orden: "+err.message+")"}
+      }
+      msg("pubMsg","ok",(editing?"Cambios guardados.":"Trabajo publicado.")+" Se ve en la página en 1 o 2 minutos."+nota);
       setTimeout(closeForm,1600);renderJobs();
     }catch(err){msg("pubMsg","err",err.message)}
     btn.disabled=false;
@@ -845,7 +853,7 @@ input[readonly]{color:var(--muted)}
   $("rEstado").onchange=function(){if(this.value==="Entregado"&&!$("rEntrega").value){$("rEntrega").value=hoy();calc()}aviso()};
   function aviso(){
     var n=waNum($("rTel").value),e=$("rEstado").value,eq=$("rEquipo").value.trim()||"equipo",nombre=$("rCliente").value.trim().split(" ")[0];
-    var txt=e==="Listo para retirar"?"Hola"+(nombre?" "+nombre:"")+", tu "+eq+" ya está listo para retirar en iBros Technology (3 de Abril 917)."+(regEdit?" Orden N° "+regEdit.nro+".":"")+" Te esperamos de lunes a viernes de 9 a 12:30 y de 17:30 a 20:30, y sábados de 9 a 12:30.":
+    var txt=e==="Listo para retirar"?"Hola"+(nombre?" "+nombre:"")+", tu "+eq+" ya está listo para retirar en iBros Technology (3 de Abril 917)."+(regEdit?" Orden N° "+regEdit.nro+".":"")+" Te esperamos de lunes a viernes de 09:00 a 12:30 y de 17:30 a 20:30, y sábados de 09:00 a 12:30.":
       e==="Esperando aprobación"?"Hola"+(nombre?" "+nombre:"")+", ya revisamos tu "+eq+". El presupuesto es de "+plata(num($("rPresupuesto").value))+". ¿Querés que avancemos con la reparación?":
       "Hola"+(nombre?" "+nombre:"")+", te escribimos de iBros Technology por tu "+eq+".";
     $("rAviso").hidden=!n;if(n)$("rAviso").href="https://wa.me/"+n+"?text="+encodeURIComponent(txt);
@@ -863,8 +871,26 @@ input[readonly]{color:var(--muted)}
     ["presupuesto:rPresupuesto","sena:rSena","cobrado:rCobrado","repuesto:rRepuesto","pago_tecnico:rPagoTec"].forEach(function(p){var k=p.split(":");$(k[1]).value=o&&o[k[0]]?o[k[0]]:""});
     $("rPago").value=o?o.medio_pago||"":"";
     $("regNro").textContent=o?"N° "+o.nro:"N° "+nextNro();
-    calc();aviso();$("regForm").scrollIntoView({behavior:"smooth",block:"start"});
+    calc();aviso();pubBtn();$("regForm").scrollIntoView({behavior:"smooth",block:"start"});
   }
+  // Subir la orden a Trabajos (página pública): solo equipo, servicio, falla y fotos; nunca nombre ni teléfono del cliente
+  function ordenJob(o){return o&&o.trabajo_id?jobs.find(function(j){return j.id===o.trabajo_id}):null}
+  function pubBtn(){var o=regEdit;$("rPub").hidden=!o;$("rPub").textContent=ordenJob(o)?"Ver en Trabajos":"Subir a Trabajos"}
+  function catDe(o){
+    if(o.tipo==="Computadora")return"pc";
+    var s=(svc.celulares||[]).find(function(x){return x.nombre===o.servicio});
+    return s&&CATS[s.id]?s.id:"otro";
+  }
+  $("rPub").onclick=function(){
+    var o=regEdit;if(!o)return;
+    document.querySelector('.tabs [data-tab="trabajos"]').click();
+    var j=ordenJob(o);if(j){openForm(j);return}
+    openForm();fromOrder=o;
+    $("equipo").value=o.equipo||"";$("categoria").value=catDe(o);
+    $("trabajo").value=[o.servicio&&o.servicio!=="Otro"?o.servicio+".":"",o.falla?o.falla.charAt(0).toUpperCase()+o.falla.slice(1)+(/[.!?]$/.test(o.falla)?"":"."):""].filter(Boolean).join(" ");
+    $("fecha").value=o.entrega||hoy();
+    msg("pubMsg","info","Datos traídos de la orden N° "+o.nro+" (sin nombre ni teléfono del cliente). Agregá las fotos, revisá el texto y tocá Publicar.");
+  };
   $("regNew").onclick=function(){regOpen()};
   $("rCancel").onclick=function(){$("regForm").hidden=true;regEdit=null};
   $("regList").onclick=function(e){var b=e.target.closest(".order");if(b)regOpen(regData.find(function(o){return o.id===b.dataset.id}))};
@@ -878,7 +904,7 @@ input[readonly]{color:var(--muted)}
       servicio:$("rServicio").value,tecnico:$("rTecnico").value.trim(),falla:$("rFalla").value.trim(),observaciones:$("rObs").value.trim(),
       estado:$("rEstado").value,entrega:$("rEntrega").value,garantia_hasta:$("rEntrega").value?addMonths($("rEntrega").value,2):"",
       presupuesto:num($("rPresupuesto").value),sena:num($("rSena").value),cobrado:num($("rCobrado").value),medio_pago:$("rPago").value,
-      repuesto:num($("rRepuesto").value),pago_tecnico:num($("rPagoTec").value),actualizado:new Date().toISOString()};
+      repuesto:num($("rRepuesto").value),pago_tecnico:num($("rPagoTec").value),trabajo_id:regEdit&&regEdit.trabajo_id||"",actualizado:new Date().toISOString()};
     $("rSave").disabled=true;msg("rMsg","info","Guardando…");
     try{
       await regSave(y,function(list){
@@ -887,7 +913,7 @@ input[readonly]{color:var(--muted)}
         if(ix>=0)list[ix]=o;else list.push(o);return list;
       },(regEdit?"Actualizar orden ":"Nueva orden ")+(o.nro||""));
       regEdit=o;$("regNro").textContent="N° "+o.nro;$("regFormTitle").textContent="Orden";$("rDel").hidden=false;
-      msg("rMsg","ok","Orden N° "+o.nro+" guardada.");aviso();
+      msg("rMsg","ok","Orden N° "+o.nro+" guardada."+(!ordenJob(o)&&(o.estado==="Entregado"||o.estado==="Listo para retirar")?" Si querés que se vea en la página, tocá «Subir a Trabajos».":""));aviso();pubBtn();
       if($("regMes").value!==ingreso.slice(0,7))$("regMes").value=ingreso.slice(0,7);
       regRender();
     }catch(err){msg("rMsg","err",err.message)}

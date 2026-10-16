@@ -10,7 +10,7 @@
      "nota":"Si la batería está inflada, no lo sigas usando ni lo cargues: traelo cuanto antes."},
     {"id":"pin","nombre":"Pin de carga","corto":"No carga, carga lento o hay que mover el cable.","tiempo":"En el día","foto":"img/hero.webp",
      "detalle":"Muchas veces es suciedad acumulada. Primero hacemos una limpieza y, si el pin está dañado, lo cambiamos.",
-     "pasos":["Revisamos el puerto con lupa y probamos con distintos cables.","Limpiamos el puerto de carga.","Si con la limpieza no alcanza, te pasamos presupuesto para el cambio.","Probamos carga rápida y conexión a la computadora.","Te lo entregamos funcionando y con garantía."],
+     "pasos":["Revisamos el puerto con lupa y probamos con distintos cables.","Limpiamos el puerto de carga.","Si con la limpieza no alcanza, te pasamos presupuesto para el cambio.","Probamos carga.","Te lo entregamos funcionando y con garantía."],
      "nota":""},
     {"id":"software","nombre":"Desbloqueo y software","corto":"Equipo lento, reinicios, sistema dañado o cuentas olvidadas.","tiempo":"2 a 3 días","foto":"",
      "detalle":"Reinstalamos o reparamos el sistema y resolvemos bloqueos de cuenta. Solo trabajamos con el titular del equipo y su comprobante.",

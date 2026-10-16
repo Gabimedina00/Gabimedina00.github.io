@@ -8,7 +8,7 @@
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#0b0b0b">
 <title>iBros · Panel</title>
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
@@ -98,6 +98,11 @@ table.mini th:not(:first-child),table.mini td:not(:first-child){text-align:right
 .st.ready{background:color-mix(in srgb,var(--accent) 22%,transparent);color:var(--accent)}
 .st.ok{background:color-mix(in srgb,var(--ok) 20%,transparent);color:var(--ok)}
 .st.off{background:var(--card2);color:var(--muted)}
+.gar{display:block;margin-top:5px;max-width:240px}
+.gar i{display:block;height:4px;border-radius:99px;background:var(--card2);overflow:hidden;margin-top:3px}
+.gar i::before{content:"";display:block;height:100%;width:var(--p);background:var(--ok)}
+.gar.warn i::before{background:var(--star)}.gar.warn small{color:var(--star)}
+.gar.end small{color:var(--muted)}
 .sect{font-family:Montserrat,sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-top:6px}
 .nro{font-family:Montserrat,sans-serif;font-weight:800;color:var(--muted)}
 input[readonly]{color:var(--muted)}
@@ -124,7 +129,8 @@ input[readonly]{color:var(--muted)}
 .prev .pv-chip{align-self:flex-start;background:var(--pb);color:var(--pbi);border-radius:99px;padding:5px 11px;font-size:.75rem;font-weight:700}
 .fotos .item img{background:var(--bg)}
 .svc-foto{margin:4px 0 12px}
-.svc-foto img{width:96px;height:60px}
+.svc-foto{grid-template-columns:96px 1fr auto}
+.svc-foto img,.svc-foto .ph{width:96px;height:60px}
 .svc-foto img:not([hidden])+.ph{display:none}
 .rs{display:flex;flex-direction:column;gap:6px;padding:14px 0;border-bottom:1px solid var(--line)}
 .rs:last-child{border-bottom:0}
@@ -138,7 +144,7 @@ input[readonly]{color:var(--muted)}
 .fotos .item .tag{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:99px;font-size:.7rem;font-weight:700;background:color-mix(in srgb,var(--accent) 20%,transparent);color:var(--accent)}
 @media (max-width:420px){.swatches{grid-template-columns:repeat(4,1fr);gap:6px}.swatches button{font-size:.72rem}}
 @media (max-width:560px){.kpis{grid-template-columns:repeat(2,1fr)}.tabs{gap:2px}.tabs button{padding:10px 4px;font-size:.88rem}}
-@media (max-width:480px){.row{grid-template-columns:1fr}.item{grid-template-columns:60px 1fr}.item .btns{grid-column:1/-1;flex-wrap:wrap}}
+@media (max-width:480px){.row{grid-template-columns:1fr}.item{grid-template-columns:60px 1fr}.item .btns{grid-column:1/-1;flex-wrap:wrap}.svc-foto{grid-template-columns:96px 1fr}}
 </style>
 </head>
 <body>
@@ -853,6 +859,14 @@ input[readonly]{color:var(--muted)}
   function num(v){v=String(v==null?"":v).replace(/[^\d,.-]/g,"");if(!v)return 0;if(v.indexOf(",")>=0)v=v.replace(/\./g,"").replace(",",".");else if(/^\d{1,3}(\.\d{3})+$/.test(v))v=v.replace(/\./g,"");return Number(v)||0}
   function plata(n){return"$ "+Math.round(n||0).toLocaleString("es-AR")}
   function addMonths(d,m){if(!d)return"";var x=new Date(d+"T12:00:00");x.setMonth(x.getMonth()+m);return x.toISOString().slice(0,10)}
+  // Garantía: 2 meses desde la entrega. Devuelve días que faltan y el porcentaje que queda
+  function garantia(o){
+    var fin=o.garantia_hasta||addMonths(o.entrega,2);if(!o.entrega||!fin)return null;
+    var dia=864e5,ini=new Date(o.entrega+"T12:00:00"),f=new Date(fin+"T12:00:00"),h=new Date(hoy()+"T12:00:00");
+    var resta=Math.round((f-h)/dia),total=Math.max(1,Math.round((f-ini)/dia));
+    return{resta:resta,fin:fin,p:Math.max(0,Math.min(100,resta/total*100))};
+  }
+  function garTxt(g){return g.resta<0?"Garantía vencida el "+fmtFecha(g.fin):g.resta===0?"Garantía: vence hoy":"Garantía: faltan "+g.resta+(g.resta===1?" día":" días")+" (hasta "+fmtFecha(g.fin)+")"}
   function fmtFecha(d){if(!d)return"";var p=d.split("-");return p[2]+"/"+p[1]+"/"+p[0]}
   function waNum(t){t=String(t||"").replace(/\D/g,"");if(!t)return"";if(t.indexOf("54")===0)t=t.slice(2);if(t[0]==="0")t=t.slice(1);if(t.indexOf("9")===0&&t.length===11)t=t.slice(1);if(t.length===12)t=t.replace(/^(\d{2,4})15/,"$1");return t.length===10?"549"+t:""}
 
@@ -926,7 +940,7 @@ input[readonly]{color:var(--muted)}
     var list=filtrados();
     $("regListTitle").textContent="Arreglos de "+mesTxt+" ("+list.length+")";
     $("regList").innerHTML=list.length?list.map(function(o){
-      return'<button type="button" class="order" data-id="'+esc(o.id)+'"><span class="o1"><b>N° '+esc(o.nro)+' · '+esc(o.equipo||"Sin modelo")+'</b><small>'+esc(fmtFecha(o.ingreso))+' · '+esc(o.cliente||"Sin nombre")+(o.servicio?' · '+esc(o.servicio):"")+(o.tecnico?' · '+esc(o.tecnico):"")+'</small></span><span class="o2"><span class="st '+estadoClass(o.estado)+'">'+esc(o.estado)+'</span><small>'+(o.cobrado?plata(o.cobrado)+" cobrado":o.presupuesto?plata(o.presupuesto)+" presup.":"")+'</small></span></button>';
+      return'<button type="button" class="order" data-id="'+esc(o.id)+'"><span class="o1"><b>N° '+esc(o.nro)+' · '+esc(o.equipo||"Sin modelo")+'</b><small>'+esc(fmtFecha(o.ingreso))+' · '+esc(o.cliente||"Sin nombre")+(o.servicio?' · '+esc(o.servicio):"")+(o.tecnico?' · '+esc(o.tecnico):"")+'</small>'+(function(g){return g?'<span class="gar'+(g.resta<0?" end":g.resta<=7?" warn":"")+'" style="--p:'+g.p.toFixed(1)+'%"><small>'+esc(garTxt(g))+'</small><i></i></span>':""})(garantia(o))+'</span><span class="o2"><span class="st '+estadoClass(o.estado)+'">'+esc(o.estado)+'</span><small>'+(o.cobrado?plata(o.cobrado)+" cobrado":o.presupuesto?plata(o.presupuesto)+" presup.":"")+'</small></span></button>';
     }).join(""):'<p class="muted">No hay arreglos con este filtro. Tocá "Nueva orden" para cargar uno.</p>';
   }
 
@@ -943,7 +957,7 @@ input[readonly]{color:var(--muted)}
   function calc(){
     var c=num($("rCobrado").value),g=c-num($("rRepuesto").value)-num($("rPagoTec").value);
     $("rGanancia").innerHTML=c?"Ganancia de este arreglo: <b>"+plata(g)+"</b>":"";
-    var ent=$("rEntrega").value;$("rGarantia").value=ent?fmtFecha(addMonths(ent,2)):"";
+    var ent=$("rEntrega").value,g=ent?garantia({entrega:ent}):null;$("rGarantia").value=g?fmtFecha(g.fin)+(g.resta<0?" (vencida)":" (faltan "+g.resta+(g.resta===1?" día)":" días)")):"";
   }
   ["rCobrado","rRepuesto","rPagoTec","rEntrega"].forEach(function(id){$(id).addEventListener("input",calc)});
   $("rEstado").onchange=function(){if(this.value==="Entregado"&&!$("rEntrega").value){$("rEntrega").value=hoy();calc()}aviso()};

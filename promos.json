@@ -1,0 +1,9 @@
+{
+  "activa": true,
+  "tipo": "descuento",
+  "porcentaje": 10,
+  "regalo": "",
+  "cupos": 10,
+  "titulo": "",
+  "aclaracion": "El descuento es sobre la mano de obra. No incluye repuestos."
+}

@@ -5,7 +5,7 @@
 <meta name="color-scheme" content="only light">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="canonical" href="https://ibrostechnology.github.io/">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_AR">
 <meta property="og:title" content="iBros Technology · Servicio técnico en Corrientes">
@@ -201,6 +201,27 @@ button{font:inherit;color:inherit}
 @keyframes mvWord{from{translate:0 118%;rotate:6deg}}
 @keyframes mvPhoto{from{clip-path:inset(100% 0 0 0);scale:1.35}to{clip-path:inset(0 0 0 0)}}
 @keyframes mvZoom{from{scale:1.25}}
+/* Inclinación 3D de las fotos, como la del inicio: sigue al mouse y, en el celular, acompaña el scroll */
+.tilt{transform:perspective(1000px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));will-change:transform}
+.pcvis .frame.tilt{transition:transform .5s var(--ease)}
+.xp-card.tilt{transition:translate .35s var(--ease),box-shadow .35s var(--ease),transform .5s var(--ease)}
+.job.tilt{transition:translate .35s var(--ease),transform .5s var(--ease)}
+/* Fotos de los trabajos: sin menú de guardar, sin arrastrar y sin seleccionar */
+.job-img img,.lb-pics img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;-webkit-user-drag:none;pointer-events:none}
+.lb-pics{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+/* Anuncio de descuento en Presupuesto */
+.promo{position:relative;overflow:hidden;isolation:isolate;display:flex;align-items:center;gap:16px;margin-top:22px;padding:16px 18px;border-radius:18px;background:linear-gradient(120deg,var(--accent),color-mix(in srgb,var(--accent) 70%,#000));color:#fff;box-shadow:0 18px 40px color-mix(in srgb,var(--accent) 35%,transparent);max-width:46ch}
+.promo::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);translate:-100% 0}
+.promo .pct{flex:none;display:grid;place-items:center;width:68px;height:68px;border-radius:50%;background:#fff;color:var(--accent);font-family:Montserrat,sans-serif;font-weight:900;font-size:1.35rem;line-height:1;letter-spacing:-.04em;text-align:center}
+.promo[hidden]{display:none}
+.promo .pct svg{width:30px;height:30px}
+.promo em{display:block;margin-top:4px;font-style:normal;font-size:.78rem;opacity:.85}
+.promo .pct small{display:block;font-size:.62rem;letter-spacing:.08em;font-weight:800}
+.promo b{display:block;font-family:Montserrat,sans-serif;font-size:1.08rem;line-height:1.2}
+.promo span{font-size:.9rem;opacity:.92}
+@media (prefers-reduced-motion:no-preference){.promo::after{animation:promoShine 3.2s ease-in-out infinite}.promo .pct{animation:promoPop 2.4s var(--ease) infinite}}
+@keyframes promoShine{0%,55%{translate:-100% 0}100%{translate:100% 0}}
+@keyframes promoPop{0%,70%,100%{scale:1}80%{scale:1.1}90%{scale:.97}}
 
 section{padding-block:88px}
 .head{display:flex;flex-direction:column;gap:12px;max-width:62ch}
@@ -575,7 +596,7 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
     <div class="ctas"><a class="btn btn-or" href="https://wa.me/5493794541449?text=Hola%20iBros%2C%20quiero%20un%20presupuesto%20para%20mi%20celular." target="_blank" rel="noopener">Consultar por mi celular</a></div>
   </div>
   <div class="pcvis reveal">
-    <div class="frame"><img data-foto="celulares" src="img/bateria-foto.webp" alt="iPhone y batería de repuesto" width="900" height="598" loading="lazy"></div>
+    <div class="frame tilt"><img data-foto="celulares" src="img/bateria-foto.webp" alt="iPhone y batería de repuesto" width="900" height="598" loading="lazy"></div>
     <div class="pill p1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span><span><b>En el día</b><small>la mayoría de los arreglos</small></span></div>
     <div class="pill p2"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.1 7.5 9.5 4.3-1.4 7.5-4.9 7.5-9.5V6L12 3Z"/><path d="m8.8 12 2.2 2.2 4.2-4.4"/></svg></span><span><b>2 meses</b><small>de garantía</small></span></div>
   </div>
@@ -591,7 +612,7 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
     <div class="ctas"><a class="btn btn-or" href="https://wa.me/5493794541449?text=Hola%20iBros%2C%20quiero%20un%20presupuesto%20para%20mi%20computadora." target="_blank" rel="noopener">Consultar por mi computadora</a></div>
   </div>
   <div class="pcvis reveal">
-    <div class="frame"><img data-foto="computadoras" src="img/pc-foto.webp" alt="Notebook en uso" width="900" height="692" loading="lazy"></div>
+    <div class="frame tilt"><img data-foto="computadoras" src="img/pc-foto.webp" alt="Notebook en uso" width="900" height="692" loading="lazy"></div>
     <div class="pill p1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span><span><b>Presupuesto</b><small>en el día</small></span></div>
     <div class="pill p2"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></span><span><b>SSD</b><small>hasta 5 veces más rápida</small></span></div>
   </div>
@@ -602,6 +623,7 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
     <p class="eyebrow or">Presupuesto</p>
     <h2 style="margin-top:12px">Armá tu consulta en 20 segundos</h2>
     <p style="margin-top:14px;color:var(--muted);max-width:46ch;font-size:1.05rem">Completá lo que sepas y se abre WhatsApp con el mensaje listo para enviar.</p>
+    <div class="promo" id="promo" hidden><span class="pct" id="promoBadge"></span><div><b id="promoTit"></b><span>Armá tu consulta acá y enviala por WhatsApp desde la página.</span><em id="promoAcl"></em></div></div>
     <ol class="steps">
       <li><div><b>Consultás</b><span>Por WhatsApp o en el local, con el modelo y la falla.</span></div></li>
       <li><div><b>Presupuesto</b><span>Te decimos precio y tiempo. Sin tu ok no se toca nada.</span></div></li>
@@ -719,21 +741,21 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
 <section class="alt" id="explorar"><div class="wrap">
   <div class="head reveal" style="margin-bottom:28px"><p class="eyebrow or">Explorá más</p><h2>¿Qué estás buscando?</h2></div>
   <nav class="xp" aria-label="Explorá más">
-    <a class="xp-card reveal" href="#celulares">
+    <a class="xp-card tilt reveal" href="#celulares">
       <img data-foto="explorar-cel" src="img/iphone-foto.webp" alt="" width="600" height="1015" loading="lazy">
       <span class="xp-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       <span class="xp-k">Celulares</span>
       <b>Arreglos para todas las marcas</b>
       <p>Módulo, batería, pin de carga, cámara y más.</p>
     </a>
-    <a class="xp-card reveal" href="#computadoras">
+    <a class="xp-card tilt reveal" href="#computadoras">
       <img data-foto="explorar-pc" src="img/pc-foto.webp" alt="" width="900" height="692" loading="lazy">
       <span class="xp-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       <span class="xp-k">Computadoras</span>
       <b>Notebooks y PC</b>
       <p>Formateo, limpieza, disco SSD y presupuesto en el día.</p>
     </a>
-    <a class="xp-card reveal" href="#trabajos">
+    <a class="xp-card tilt reveal" href="#trabajos">
       <img data-foto="explorar-trabajos" src="img/tapas-foto.webp" alt="" width="900" height="745" loading="lazy">
       <span class="xp-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       <span class="xp-k">Trabajos</span>
@@ -939,11 +961,32 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
     el.classList.add("touch");setTimeout(function(){el.classList.remove("touch")},600);
   },{passive:true});
 
-  // Inclinación de la foto principal
+  // Inclinación 3D: la foto principal y todas las fotos con .tilt (secciones, Explorá más y trabajos)
   var vis=$("visual"),frame=vis.querySelector(".frame");
+  function tiltSet(el,x,y){el.style.setProperty("--ry",(x*10)+"deg");el.style.setProperty("--rx",(-y*10)+"deg")}
   if(!reduce&&matchMedia("(pointer:fine)").matches){
-    vis.addEventListener("pointermove",function(e){var r=vis.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;frame.style.setProperty("--ry",(x*10)+"deg");frame.style.setProperty("--rx",(-y*10)+"deg")});
-    vis.addEventListener("pointerleave",function(){frame.style.setProperty("--ry","0deg");frame.style.setProperty("--rx","0deg")});
+    vis.addEventListener("pointermove",function(e){var r=vis.getBoundingClientRect();tiltSet(frame,(e.clientX-r.left)/r.width-.5,(e.clientY-r.top)/r.height-.5)});
+    vis.addEventListener("pointerleave",function(){tiltSet(frame,0,0)});
+    var tLast=null;
+    document.addEventListener("pointermove",function(e){
+      var el=e.target.closest&&e.target.closest(".tilt");
+      if(tLast&&tLast!==el)tiltSet(tLast,0,0);tLast=el;if(!el)return;
+      var r=el.getBoundingClientRect();tiltSet(el,((e.clientX-r.left)/r.width-.5)*.8,((e.clientY-r.top)/r.height-.5)*.8);
+    },{passive:true});
+    document.documentElement.addEventListener("pointerleave",function(){if(tLast){tiltSet(tLast,0,0);tLast=null}});
+  }else if(!reduce){
+    // En el celular no hay mouse: las fotos se inclinan suave según dónde están en la pantalla al scrollear
+    var tTick=false;
+    function tiltScroll(){
+      tTick=false;var h=innerHeight;
+      [frame].concat([].slice.call(document.querySelectorAll(".tilt"))).forEach(function(el){
+        var r=el.getBoundingClientRect();if(r.bottom<0||r.top>h)return;
+        var p=Math.max(-1,Math.min(1,((r.top+r.height/2)/h-.5)*2));
+        el.style.setProperty("--rx",(p*7)+"deg");el.style.setProperty("--ry","0deg");
+      });
+    }
+    addEventListener("scroll",function(){if(!tTick){tTick=true;requestAnimationFrame(tiltScroll)}},{passive:true});
+    addEventListener("resize",tiltScroll,{passive:true});tiltScroll();
   }
 
   // Selector Celulares / Computadoras del inicio
@@ -1033,8 +1076,8 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
   function fecha(s){try{return new Date(s+"T12:00:00").toLocaleDateString("es-AR",{day:"numeric",month:"short"})}catch(e){return s}}
   function card(j,i){
     var f=j.fotos||[];
-    return'<article class="job"><button class="job-img" type="button" data-i="'+i+'" aria-label="Ver trabajo: '+esc(j.equipo)+'">'+
-      (f[0]?'<img src="'+esc(f[0])+'" alt="'+esc(j.equipo)+'" loading="lazy">':"")+(j.ejemplo?'<span class="ex">Ejemplo</span>':"")+(f.length>1?'<span class="n">'+f.length+' fotos</span>':"")+
+    return'<article class="job tilt"><button class="job-img" type="button" data-i="'+i+'" aria-label="Ver trabajo: '+esc(j.equipo)+'">'+
+      (f[0]?'<img src="'+esc(f[0])+'" alt="'+esc(j.equipo)+'" loading="lazy" draggable="false">':"")+(j.ejemplo?'<span class="ex">Ejemplo</span>':"")+(f.length>1?'<span class="n">'+f.length+' fotos</span>':"")+
       '</button><div class="job-body"><div class="job-meta"><span class="chip">'+esc(CATS[j.categoria]||"Reparación")+'</span><time>'+esc(fecha(j.fecha))+'</time></div><h3>'+esc(j.equipo)+'</h3>'+
       (j.trabajo?'<p class="job-desc">'+esc(j.trabajo)+'</p>':"")+
       (j.resena?'<blockquote><p>'+esc(j.resena)+'</p><footer><span class="stars">'+stars(j.estrellas)+'</span>'+(j.cliente?'<span>'+esc(j.cliente)+'</span>':"")+'</footer></blockquote>':"")+'</div></article>';
@@ -1069,7 +1112,7 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
   var lb=$("lb");
   rail.addEventListener("click",function(e){
     var b=e.target.closest(".job-img");if(!b)return;var j=jobs[b.dataset.i];
-    $("lbPics").innerHTML=(j.fotos||[]).map(function(f){return'<img src="'+esc(f)+'" alt="'+esc(j.equipo)+'">'}).join("");
+    $("lbPics").innerHTML=(j.fotos||[]).map(function(f){return'<img src="'+esc(f)+'" alt="'+esc(j.equipo)+'" draggable="false">'}).join("");
     $("lbTxt").innerHTML='<span class="chip" style="align-self:flex-start">'+esc(CATS[j.categoria]||"Reparación")+'</span><h3>'+esc(j.equipo)+'</h3><p style="color:var(--band-muted)">'+esc(fecha(j.fecha))+(j.ejemplo?" · ejemplo":"")+'</p>'+
       (j.trabajo?'<p>'+esc(j.trabajo)+'</p>':"")+
       (j.resena?'<blockquote style="margin:8px 0 0;padding:14px;border-radius:14px;background:var(--band);border:1px solid var(--band-line)"><p>“'+esc(j.resena)+'”</p><p style="margin-top:8px;font-size:.85rem;color:var(--band-muted)"><span class="stars">'+stars(j.estrellas)+'</span> '+esc(j.cliente||"")+'</p></blockquote>':"")+
@@ -1077,6 +1120,8 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
     lb.showModal?lb.showModal():lb.setAttribute("open","");
   });
   $("lbClose").onclick=function(){lb.close()};
+  // Fotos de clientes: sin "Guardar imagen" (clic derecho o mantener apretado) y sin arrastrarlas
+  [rail,lb].forEach(function(box){["contextmenu","dragstart"].forEach(function(ev){box.addEventListener(ev,function(e){if(e.target.closest(".job-img,.lb-pics"))e.preventDefault()})})});
   lb.addEventListener("click",function(e){if(e.target===lb)lb.close()});
 
   // Reseña por WhatsApp
@@ -1123,9 +1168,22 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
     var list=(pc?SV.computadoras:SV.celulares)||[];
     $("falla").innerHTML=list.map(function(s){return'<option>'+esc(s.nombre)+'</option>'}).join("");build();
   }
+  // Promo de Presupuesto (promos.json, la arma el panel en la pestaña Promos)
+  var PROMO=null;
+  function promoTitulo(p){
+    if(p.titulo)return p.titulo;var n=+p.cupos||0,uno=n===1;
+    var q=n>0?(uno?"La primera consulta":"Las "+n+" primeras consultas"):"Las consultas por la página";
+    return q+(uno?" tiene ":" tienen ")+(p.tipo==="regalo"?"de regalo: "+p.regalo:p.porcentaje+"% de descuento");
+  }
+  function promoOk(p){return!!p&&p.activa===true&&(p.tipo==="regalo"?!!String(p.regalo||"").trim():+p.porcentaje>0)}
+  function renderPromo(){
+    var el=$("promo");if(!promoOk(PROMO)){el.hidden=true;return}
+    $("promoBadge").innerHTML=PROMO.tipo==="regalo"?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="8" width="17" height="4" rx="1"/><path d="M5 12v8.5h14V12M12 8v12.5M12 8S10.5 3.5 8 4.2 8.3 8 12 8Zm0 0s1.5-4.5 4-3.8S15.7 8 12 8Z"/></svg><small>REGALO</small>':esc(String(Math.round(+PROMO.porcentaje)))+"%<small>OFF</small>";
+    $("promoTit").textContent=promoTitulo(PROMO);$("promoAcl").textContent=PROMO.aclaracion||"";$("promoAcl").hidden=!PROMO.aclaracion;el.hidden=false;
+  }
   function build(){
     var tipo=f.querySelector('input[name=tipo]:checked').value,modelo=$("modelo").value.trim(),det=$("detalle").value.trim();
-    var msg="Hola iBros, quiero un presupuesto para mi "+tipo+".\nEquipo: "+(modelo||"(sin especificar)")+"\nFalla: "+$("falla").value+(det?"\nDetalle: "+det:"");
+    var msg="Hola iBros, quiero un presupuesto para mi "+tipo+".\nEquipo: "+(modelo||"(sin especificar)")+"\nFalla: "+$("falla").value+(det?"\nDetalle: "+det:"")+(promoOk(PROMO)?"\nVi la promo en la página: "+promoTitulo(PROMO)+".":"");
     $("prev").textContent=msg;$("send").href=wa(msg);
   }
   f.addEventListener("input",build);f.addEventListener("change",function(e){if(e.target.name==="tipo")fillFalla();else build()});
@@ -1175,6 +1233,9 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
   renderRedes();
   fetch("redes.json?v="+Date.now()).then(function(r){return r.ok?r.json():null}).catch(function(){return null}).then(function(d){
     if(d&&typeof d==="object"){REDES=d;renderRedes()}
+  });
+  fetch("promos.json?v="+Date.now()).then(function(r){return r.ok?r.json():null}).catch(function(){return null}).then(function(d){
+    if(d&&typeof d==="object"){PROMO=d;renderPromo();build()}
   });
   fetch("trabajos.json?v="+Date.now()).then(function(r){return r.ok?r.json():[]}).catch(function(){return[]}).then(function(data){
     jobs=(Array.isArray(data)?data:[]).sort(function(a,b){return(b.fecha||"").localeCompare(a.fecha||"")});

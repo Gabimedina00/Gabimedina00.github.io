@@ -213,6 +213,9 @@ button{font:inherit;color:inherit}
 .promo{position:relative;overflow:hidden;isolation:isolate;display:flex;align-items:center;gap:16px;margin-top:22px;padding:16px 18px;border-radius:18px;background:linear-gradient(120deg,var(--accent),color-mix(in srgb,var(--accent) 70%,#000));color:#fff;box-shadow:0 18px 40px color-mix(in srgb,var(--accent) 35%,transparent);max-width:46ch}
 .promo::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);translate:-100% 0}
 .promo .pct{flex:none;display:grid;place-items:center;width:68px;height:68px;border-radius:50%;background:#fff;color:var(--accent);font-family:Montserrat,sans-serif;font-weight:900;font-size:1.35rem;line-height:1;letter-spacing:-.04em;text-align:center}
+.promo[hidden]{display:none}
+.promo .pct svg{width:30px;height:30px}
+.promo em{display:block;margin-top:4px;font-style:normal;font-size:.78rem;opacity:.85}
 .promo .pct small{display:block;font-size:.62rem;letter-spacing:.08em;font-weight:800}
 .promo b{display:block;font-family:Montserrat,sans-serif;font-size:1.08rem;line-height:1.2}
 .promo span{font-size:.9rem;opacity:.92}
@@ -620,7 +623,7 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
     <p class="eyebrow or">Presupuesto</p>
     <h2 style="margin-top:12px">Armá tu consulta en 20 segundos</h2>
     <p style="margin-top:14px;color:var(--muted);max-width:46ch;font-size:1.05rem">Completá lo que sepas y se abre WhatsApp con el mensaje listo para enviar.</p>
-    <div class="promo" id="promo"><span class="pct">10%<small>OFF</small></span><div><b>Las 5 primeras consultas tienen 10% de descuento</b><span>Armá tu consulta acá y enviala por WhatsApp desde la página.</span></div></div>
+    <div class="promo" id="promo" hidden><span class="pct" id="promoBadge"></span><div><b id="promoTit"></b><span>Armá tu consulta acá y enviala por WhatsApp desde la página.</span><em id="promoAcl"></em></div></div>
     <ol class="steps">
       <li><div><b>Consultás</b><span>Por WhatsApp o en el local, con el modelo y la falla.</span></div></li>
       <li><div><b>Presupuesto</b><span>Te decimos precio y tiempo. Sin tu ok no se toca nada.</span></div></li>
@@ -1165,9 +1168,22 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
     var list=(pc?SV.computadoras:SV.celulares)||[];
     $("falla").innerHTML=list.map(function(s){return'<option>'+esc(s.nombre)+'</option>'}).join("");build();
   }
+  // Promo de Presupuesto (promos.json, la arma el panel en la pestaña Promos)
+  var PROMO=null;
+  function promoTitulo(p){
+    if(p.titulo)return p.titulo;var n=+p.cupos||0,uno=n===1;
+    var q=n>0?(uno?"La primera consulta":"Las "+n+" primeras consultas"):"Las consultas por la página";
+    return q+(uno?" tiene ":" tienen ")+(p.tipo==="regalo"?"de regalo: "+p.regalo:p.porcentaje+"% de descuento");
+  }
+  function promoOk(p){return!!p&&p.activa===true&&(p.tipo==="regalo"?!!String(p.regalo||"").trim():+p.porcentaje>0)}
+  function renderPromo(){
+    var el=$("promo");if(!promoOk(PROMO)){el.hidden=true;return}
+    $("promoBadge").innerHTML=PROMO.tipo==="regalo"?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="8" width="17" height="4" rx="1"/><path d="M5 12v8.5h14V12M12 8v12.5M12 8S10.5 3.5 8 4.2 8.3 8 12 8Zm0 0s1.5-4.5 4-3.8S15.7 8 12 8Z"/></svg><small>REGALO</small>':esc(String(Math.round(+PROMO.porcentaje)))+"%<small>OFF</small>";
+    $("promoTit").textContent=promoTitulo(PROMO);$("promoAcl").textContent=PROMO.aclaracion||"";$("promoAcl").hidden=!PROMO.aclaracion;el.hidden=false;
+  }
   function build(){
     var tipo=f.querySelector('input[name=tipo]:checked').value,modelo=$("modelo").value.trim(),det=$("detalle").value.trim();
-    var msg="Hola iBros, quiero un presupuesto para mi "+tipo+".\nEquipo: "+(modelo||"(sin especificar)")+"\nFalla: "+$("falla").value+(det?"\nDetalle: "+det:"")+($("promo")?"\nVi la promo del 10% en la página.":"");
+    var msg="Hola iBros, quiero un presupuesto para mi "+tipo+".\nEquipo: "+(modelo||"(sin especificar)")+"\nFalla: "+$("falla").value+(det?"\nDetalle: "+det:"")+(promoOk(PROMO)?"\nVi la promo en la página: "+promoTitulo(PROMO)+".":"");
     $("prev").textContent=msg;$("send").href=wa(msg);
   }
   f.addEventListener("input",build);f.addEventListener("change",function(e){if(e.target.name==="tipo")fillFalla();else build()});
@@ -1217,6 +1233,9 @@ dialog.lb::backdrop{background:rgba(0,0,0,.85)}
   renderRedes();
   fetch("redes.json?v="+Date.now()).then(function(r){return r.ok?r.json():null}).catch(function(){return null}).then(function(d){
     if(d&&typeof d==="object"){REDES=d;renderRedes()}
+  });
+  fetch("promos.json?v="+Date.now()).then(function(r){return r.ok?r.json():null}).catch(function(){return null}).then(function(d){
+    if(d&&typeof d==="object"){PROMO=d;renderPromo();build()}
   });
   fetch("trabajos.json?v="+Date.now()).then(function(r){return r.ok?r.json():[]}).catch(function(){return[]}).then(function(data){
     jobs=(Array.isArray(data)?data:[]).sort(function(a,b){return(b.fecha||"").localeCompare(a.fecha||"")});

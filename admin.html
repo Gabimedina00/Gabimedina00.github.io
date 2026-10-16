@@ -98,6 +98,12 @@ table.mini th:not(:first-child),table.mini td:not(:first-child){text-align:right
 .st.ready{background:color-mix(in srgb,var(--accent) 22%,transparent);color:var(--accent)}
 .st.ok{background:color-mix(in srgb,var(--ok) 20%,transparent);color:var(--ok)}
 .st.off{background:var(--card2);color:var(--muted)}
+.prpv{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:16px;background:linear-gradient(120deg,var(--accent),color-mix(in srgb,var(--accent) 70%,#000));color:#fff}
+.prpv .pct{flex:none;display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:#fff;color:var(--accent);font-weight:900;font-size:1.15rem;line-height:1;text-align:center}
+.prpv .pct small{display:block;font-size:.55rem;letter-spacing:.08em}
+.prpv .pct svg{width:26px;height:26px}
+.prpv b{display:block;font-size:1rem}.prpv span{font-size:.85rem;opacity:.9}.prpv em{display:block;font-style:normal;font-size:.75rem;opacity:.85;margin-top:3px}
+.prpv.off{opacity:.45;filter:grayscale(1)}
 .gar{display:block;margin-top:5px;max-width:240px}
 .gar i{display:block;height:4px;border-radius:99px;background:var(--card2);overflow:hidden;margin-top:3px}
 .gar i::before{content:"";display:block;height:100%;width:var(--p);background:var(--ok)}
@@ -185,6 +191,7 @@ input[readonly]{color:var(--muted)}
       <button type="button" role="tab" aria-selected="false" data-tab="resenas">Reseñas</button>
       <button type="button" role="tab" aria-selected="false" data-tab="servicios">Servicios</button>
       <button type="button" role="tab" aria-selected="false" data-tab="diseno">Diseño</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="promos">Promos</button>
       <button type="button" role="tab" aria-selected="false" data-tab="ajustes">Ajustes</button>
     </div>
 
@@ -390,7 +397,7 @@ input[readonly]{color:var(--muted)}
         <label>Facebook<input id="rFacebook" inputmode="url" autocomplete="off" placeholder="https://www.facebook.com/..."></label>
         <label>Instagram<input id="rInstagram" inputmode="url" autocomplete="off" placeholder="https://www.instagram.com/... o @usuario"></label>
         <label>YouTube<input id="rYoutube" inputmode="url" autocomplete="off" placeholder="https://www.youtube.com/@..."></label>
-        <div class="btns"><button class="btn" type="submit" id="rSave">Guardar redes</button></div>
+        <div class="btns"><button class="btn" type="submit" id="redSave">Guardar redes</button></div>
         <div id="redMsg"></div>
       </form>
     </div>
@@ -427,6 +434,27 @@ input[readonly]{color:var(--muted)}
         <div id="apFotos"></div>
         <div id="apFotoMsg"></div>
       </div>
+    </div>
+
+    <!-- PROMOS: cartel de Presupuesto en la página (promos.json) -->
+    <div data-pane="promos" hidden style="flex-direction:column;gap:16px;margin-top:16px">
+      <form class="card" id="prForm">
+        <h2>Promo de la página</h2>
+        <p class="muted">Sale como cartel llamativo en Presupuesto, junto al formulario de consulta, y se suma al mensaje de WhatsApp para que sepas quién vino por la promo. Hay una sola promo a la vez.</p>
+        <div id="prState"></div>
+        <label>Tipo de promo<select id="prTipo"><option value="descuento">Descuento en porcentaje</option><option value="regalo">Regalo</option></select></label>
+        <div class="row">
+          <label id="prPctL">Descuento (%)<input id="prPct" type="number" min="1" max="90" step="1" inputmode="numeric" placeholder="Ej: 10"></label>
+          <label id="prRegL" hidden>Regalo<input id="prReg" maxlength="60" autocomplete="off" placeholder="Ej: un vidrio templado"></label>
+          <label>Para las primeras… consultas<input id="prCupos" type="number" min="0" max="999" step="1" inputmode="numeric" placeholder="Vacío = sin límite"></label>
+        </div>
+        <label>Título (opcional)<input id="prTit" maxlength="90" autocomplete="off" placeholder="Si lo dejás vacío se arma solo"></label>
+        <label>Aclaración (letra chica)<input id="prAcl" maxlength="140" autocomplete="off"></label>
+        <p class="muted" style="margin:0">Así se ve en la página:</p>
+        <div class="prpv" id="prPrev"></div>
+        <div class="btns"><button class="btn" type="submit" id="prSave">Guardar y mostrar</button><button class="btn ghost" type="button" id="prOff">Apagar promo</button></div>
+        <div id="prMsg"></div>
+      </form>
     </div>
 
     <!-- AJUSTES -->
@@ -505,7 +533,7 @@ input[readonly]{color:var(--muted)}
     $("setup").hidden=locked||!!token;
     $("app").hidden=locked||!token;
     if(locked){setTimeout(function(){$("pinIn").querySelector("input").focus()},50);return}
-    if(token){loadJobs();loadSvcs();loadRedes();loadAp();pinState();regInit();rsInit()}
+    if(token){loadJobs();loadSvcs();loadRedes();loadPromo();loadAp();pinState();regInit();rsInit()}
   }
   document.querySelector(".tabs").onclick=function(e){
     var b=e.target.closest("button");if(!b)return;
@@ -663,11 +691,51 @@ input[readonly]{color:var(--muted)}
     e.preventDefault();var d={},bad="";
     Object.keys(REDES).forEach(function(k){var v=normRed(k,redIn(k).value);if(v===null)bad=bad||REDES[k];else{d[k]=v;redIn(k).value=v}});
     if(bad){msg("redMsg","err","El enlace de "+bad+" no es válido.");return}
-    $("rSave").disabled=true;msg("redMsg","info","Guardando…");
+    $("redSave").disabled=true;msg("redMsg","info","Guardando…");
     try{await update("redes.json",{},function(){return d},"Actualizar redes sociales");msg("redMsg","ok","Guardado. Se ve en la página en 1 o 2 minutos.")}
     catch(err){msg("redMsg","err",err.message)}
-    $("rSave").disabled=false;
+    $("redSave").disabled=false;
   };
+
+  // ---- Promos: un solo cartel en Presupuesto (promos.json). Mismos textos que arma la página ----
+  var ACL_DESC="El descuento es sobre la mano de obra. No incluye repuestos.",prActiva=false;
+  function promoTitulo(p){
+    if(p.titulo)return p.titulo;var n=+p.cupos||0,uno=n===1;
+    var q=n>0?(uno?"La primera consulta":"Las "+n+" primeras consultas"):"Las consultas por la página";
+    return q+(uno?" tiene ":" tienen ")+(p.tipo==="regalo"?"de regalo: "+p.regalo:p.porcentaje+"% de descuento");
+  }
+  function promoOk(p){return!!p&&p.activa===true&&(p.tipo==="regalo"?!!String(p.regalo||"").trim():+p.porcentaje>0)}
+  function prRead(){
+    var tipo=$("prTipo").value;
+    return{activa:true,tipo:tipo,porcentaje:Math.round(num($("prPct").value)),regalo:$("prReg").value.trim(),cupos:Math.round(num($("prCupos").value)),titulo:$("prTit").value.trim(),aclaracion:$("prAcl").value.trim()};
+  }
+  function prPaint(){
+    var p=prRead(),reg=p.tipo==="regalo";$("prPctL").hidden=reg;$("prRegL").hidden=!reg;
+    $("prPrev").className="prpv"+(prActiva?"":" off");
+    $("prPrev").innerHTML=promoOk(p)?'<span class="pct">'+(reg?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="8" width="17" height="4" rx="1"/><path d="M5 12v8.5h14V12M12 8v12.5M12 8S10.5 3.5 8 4.2 8.3 8 12 8Zm0 0s1.5-4.5 4-3.8S15.7 8 12 8Z"/></svg><small>REGALO</small>':esc(String(p.porcentaje))+"%<small>OFF</small>")+'</span><div><b>'+esc(promoTitulo(p))+'</b><span>Armá tu consulta acá y enviala por WhatsApp desde la página.</span>'+(p.aclaracion?'<em>'+esc(p.aclaracion)+'</em>':"")+'</div>':'<span>Completá '+(reg?"el regalo":"el porcentaje")+' para ver el cartel.</span>';
+    $("prState").innerHTML='<div class="msg '+(prActiva?"ok":"info")+'">'+(prActiva?"La promo está prendida y se ve en la página.":"No hay ninguna promo en la página.")+'</div>';
+    $("prOff").hidden=!prActiva;
+  }
+  async function loadPromo(){
+    try{
+      var p=(await readJson("promos.json",{})).data||{};prActiva=promoOk(p);
+      $("prTipo").value=p.tipo==="regalo"?"regalo":"descuento";$("prPct").value=p.porcentaje||"";$("prReg").value=p.regalo||"";
+      $("prCupos").value=p.cupos||"";$("prTit").value=p.titulo||"";$("prAcl").value=p.aclaracion!=null?p.aclaracion:ACL_DESC;prPaint();
+    }catch(err){msg("prMsg","err",err.message)}
+  }
+  $("prTipo").onchange=function(){var a=$("prAcl");if(this.value==="regalo"&&a.value===ACL_DESC)a.value="";else if(this.value==="descuento"&&!a.value)a.value=ACL_DESC;prPaint()};
+  ["prPct","prReg","prCupos","prTit","prAcl"].forEach(function(id){$(id).addEventListener("input",prPaint)});
+  async function prWrite(activa){
+    var p=prRead();p.activa=activa;
+    if(activa&&p.tipo==="descuento"&&!(p.porcentaje>=1&&p.porcentaje<=90)){msg("prMsg","err","Poné un descuento entre 1 y 90 %.");return}
+    if(activa&&p.tipo==="regalo"&&!p.regalo){msg("prMsg","err","Escribí cuál es el regalo.");return}
+    $("prSave").disabled=$("prOff").disabled=true;msg("prMsg","info","Guardando…");
+    try{await update("promos.json",{},function(){return p},activa?"Promo: "+promoTitulo(p):"Apagar promo");prActiva=activa;prPaint();msg("prMsg","ok",(activa?"Promo guardada.":"Promo apagada.")+" Se ve en la página en 1 o 2 minutos.")}
+    catch(err){msg("prMsg","err",err.message)}
+    $("prSave").disabled=$("prOff").disabled=false;
+  }
+  $("prForm").onsubmit=function(e){e.preventDefault();prWrite(true)};
+  $("prOff").onclick=function(){prWrite(false)};
 
   // ---- Diseño: color de acento y fotos (apariencia.json + apariencia.css; build.py no los pisa) ----
   var ORIG="#ee6a1c",ORIG_C={accent:ORIG,text:"#b9500f",ink:"#ffffff"};

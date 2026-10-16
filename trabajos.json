@@ -1,5 +1,16 @@
 [
   {
+    "id": "mvbavc18",
+    "fecha": "2026-02-18",
+    "equipo": "Motorola Moto G42",
+    "categoria": "bateria",
+    "trabajo": "Cambio de batería. Se descargaba muy rápido; lo abrimos, cambiamos la batería por una nueva y probamos carga y encendido.",
+    "fotos": [
+      "trabajos/mvbavc18-mvbavc18-1.jpg",
+      "trabajos/mvbavc18-mvbavc18-2.jpg"
+    ]
+  },
+  {
     "id": "mvbapk43",
     "fecha": "2026-04-03",
     "equipo": "iPhone 11",

@@ -123,6 +123,9 @@ input[readonly]{color:var(--muted)}
 .prev .pv-band b span{color:var(--pb)}
 .prev .pv-chip{align-self:flex-start;background:var(--pb);color:var(--pbi);border-radius:99px;padding:5px 11px;font-size:.75rem;font-weight:700}
 .fotos .item img{background:var(--bg)}
+.svc-foto{margin:4px 0 12px}
+.svc-foto img{width:96px;height:60px}
+.svc-foto img:not([hidden])+.ph{display:none}
 .rs{display:flex;flex-direction:column;gap:6px;padding:14px 0;border-bottom:1px solid var(--line)}
 .rs:last-child{border-bottom:0}
 .rs-top{display:flex;align-items:center;gap:8px}
@@ -366,6 +369,8 @@ input[readonly]{color:var(--muted)}
           <label>Tiempo<input id="sTiempo" placeholder="Ej: En el día, 2 a 3 días"></label>
           <label>Foto (opcional)<select id="sFoto"><option value="">Sin foto (muestra el ícono)</option><option value="img/hero.webp">Pin de carga</option><option value="img/iphone-foto.webp">iPhone</option><option value="img/bateria-foto.webp">Batería</option><option value="img/tapas-foto.webp">Tapas</option><option value="img/pc-foto.webp">Notebook</option></select></label>
         </div>
+        <div class="item svc-foto"><img id="sFotoImg" alt="" hidden><span class="ph" id="sFotoPh"></span><div><b>Foto del servicio</b><span>Subí una foto tuya o elegí una de la lista. Se achica sola antes de subir. Conviene horizontal.</span></div><div class="btns"><button class="btn small" type="button" id="sFotoUp">Subir foto propia</button></div></div>
+        <input type="file" id="sFile" accept="image/*" hidden>
         <label>Frase corta (aparece en el botón)<input id="sCorto"></label>
         <label>En qué consiste<textarea id="sDetalle"></textarea></label>
         <label>Procedimiento (un paso por renglón)<textarea id="sPasos" style="min-height:150px"></textarea></label>
@@ -772,35 +777,68 @@ input[readonly]{color:var(--muted)}
     $("svcItems").innerHTML=list.map(function(s){return'<button type="button" class="svcitem" data-id="'+esc(s.id)+'"><span><b>'+esc(s.nombre)+'</b><small>'+esc(s.corto)+'</small></span><span class="t">'+esc(s.tiempo)+'</span></button>'}).join("")||'<p class="muted">No hay servicios en este grupo.</p>';
   }
   $("grupo").onchange=renderSvcs;
+  // Foto propia del servicio: se elige acá y se sube a servicios/ recién al tocar Guardar
+  var sPend=null;
+  function sFotoOpt(v){
+    var sel=$("sFoto"),o=sel.querySelector("option[data-tuya]");if(o)o.remove();
+    if(v&&![].some.call(sel.options,function(x){return x.value===v})){o=document.createElement("option");o.value=v;o.dataset.tuya="1";o.textContent=v==="__nueva__"?"Foto nueva (se sube al guardar)":"Tu foto";sel.insertBefore(o,sel.options[1])}
+    sel.value=v||"";sFotoShow();
+  }
+  function sFotoShow(){
+    var v=$("sFoto").value,i=$("sFotoImg");
+    if(v!=="__nueva__"&&sPend){URL.revokeObjectURL(sPend.url);sPend=null}
+    if(v==="__nueva__"&&sPend)i.src=sPend.url;else if(v)i.src=/^servicios\//.test(v)?RAW+v:v;
+    i.hidden=!v;
+  }
+  $("sFoto").onchange=function(){if(this.value!=="__nueva__"){var o=this.querySelector('option[value="__nueva__"]');if(o)o.remove()}sFotoShow()};
+  $("sFotoUp").onclick=function(){$("sFile").click()};
+  $("sFile").onchange=function(){
+    var f=this.files[0];this.value="";if(!f)return;
+    if(!/^image\//.test(f.type)){msg("svcMsg","err","Eso no es una foto. Probá con un JPG o PNG.");return}
+    if(sPend)URL.revokeObjectURL(sPend.url);
+    sPend={file:f,url:URL.createObjectURL(f)};sFotoOpt("__nueva__");msg("svcMsg","info","Foto lista. Tocá Guardar para subirla.");
+  };
   function openSvc(s,isNew){
     sEdit={g:$("grupo").value,id:s.id,isNew:!!isNew};
     $("svcForm").hidden=false;$("svcFormTitle").textContent=isNew?"Nuevo servicio":"Editar servicio";$("sDel").hidden=!!isNew;msg("svcMsg","","");
-    $("sNombre").value=s.nombre||"";$("sTiempo").value=s.tiempo||"";$("sFoto").value=s.foto||"";$("sCorto").value=s.corto||"";
+    $("sNombre").value=s.nombre||"";$("sTiempo").value=s.tiempo||"";sFotoOpt(s.foto||"");$("sCorto").value=s.corto||"";
     $("sDetalle").value=s.detalle||"";$("sPasos").value=(s.pasos||[]).join("\n");$("sNota").value=s.nota||"";
     $("svcForm").scrollIntoView({behavior:"smooth",block:"start"});
   }
   $("svcItems").onclick=function(e){var b=e.target.closest(".svcitem");if(!b)return;openSvc((svc[$("grupo").value]||[]).find(function(x){return x.id===b.dataset.id}))};
   $("addSvc").onclick=function(){var g=$("grupo").value;openSvc({id:(g==="computadoras"?"pc-":"")+"s"+Date.now().toString(36)},true)};
-  $("sCancel").onclick=function(){$("svcForm").hidden=true;sEdit=null};
+  $("sCancel").onclick=function(){$("svcForm").hidden=true;sEdit=null;sFotoOpt("")};
   $("svcForm").onsubmit=async function(e){
     e.preventDefault();if(!sEdit)return;
     if(!$("sNombre").value.trim()){msg("svcMsg","err","Escribí el nombre.");return}
     var item={id:sEdit.id,nombre:$("sNombre").value.trim(),corto:$("sCorto").value.trim(),tiempo:$("sTiempo").value.trim()||"Consultá",foto:$("sFoto").value,
       detalle:$("sDetalle").value.trim(),pasos:$("sPasos").value.split("\n").map(function(x){return x.trim()}).filter(Boolean),nota:$("sNota").value.trim()};
     $("sSave").disabled=true;msg("svcMsg","info","Guardando…");
+    var old=((svc[sEdit.g]||[]).find(function(x){return x.id===item.id})||{}).foto||"";
     try{
+      if(item.foto==="__nueva__"){
+        if(!sPend)throw new Error("Volvé a elegir la foto.");
+        msg("svcMsg","info","Achicando y subiendo la foto…");
+        var path="servicios/"+item.id+"-"+Date.now().toString(36)+".jpg";
+        await gh(API+"/contents/"+path,"PUT",{message:"Foto del servicio: "+item.nombre,content:await compress(sPend.file)});
+        item.foto=path;msg("svcMsg","info","Guardando…");
+      }
       svc=await update("servicios.json",{celulares:[],computadoras:[]},function(d){
         d[sEdit.g]=d[sEdit.g]||[];var ix=d[sEdit.g].findIndex(function(x){return x.id===item.id});
         if(ix>=0)d[sEdit.g][ix]=item;else d[sEdit.g].push(item);return d;
       },"Editar servicio: "+item.nombre);
+      if(/^servicios\//.test(old)&&old!==item.foto)delFile(old).catch(function(){});
+      sFotoOpt(item.foto);
       msg("svcMsg","ok","Guardado. Se ve en la página en 1 o 2 minutos.");renderSvcs();
       setTimeout(function(){$("svcForm").hidden=true},1600);
-    }catch(err){msg("svcMsg","err",err.message)}
+    }catch(err){msg("svcMsg","err",err.message==="EncodingError"||/decode/i.test(err.message)?"No se pudo leer esa foto. Probá con otra (JPG o PNG).":err.message)}
     $("sSave").disabled=false;
   };
   $("sDel").onclick=async function(){
     var b=$("sDel");if(b.dataset.sure!=="1"){b.dataset.sure="1";b.textContent="¿Seguro? Tocá otra vez";setTimeout(function(){b.dataset.sure="";b.textContent="Borrar servicio"},4000);return}
+    var old=((svc[sEdit.g]||[]).find(function(x){return x.id===sEdit.id})||{}).foto||"";
     try{svc=await update("servicios.json",{celulares:[],computadoras:[]},function(d){d[sEdit.g]=(d[sEdit.g]||[]).filter(function(x){return x.id!==sEdit.id});return d},"Borrar servicio");
+      if(/^servicios\//.test(old))delFile(old).catch(function(){});
       $("svcForm").hidden=true;renderSvcs()}catch(err){msg("svcMsg","err",err.message)}
     b.dataset.sure="";b.textContent="Borrar servicio";
   };

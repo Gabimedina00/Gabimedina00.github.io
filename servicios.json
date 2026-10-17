@@ -197,7 +197,7 @@
       "nombre": "No enciende o no carga",
       "corto": "No prende, se apaga sola o el cargador no anda.",
       "tiempo": "Presupuesto en el día",
-      "foto": "",
+      "foto": "servicios/pc-carga-mvcyj3m2.jpg",
       "detalle": "Buscamos si la falla está en el cargador, el pin de carga, la batería o la placa.",
       "pasos": [
         "Probamos cargador, batería y pin de carga.",

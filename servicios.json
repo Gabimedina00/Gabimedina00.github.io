@@ -213,7 +213,7 @@
       "nombre": "Limpieza y temperatura",
       "corto": "Se calienta, hace ruido o se apaga sola.",
       "tiempo": "Presupuesto en el día",
-      "foto": "",
+      "foto": "servicios/pc-limpieza-mvcyjlib.jpg",
       "detalle": "Limpieza interna completa y cambio de pasta térmica para que no levante temperatura.",
       "pasos": [
         "Medimos la temperatura de trabajo.",
